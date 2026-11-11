@@ -1,0 +1,135 @@
+name: 'HQ ingest notify'
+description: 'POST one wo/1 EVENT to the HQ ingest door (/api/events/ingest). Fail-soft: never fails the pipeline.'
+author: 'peachtukta1014'
+branding:
+  icon: 'send'
+  color: 'blue'
+
+inputs:
+  endpoint:
+    description: 'Ingest URL (vars.EVENT_URL)'
+    required: true
+  token:
+    description: 'Bearer token (secrets.VM_SSE_TOKEN)'
+    required: true
+  lane:
+    description: 'Destination lane (to)'
+    required: true
+  repo:
+    description: 'owner/name of the reporting repo'
+    required: false
+    default: ''
+  workflow:
+    description: 'Workflow name'
+    required: false
+    default: ''
+  branch:
+    description: 'Branch ref'
+    required: false
+    default: ''
+  sha:
+    description: 'Commit sha (12 chars are enough)'
+    required: false
+    default: ''
+  run_id:
+    description: 'Actions run id'
+    required: false
+    default: ''
+  run_url:
+    description: 'Actions run url'
+    required: false
+    default: ''
+  conclusion:
+    description: 'success | failure | cancelled | ...'
+    required: false
+    default: ''
+  task:
+    description: 'wo/1 task name'
+    required: false
+    default: 'gh_ci_status'
+  priority:
+    description: 'wo/1 priority (int)'
+    required: false
+    default: '2'
+  actor:
+    description: 'Optional actor login'
+    required: false
+    default: ''
+  detail:
+    description: 'Optional human-readable detail'
+    required: false
+    default: ''
+
+runs:
+  using: 'composite'
+  steps:
+    - name: POST /api/events/ingest
+      shell: bash
+      env:
+        IN_ENDPOINT: ${{ inputs.endpoint }}
+        IN_TOKEN: ${{ inputs.token }}
+        IN_LANE: ${{ inputs.lane }}
+        IN_REPO: ${{ inputs.repo }}
+        IN_WF: ${{ inputs.workflow }}
+        IN_BRANCH: ${{ inputs.branch }}
+        IN_SHA: ${{ inputs.sha }}
+        IN_RUN_ID: ${{ inputs.run_id }}
+        IN_RUN_URL: ${{ inputs.run_url }}
+        IN_CONCLUSION: ${{ inputs.conclusion }}
+        IN_TASK: ${{ inputs.task }}
+        IN_PRIORITY: ${{ inputs.priority }}
+        IN_ACTOR: ${{ inputs.actor }}
+        IN_DETAIL: ${{ inputs.detail }}
+      run: |
+        python3 - <<'PYEOF'
+        import json, os, urllib.request
+
+        env = os.environ
+        url = (env.get("IN_ENDPOINT") or "").strip()
+        tok = (env.get("IN_TOKEN") or "").strip()
+        if not url or not tok:
+            print("skipped: endpoint or token missing")
+            raise SystemExit(0)
+
+        sha = (env.get("IN_SHA") or "")[:12]
+        run_id = env.get("IN_RUN_ID") or ""
+        repo = env.get("IN_REPO") or ""
+        run_url = env.get("IN_RUN_URL") or (
+            "https://github.com/%s/actions/runs/%s" % (repo, run_id) if repo and run_id else "")
+
+        params = {
+            "repo": repo,
+            "workflow": env.get("IN_WF") or "",
+            "branch": env.get("IN_BRANCH") or "",
+            "sha": sha,
+            "conclusion": env.get("IN_CONCLUSION") or "",
+            "run_id": run_id,
+            "run_url": run_url,
+        }
+        if env.get("IN_ACTOR"):
+            params["actor"] = env["IN_ACTOR"]
+        if env.get("IN_DETAIL"):
+            params["detail"] = env["IN_DETAIL"]
+
+        body = json.dumps({
+            "proto": "wo/1",
+            "type": "EVENT",
+            "from": "github",
+            "to": env.get("IN_LANE") or "jii",
+            "job_id": ("GHCI-%s" % run_id) if run_id else "",
+            "task": env.get("IN_TASK") or "gh_ci_status",
+            "params": params,
+            "priority": int(env.get("IN_PRIORITY") or 2),
+            "status": "done",
+        }).encode()
+
+        req = urllib.request.Request(url, data=body, method="POST", headers={
+            "Authorization": "Bearer " + tok,
+            "Content-Type": "application/json",
+        })
+        try:
+            with urllib.request.urlopen(req, timeout=20) as r:
+                print("ingest http=%s body=%s" % (r.status, r.read(200).decode(errors="replace")))
+        except Exception as e:
+            print("ingest failed (ignored): %r" % (e,))
+        PYEOF
