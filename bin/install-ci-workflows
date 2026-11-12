@@ -66,7 +66,9 @@ def main():
     ap.add_argument("--check", action="store_true")
     a = ap.parse_args()
 
-    wf = ", ".join('"%s"' % w.strip() for w in a.workflows.split(",") if w.strip())
+    # Strip stray quotes so "A","B" and A,B both render as ["A", "B"] (P9 defect 2026-11-12).
+    wf = ", ".join('"%s"' % w.strip().strip('"').strip("'")
+                   for w in a.workflows.split(",") if w.strip().strip('"').strip("'"))
     base = {"__REPO__": a.repo, "__LANE__": a.lane, "__WORKFLOWS__": wf}
     out = {}
 
