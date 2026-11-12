@@ -1,0 +1,22 @@
+# Deploy status job — canonical template v1 (appended to a deploy workflow).
+# Rendered by peachtukta1014/.github/bin/install-ci-workflows.
+# Payload shape (wo/1 EVENT, task gh_deploy_status) is identical in every repo.
+  status:
+    name: Deploy status
+    needs: [__NEEDS__]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: POST /api/events/ingest
+        uses: peachtukta1014/.github/notify-ingest@v1
+        with:
+          endpoint: ${{ vars.EVENT_URL || 'http://35.208.171.151/api/events/ingest' }}
+          token: ${{ secrets.VM_SSE_TOKEN }}
+          lane: __LANE__
+          repo: ${{ github.repository }}
+          workflow: ${{ github.workflow }}
+          branch: ${{ github.ref_name }}
+          sha: ${{ github.sha }}
+          run_id: ${{ github.run_id }}
+          conclusion: ${{ needs.__NEEDS__.result }}
+          task: gh_deploy_status

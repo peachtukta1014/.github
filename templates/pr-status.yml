@@ -1,0 +1,35 @@
+# PR Status Notify — canonical template v1 (single authoring point).
+# Rendered by peachtukta1014/.github/bin/install-ci-workflows; do not edit in the repo.
+# Payload shape (wo/1 EVENT, task gh_ci_status) is identical in every repo.
+name: PR Status Notify
+
+on:
+  workflow_run:
+    workflows: [__WORKFLOWS__]
+    types: [completed]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: __REPO__-pr-status
+  cancel-in-progress: true
+
+jobs:
+  status:
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: POST /api/events/ingest
+        uses: peachtukta1014/.github/notify-ingest@v1
+        with:
+          endpoint: ${{ vars.EVENT_URL || 'http://35.208.171.151/api/events/ingest' }}
+          token: ${{ secrets.VM_SSE_TOKEN }}
+          lane: __LANE__
+          repo: ${{ github.repository }}
+          workflow: ${{ github.event.workflow_run.name }}
+          branch: ${{ github.event.workflow_run.head_branch }}
+          sha: ${{ github.event.workflow_run.head_sha }}
+          run_id: ${{ github.event.workflow_run.id }}
+          conclusion: ${{ github.event.workflow_run.conclusion }}
+          task: gh_ci_status

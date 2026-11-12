@@ -1,0 +1,92 @@
+#!/usr/bin/env python3
+"""Render the 3 canonical CI workflows into one repo (single authoring point).
+
+Templates live next to this script: ../templates/*.yml
+Usage:
+  install-ci-workflows --repo-dir DIR --repo NAME --lane LANE --workflows "CI,Deploy HQ Proxy"
+  install-ci-workflows ... --deploy .github/workflows/deploy.yml --deploy-needs deploy_x
+  install-ci-workflows ... --check     # only print md5, write nothing
+"""
+import argparse, hashlib, json, os, re, sys
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+TPL = os.path.join(os.path.dirname(HERE), "templates")
+
+
+def render(name, mapping):
+    with open(os.path.join(TPL, name), encoding="utf-8") as f:
+        text = f.read()
+    for k, v in mapping.items():
+        text = text.replace(k, v)
+    return text
+
+
+def md5(text):
+    return hashlib.md5(text.encode("utf-8")).hexdigest()
+
+
+def write(path, text, check_only):
+    old = open(path, encoding="utf-8").read() if os.path.exists(path) else None
+    status = "same" if old == text else ("new" if old is None else "changed")
+    if not check_only:
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(text)
+    return status, md5(text)
+
+
+def patch_deploy(path, snippet, check_only):
+    """Replace a trailing `  status:` job (2-space indent) with the canonical one."""
+    text = open(path, encoding="utf-8").read()
+    lines = text.split("\n")
+    idx = None
+    for i in range(len(lines) - 1, -1, -1):
+        if re.match(r"^  status:\s*$", lines[i]):
+            idx = i
+            break
+    if idx is None:
+        return "no-status-job", md5(text)
+    head = "\n".join(lines[:idx]).rstrip("\n") + "\n\n"
+    new = head + snippet
+    status = "same" if new == text else "changed"
+    if not check_only:
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(new)
+    return status, md5(new)
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--repo-dir", required=True)
+    ap.add_argument("--repo", required=True)
+    ap.add_argument("--lane", required=True)
+    ap.add_argument("--workflows", default="CI")
+    ap.add_argument("--deploy")
+    ap.add_argument("--deploy-needs", default="build")
+    ap.add_argument("--check", action="store_true")
+    a = ap.parse_args()
+
+    wf = ", ".join('"%s"' % w.strip() for w in a.workflows.split(",") if w.strip())
+    base = {"__REPO__": a.repo, "__LANE__": a.lane, "__WORKFLOWS__": wf}
+    out = {}
+
+    p = os.path.join(a.repo_dir, ".github/workflows/pr-status.yml")
+    st, h = write(p, render("pr-status.yml", base), a.check)
+    out["pr-status.yml"] = {"status": st, "md5": h}
+
+    p = os.path.join(a.repo_dir, ".github/workflows/sync-project-tree.yml")
+    st, h = write(p, render("sync-project-tree.yml", base), a.check)
+    out["sync-project-tree.yml"] = {"status": st, "md5": h}
+
+    if a.deploy:
+        p = os.path.join(a.repo_dir, a.deploy)
+        snip = render("deploy-status-job.yml",
+                      dict(base, __NEEDS__=a.deploy_needs))
+        st, h = patch_deploy(p, snip, a.check)
+        out[a.deploy + ":status"] = {"status": st, "md5": h}
+
+    print(json.dumps(out, ensure_ascii=False, indent=1))
+
+
+if __name__ == "__main__":
+    sys.exit(main())

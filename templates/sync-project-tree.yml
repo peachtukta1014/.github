@@ -1,0 +1,107 @@
+# Sync Project Tree — canonical template v1 (single authoring point).
+# Rendered by peachtukta1014/.github/bin/install-ci-workflows; do not edit in the repo.
+# Same location + same format in every repo: docs/PROJECT_STRUCTURE.md,
+# tree block between <!-- TREE_START --> / <!-- TREE_END -->.
+name: Sync Project Tree
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: __REPO__-sync-tree
+  cancel-in-progress: false
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
+jobs:
+  sync:
+    name: Auto-sync project tree
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+
+      - name: Install tree
+        run: sudo apt-get install -y tree
+
+      - name: Sync tree in PROJECT_STRUCTURE.md
+        env:
+          REPO_NAME: ${{ github.event.repository.name }}
+        run: |
+          node --input-type=module - <<'JSEOF'
+          import { execSync } from 'child_process';
+          import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
+
+          const DOC = 'docs/PROJECT_STRUCTURE.md';
+          const NAME = process.env.REPO_NAME || 'repo';
+          const IGNORE = 'node_modules|.git|dist|package-lock.json|.firebase';
+
+          if (!existsSync('docs')) mkdirSync('docs', { recursive: true });
+          if (!existsSync(DOC)) {
+            writeFileSync(DOC, `# Project Structure\n\n## Tree\n\n<!-- TREE_START -->\n<!-- TREE_END -->\n`);
+            console.log('created ' + DOC);
+          }
+
+          let raw = execSync(`tree --dirsfirst -a --noreport -I '${IGNORE}' -L 3`, { cwd: '.' })
+            .toString().trimEnd();
+          raw = NAME + '/' + raw.slice(1);
+
+          const doc = readFileSync(DOC, 'utf8');
+          const block = `<!-- TREE_START -->\n\`\`\`\n${raw}\n\`\`\`\n<!-- TREE_END -->`;
+          const next = /<!-- TREE_START -->[\s\S]*?<!-- TREE_END -->/.test(doc)
+            ? doc.replace(/<!-- TREE_START -->[\s\S]*?<!-- TREE_END -->/, block)
+            : doc.trimEnd() + '\n\n' + block + '\n';
+
+          if (next === doc) { console.log('tree unchanged'); }
+          else { writeFileSync(DOC, next); console.log('tree updated'); }
+          JSEOF
+
+      - name: Commit if changed
+        run: |
+          if [ -z "$(git status --porcelain docs/PROJECT_STRUCTURE.md)" ]; then
+            echo "no changes"; exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/PROJECT_STRUCTURE.md
+          git commit -m "docs: auto-sync project tree [skip ci]"
+          pushed=0
+          for i in 1 2 3; do
+            git pull --rebase origin main || true
+            if git push origin HEAD:main; then pushed=1; break; fi
+            echo "push rejected (attempt $i)"; sleep 2
+          done
+          [ "$pushed" -eq 1 ] || { echo "push failed after 3 attempts" >&2; exit 1; }
+
+      # VM mirror only for repos that have a clone on the VM (opt-in: repo variable VM_MIRROR=1)
+      - name: Mirror tree to VM
+        if: ${{ vars.VM_MIRROR == '1' }}
+        continue-on-error: true
+        env:
+          SYNC_URL: ${{ vars.SYNC_URL }}
+          SYNC_TOKEN: ${{ secrets.VM_SYNC_TOKEN }}
+          REPO_NAME: ${{ github.event.repository.name }}
+        run: |
+          python3 - <<'PYEOF'
+          import json, os, urllib.request
+          url, tok = os.environ.get("SYNC_URL"), os.environ.get("SYNC_TOKEN")
+          if not url or not tok:
+              print("VM mirror skipped: variable/secret missing"); raise SystemExit(0)
+          body = json.dumps({"repo": os.environ["REPO_NAME"],
+                             "path": "docs/PROJECT_STRUCTURE.md",
+                             "content": open("docs/PROJECT_STRUCTURE.md", encoding="utf-8").read()}).encode()
+          req = urllib.request.Request(url, data=body, method="POST",
+                                       headers={"Authorization": "Bearer " + tok,
+                                                "Content-Type": "application/json"})
+          try:
+              with urllib.request.urlopen(req, timeout=25) as r:
+                  print("VM mirror:", r.status, r.read(200))
+          except Exception as e:
+              print("VM mirror failed (ignored):", repr(e))
+          PYEOF
