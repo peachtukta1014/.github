@@ -10,7 +10,7 @@
       - name: POST /api/events/ingest
         uses: peachtukta1014/.github/notify-ingest@v1
         with:
-          endpoint: ${{ vars.EVENT_URL || 'http://35.208.171.151/api/events/ingest' }}
+          endpoint: ${{ vars.EVENT_URL || 'https://hq-agentic.duckdns.org/api/events/ingest' }}
           token: ${{ secrets.VM_SSE_TOKEN }}
           lane: __LANE__
           repo: ${{ github.repository }}
