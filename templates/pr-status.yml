@@ -1,4 +1,8 @@
-# PR Status Notify — canonical template v2 (single authoring point).
+# PR Status Notify — canonical template v3 (single authoring point).
+# v3 (2026-11-16, WO-code-CI_MAIN_TWIN): on hq-infra, a main push is never posted here.
+# rule D (hq-core ci_agg / ci_main_status) is the single voice for main shas, so a red
+# main push used to produce 2 docs (ci_main_status + gh_ci_status). Other repos are
+# untouched: same gate as rule D's repo scope, everything else renders identically.
 # Rendered by peachtukta1014/.github/bin/install-ci-workflows; do not edit in the repo.
 # Payload shape (wo/1 EVENT, task gh_ci_status) is identical in every repo.
 # v2 (2026-11-15, WO-code-CI_LANE_ROUTE): the payload now carries the PR number and the
@@ -50,7 +54,12 @@ jobs:
           } >> "${GITHUB_OUTPUT}"
           echo "resolved pr='${pr}' files=$(printf '%s' "${files}" | grep -c . || true)"
 
+      - name: Rule D note (hq-infra main pushes are announced once, by hq-core)
+        if: github.repository == 'peachtukta1014/hq-infra' && github.event.workflow_run.head_branch == 'main'
+        run: echo "main push: rule D owns this sha (ci_main_status is the single voice)"
+
       - name: POST /api/events/ingest
+        if: ${{ !(github.repository == 'peachtukta1014/hq-infra' && github.event.workflow_run.head_branch == 'main') }}
         uses: peachtukta1014/.github/notify-ingest@v2
         with:
           endpoint: ${{ vars.EVENT_URL || 'https://hq-agentic.duckdns.org/api/events/ingest' }}
