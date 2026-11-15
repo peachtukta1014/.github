@@ -1,6 +1,9 @@
-# PR Status Notify — canonical template v1 (single authoring point).
+# PR Status Notify — canonical template v2 (single authoring point).
 # Rendered by peachtukta1014/.github/bin/install-ci-workflows; do not edit in the repo.
 # Payload shape (wo/1 EVENT, task gh_ci_status) is identical in every repo.
+# v2 (2026-11-15, WO-code-CI_LANE_ROUTE): the payload now carries the PR number and the
+# changed file paths, because the HQ door routes a GitHub event by repo + changed paths.
+# Without them every chinchaflow CI/deploy result fell back to the repo lane (`code`).
 name: PR Status Notify
 
 on:
@@ -10,6 +13,8 @@ on:
 
 permissions:
   contents: read
+  pull-requests: read
+  actions: read
 
 concurrency:
   group: __REPO__-pr-status
@@ -19,13 +24,40 @@ jobs:
   status:
     if: always()
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      REPO: ${{ github.repository }}
+      HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+      PR_FROM_EVENT: ${{ github.event.workflow_run.pull_requests[0].number }}
     steps:
+      - name: Resolve PR number + changed paths (routing input)
+        id: route
+        run: |
+          set -u
+          pr="${PR_FROM_EVENT}"
+          if [ -z "${pr}" ] || [ "${pr}" = "null" ]; then
+            pr=$(gh api "repos/${REPO}/commits/${HEAD_SHA}/pulls" --jq '.[0].number // empty' 2>/dev/null || true)
+          fi
+          files=""
+          if [ -n "${pr}" ]; then
+            files=$(gh api "repos/${REPO}/pulls/${pr}/files?per_page=100" --paginate --jq '.[].filename' 2>/dev/null || true)
+          fi
+          {
+            echo "pr=${pr}"
+            echo "files<<__HQ_EOF__"
+            echo "${files}"
+            echo "__HQ_EOF__"
+          } >> "${GITHUB_OUTPUT}"
+          echo "resolved pr='${pr}' files=$(printf '%s' "${files}" | grep -c . || true)"
+
       - name: POST /api/events/ingest
-        uses: peachtukta1014/.github/notify-ingest@v1
+        uses: peachtukta1014/.github/notify-ingest@v2
         with:
           endpoint: ${{ vars.EVENT_URL || 'https://hq-agentic.duckdns.org/api/events/ingest' }}
           token: ${{ secrets.VM_SSE_TOKEN }}
           lane: __LANE__
+          pr: ${{ steps.route.outputs.pr }}
+          files: ${{ steps.route.outputs.files }}
           repo: ${{ github.repository }}
           workflow: ${{ github.event.workflow_run.name }}
           branch: ${{ github.event.workflow_run.head_branch }}

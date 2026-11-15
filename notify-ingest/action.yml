@@ -13,8 +13,17 @@ inputs:
     description: 'Bearer token (secrets.VM_SSE_TOKEN)'
     required: true
   lane:
-    description: 'Destination lane (to)'
-    required: true
+    description: 'Fallback lane only - a GitHub event is routed by repo + changed paths, never by this field'
+    required: false
+    default: ''
+  pr:
+    description: 'Pull request number (routing + inbox correlation)'
+    required: false
+    default: ''
+  files:
+    description: 'Changed file paths, one per line (lane resolution input)'
+    required: false
+    default: ''
   repo:
     description: 'owner/name of the reporting repo'
     required: false
@@ -69,6 +78,8 @@ runs:
         IN_ENDPOINT: ${{ inputs.endpoint }}
         IN_TOKEN: ${{ inputs.token }}
         IN_LANE: ${{ inputs.lane }}
+        IN_PR: ${{ inputs.pr }}
+        IN_FILES: ${{ inputs.files }}
         IN_REPO: ${{ inputs.repo }}
         IN_WF: ${{ inputs.workflow }}
         IN_BRANCH: ${{ inputs.branch }}
@@ -110,12 +121,20 @@ runs:
             params["actor"] = env["IN_ACTOR"]
         if env.get("IN_DETAIL"):
             params["detail"] = env["IN_DETAIL"]
+        # Routing input (WO-code-CI_LANE_ROUTE): the HQ door resolves the lane from
+        # repo + changed paths. Without these the door can only fall back to the
+        # repo's own lane, which is how chinchaflow CI landed in `code` on 2026-11-15.
+        if env.get("IN_PR"):
+            params["pr_number"] = env["IN_PR"]
+        files = [l.strip() for l in (env.get("IN_FILES") or "").splitlines() if l.strip()]
+        if files:
+            params["changed_files"] = files[:300]
 
         body = json.dumps({
             "proto": "wo/1",
             "type": "EVENT",
             "from": "github",
-            "to": env.get("IN_LANE") or "jii",
+            "to": env.get("IN_LANE") or "",
             "job_id": ("GHCI-%s" % run_id) if run_id else "",
             "task": env.get("IN_TASK") or "gh_ci_status",
             "params": params,

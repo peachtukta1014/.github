@@ -5,7 +5,7 @@
 
 Usage:
 ```yaml
-- uses: peachtukta1014/.github/notify-ingest@v1
+- uses: peachtukta1014/.github/notify-ingest@v2
   with:
     endpoint: ${{ vars.EVENT_URL }}
     token: ${{ secrets.VM_SSE_TOKEN }}
