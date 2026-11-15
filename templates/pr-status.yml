@@ -56,7 +56,8 @@ jobs:
 
       - name: Rule D note (hq-infra main pushes are announced once, by hq-core)
         if: github.repository == 'peachtukta1014/hq-infra' && github.event.workflow_run.head_branch == 'main'
-        run: echo "main push: rule D owns this sha (ci_main_status is the single voice)"
+        run: |
+          echo "main push: rule D owns this sha (ci_main_status is the single voice)"
 
       - name: POST /api/events/ingest
         if: ${{ !(github.repository == 'peachtukta1014/hq-infra' && github.event.workflow_run.head_branch == 'main') }}
