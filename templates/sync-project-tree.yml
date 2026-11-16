@@ -48,8 +48,12 @@ jobs:
             console.log('created ' + DOC);
           }
 
-          let raw = execSync(`tree --dirsfirst -a --noreport -I '${IGNORE}' -L 3`, { cwd: '.' })
-            .toString().trimEnd();
+          // LC_ALL + -N + --charset unicode: without these, `tree` escapes any
+          // non-ASCII (Thai) name as octal -- e.g. "20-Team / (\340\270...).
+          let raw = execSync(`tree --dirsfirst -a --noreport -N --charset unicode -I '${IGNORE}' -L 3`, {
+            cwd: '.',
+            env: { ...process.env, LC_ALL: 'C.UTF-8', LANG: 'C.UTF-8' },
+          }).toString().trimEnd();
           raw = NAME + '/' + raw.slice(1);
 
           const doc = readFileSync(DOC, 'utf8');
