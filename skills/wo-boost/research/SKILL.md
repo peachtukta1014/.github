@@ -18,7 +18,7 @@ Full table: `30-System/CHANNEL_SHARED_RULES.md` (§Trigger lexicon). Never confu
 > **ROOT:** single home `30-System/SYSTEM_MINDMAP.md` — see there, do not restate (Peach 2026-11-17).
 > Every `70-Lanes/...` and `30-System/...` path is relative to that root.
 
-> **TOOLMAP (source of truth, lives on VM):** `/opt/vault/vm-hq-core/30-System/TOOLMAP.md` — read it at boot, right after identity, before any shell call. The VM is home; this device is only the key. Shell = MCP `ws_exec` (always runs as `ubuntu`; root mode retired 2026-11-17 — privileged calls go over SSH: `wo-loop shell "sudo -n <allowlisted script>"`, single home `30-System/CHANNEL_SHARED_RULES.md` RULE 4). Device-side script paths: skill `vm-key` (`/var/minis/skills/vm-key/SKILL.md`).
+> **TOOLMAP (source of truth, lives on VM):** `/opt/vault/vm-hq-core/30-System/TOOLMAP.md` — read it at boot, right after identity, before any shell call. The VM is home; this device is only the key. Shell = MCP `ws_exec` (always runs as `ubuntu`; `--root` = uid 0 for that one call — RULE 4's per-action lock still applies; `pr`/`token` stay allowlist-by-full-path, single home `30-System/CHANNEL_SHARED_RULES.md` RULE 4). Device-side script paths: `skills/boot/references/vm-key.md`.
 
 
 
@@ -59,3 +59,9 @@ canonical scripts unchanged (RULE 1). Details: `/var/minis/shared/tools/wo-loop/
 One rule, one file: `/opt/vault/vm-hq-core/30-System/TRANSPORT_WS_FIRST.md`.
 `ws_exec` (WS) is primary, `om-ssh` is fallback, dispatch/complete/SSE/board are
 already WS-first. Read that file; do not restate the rule here.
+
+## Two planes (Peach 2026-11-18, all lanes)
+Execution = WS: `ws_exec` (primary) / `wo-loop shell` (om-ssh fallback). Real shell work runs here.
+Bookkeeping = `wo-loop` only: dispatch/complete/pad/item/sp/render/board. It never runs the work.
+Never run shell work through `wo-loop ws-exec`; never hand-edit pad JSON.
+Rule: `PROTOCOL/protocol/wo-loop.md` "Two planes" · table: `30-System/TOOLMAP.md` 2b.1.

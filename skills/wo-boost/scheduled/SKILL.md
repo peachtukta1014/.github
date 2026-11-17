@@ -18,7 +18,7 @@ Full table: `30-System/CHANNEL_SHARED_RULES.md` (§Trigger lexicon). Never confu
 
 > Every `70-Lanes/...` and `30-System/...` path is relative to that root.
 
-> **TOOLMAP (source of truth, lives on VM):** `/opt/vault/vm-hq-core/30-System/TOOLMAP.md` — read it at boot, right after identity, before any shell call. The VM is home; this device is only the key. Shell = MCP `ws_exec` (always runs as `ubuntu`; root mode retired 2026-11-17 — privileged calls go over SSH: `wo-loop shell "sudo -n <allowlisted script>"`, single home `30-System/CHANNEL_SHARED_RULES.md` RULE 4). Device-side script paths: skill `vm-key` (`/var/minis/skills/vm-key/SKILL.md`).
+> **TOOLMAP (source of truth, lives on VM):** `/opt/vault/vm-hq-core/30-System/TOOLMAP.md` — read it at boot, right after identity, before any shell call. The VM is home; this device is only the key. Shell = MCP `ws_exec` (always runs as `ubuntu`; `--root` = uid 0 for that one call — RULE 4's per-action lock still applies; `pr`/`token` stay allowlist-by-full-path, single home `30-System/CHANNEL_SHARED_RULES.md` RULE 4). Device-side script paths: `skills/boot/references/vm-key.md`.
 
 ## Boot (receiving side)
 > **Mandatory VM shell pattern — ALL VM shell use, not only boot (Peach 2026-11-08):** ssh once to open the VM door + WS tunnel (14301→4301), then use `ws_dispatch` (WS-VM direct) as the primary fast path for all boot/shell work. If the tunnel/port drops, run one `om-ssh` round to reopen, then resume WS. Never use bare `om-boot` on this device — no `om-boot` on PATH here.
@@ -57,3 +57,9 @@ canonical scripts unchanged (RULE 1). Details: `/var/minis/shared/tools/wo-loop/
 One rule, one file: `/opt/vault/vm-hq-core/30-System/TRANSPORT_WS_FIRST.md`.
 `ws_exec` (WS) is primary, `om-ssh` is fallback, dispatch/complete/SSE/board are
 already WS-first. Read that file; do not restate the rule here.
+
+## Two planes (Peach 2026-11-18, all lanes)
+Execution = WS: `ws_exec` (primary) / `wo-loop shell` (om-ssh fallback). Real shell work runs here.
+Bookkeeping = `wo-loop` only: dispatch/complete/pad/item/sp/render/board. It never runs the work.
+Never run shell work through `wo-loop ws-exec`; never hand-edit pad JSON.
+Rule: `PROTOCOL/protocol/wo-loop.md` "Two planes" · table: `30-System/TOOLMAP.md` 2b.1.
