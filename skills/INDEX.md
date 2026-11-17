@@ -1,6 +1,6 @@
 # Skills registry — categorised
 
-_Prefix = category. Generated 2026-11-18 03:02_
+_Prefix = category. Updated 2026-11-18 (6 new skills)_
 
 | category | skill | what it does |
 |---|---|---|
@@ -24,4 +24,9 @@ _Prefix = category. Generated 2026-11-18 03:02_
 | UI & hardware | `ui-generative-minis` | In the current Minis environment, automatically convert text descriptions into a single-file HTML generator similar to Claude Artifact, with |
 
 **18 skills** · 9 archived in `/var/minis/shared/skills-archive/` (not loaded)
-
+| System design | `system-protocol-design` | Design or repair a multi-agent/multi-service protocol - message envelopes, state machines, addressing, delivery, failure paths and the evidence contra |
+| AI / evaluation | `agentic-eval` | Patterns and techniques for evaluating and improving AI agent outputs. Use this skill when: - Implementing self-critique and reflection loops - Buildi |
+| Data | `data-context-extractor` | Generate or improve a company-specific data analysis skill by extracting tribal knowledge from analysts. |
+| Discovery | `internet-skill-finder` | Search and recommend Agent Skills from verified GitHub repositories. Use when users ask to find, discover, search for, or recommend skills/plugins for |
+| Docs | `mermaid-visualizer` | Transform text content into professional Mermaid diagrams for presentations and documentation. Use when users ask to visualize concepts, create flowch |
+| Data / infra | `vector-index-tuning` | Optimize vector index performance for latency, recall, and memory. Use when tuning HNSW parameters, selecting quantization strategies, or scaling vect |
