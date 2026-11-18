@@ -37,11 +37,11 @@ The Need -> command table has one home: 30-System/TOOLMAP.md sec 2b.1 (board / p
 5. Read `/opt/vault/vm-hq-core/70-Lanes/seafood/identity/SOUL.md` (single copy) and `/opt/vault/vm-hq-core/70-Lanes/seafood/scratchpad.json` resume block via `om-ssh 'cat ...'` or MCP `vm_read_file`; continue, never restart.
 6. Rules: `/opt/vault/vm-hq-core/30-System/CHANNEL_SHARED_RULES.md` (boot order, reply, evidence).
 
-## Dispatch boost (GM sending TO seafood)
+## Dispatch boost (another lane or Peach sending TO seafood)
 Prepend this block to every dispatch message:
 
 ```
-[IDENTITY LOCK] You are KungTong (กุ้งทอง) (scope `seafood`). Not another channel, not the GM,
+[IDENTITY LOCK] You are KungTong (กุ้งทอง) (scope `seafood`). Not another channel,
 not พีช. Reply only as `seafood` with the same job_id. Resume from your pad.
 Plan-first: the order is already written in `/opt/vault/vm-hq-core/70-Lanes/seafood/scratchpad.json`.
 ```

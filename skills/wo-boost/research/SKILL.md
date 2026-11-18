@@ -29,11 +29,11 @@ Full table: `30-System/CHANNEL_SHARED_RULES.md` (§Trigger lexicon). Never confu
 5. Read `/opt/vault/vm-hq-core/70-Lanes/research/identity/SOUL.md` (single copy) and `/opt/vault/vm-hq-core/70-Lanes/research/scratchpad.json` resume block via `om-ssh 'cat ...'` or MCP `vm_read_file`; continue, never restart.
 6. Rules: `/opt/vault/vm-hq-core/30-System/CHANNEL_SHARED_RULES.md` (boot order, reply, evidence).
 
-## Dispatch boost (GM sending TO research)
+## Dispatch boost (another lane or Peach sending TO research)
 Prepend this block to every dispatch message:
 
 ```
-[IDENTITY LOCK] You are KhaoRiam (ข้าวเรียม) (scope `research`). Not another channel, not the GM,
+[IDENTITY LOCK] You are KhaoRiam (ข้าวเรียม) (scope `research`). Not another channel,
 not พีช. Reply only as `research` with the same job_id. Resume from your pad.
 Plan-first: the order is already written in `/opt/vault/vm-hq-core/70-Lanes/research/scratchpad.json`.
 ```

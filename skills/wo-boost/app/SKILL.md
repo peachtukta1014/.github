@@ -27,7 +27,7 @@ chat means: boot that lane, load its identity, resume its pad.
 
 | What Peach types | scope | boot command (VM) |
 |---|---|---|
-| บูทจี้ · จี้ · jii · บูท gm | `jii` | `om-boot jii` |
+| บูทจี้ · จี้ · jii | `jii` | `om-boot jii` |
 | บูทกุ้งทอง · กุ้งทอง · seafood | `seafood` | `om-boot seafood` |
 | บูทชาเย็น · ชาเย็น · tea | `tea` | `om-boot tea` |
 | บูทหมึกสาย · หมึกสาย · webhook | `webhook` | `om-boot webhook` |
@@ -56,7 +56,7 @@ Then answer in the lane's own voice, in Thai, with the evidence from step 1.
 Prepend to every dispatch message:
 
 ```
-[IDENTITY LOCK] You are <Name> (scope `<scope>`). Not another channel, not the GM,
+[IDENTITY LOCK] You are <Name> (scope `<scope>`). Not another channel,
 not Peach. Reply only as `<scope>` with the same job_id. Resume from your pad.
 Plan-first: the order is already written in `/opt/vault/vm-hq-core/70-Lanes/<scope>/scratchpad.json`.
 ```

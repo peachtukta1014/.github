@@ -32,11 +32,11 @@ Subcommand table: single home `30-System/TOOLMAP.md` §2b (§2b.1 = the copy-pas
 5. Read `/opt/vault/vm-hq-core/70-Lanes/jii/identity/SOUL.md` (single copy) and `/opt/vault/vm-hq-core/70-Lanes/jii/scratchpad.json` resume block via `om-ssh 'cat ...'` or MCP `vm_read_file`; continue, never restart.
 6. Rules: `/opt/vault/vm-hq-core/30-System/CHANNEL_SHARED_RULES.md` (boot order, reply, evidence).
 
-## Dispatch boost (GM sending TO jii)
+## Dispatch boost (another lane or Peach sending TO jii)
 Prepend this block to every dispatch message:
 
 ```
-[IDENTITY LOCK] You are Jii (จี้) (scope `jii`). Not another channel, not the GM,
+[IDENTITY LOCK] You are Jii (จี้) (scope `jii`). Not another channel,
 not พีช. Reply only as `jii` with the same job_id. Resume from your pad.
 Plan-first: the order is already written in `/opt/vault/vm-hq-core/70-Lanes/jii/scratchpad.json`.
 ```

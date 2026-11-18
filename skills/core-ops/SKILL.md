@@ -35,7 +35,7 @@ description: >
 
 ## A. DEBUG — when Peach says "fix the bug / it's broken / error here"
 
-GM's real-world debug flow (built from GM's own scars, PR #638).
+The system's real-world debug flow (built from Peach's own scars, PR #638).
 
 1. **Listen → check the shared board and active task** — translate symptom into expected vs actual behavior; high-risk confirm with Peach first.
 2. **Search the shared Lessons KB first** — `python3 /var/minis/shared/chincha/kb/kb.py search --keywords "<kw>"`. Never start from zero.
@@ -141,7 +141,7 @@ Never run them as a watch loop.
 2. **Fallback via API** — curl PRs/runs/jobs with `$GH_TOKEN` (never echo token).
    Local toolset `/var/minis/workspace/chincha-status/` (`poll_gh.Use MCP.
 3. **Merge** — normally do NOT merge by hand: auto-merge workflow handles green
-   PRs (minis/*, hq/*, vm/*). GM merge (`gate_call(category='chincha', tool='merge_pr')`)
+   PRs (minis/*, hq/*, vm/*). Gate merge - special cases only (`gate_call(category='chincha', tool='merge_pr')`)
    only for special cases Peach orders, and only when CI is verified green.
 4. **On red** — when the bridge reports a failure: read the run log, fix, PR
    again. That's reactive work after notification, never waiting.
@@ -164,7 +164,7 @@ is NOT used anymore (2026-09-11: iSH npm cache broken; migrated to VM where
 | `merge_pr` | Merge (squash) — only when CI green |
 | `get_github_issue` | Issue details |
 | `query_firestore` | Generic Firestore read (scope-validated) |
-| `mesh_send` | Send a message via Central Mesh (Firestore mesh_messages) GM<->minions |
+| `mesh_send` | Send a message via Central Mesh (Firestore mesh_messages) lane<->lane |
 | `mesh_inbox` | Read mesh inbox (filter by scope/status) |
 | `mesh_stats` | Central Mesh summary (counts by status) |
 

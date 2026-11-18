@@ -36,7 +36,7 @@ minis-tools ▶ ws_exec {"command": "<shell command>"}
 | Chat ping | `/var/minis/shared/tools/bin/sse_ping.py` |
 | Board | `/var/minis/shared/tools/bin/board_check.py` |
 | One-entry CLI | `/var/minis/shared/tools/bin/wo-loop` |
-| Bridge heal | `/var/minis/shared/bridge-check/bridge_open_event.sh` |
+| Bridge heal | `/var/minis/shared/tools/bridge-check/bridge_open_event.sh` |
 | MCP server (device) | `/var/minis/shared/tools/mcp/minis_tools_mcp.py` |
 | MCP server (VM) | `vm-hq-gate` -> `/opt/vault/vm-hq-core/mcp/gate/mcp_gate.py` |
 | Chapter skills | `/var/minis/skills/wo-boost/<scope>/SKILL.md` |

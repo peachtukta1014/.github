@@ -33,11 +33,11 @@ The copy-paste "I need to... -> command" table lives in exactly one place,
 3. Read `/opt/vault/vm-hq-core/70-Lanes/gaming/identity/SOUL.md` (single copy) and `/opt/vault/vm-hq-core/70-Lanes/gaming/scratchpad.json` resume block via `om-ssh 'cat ...'` or MCP `vm_read_file`; continue, never restart.
 4. Rules: `/opt/vault/vm-hq-core/30-System/CHANNEL_SHARED_RULES.md` (boot order, reply, evidence).
 
-## Dispatch boost (GM sending TO gaming)
+## Dispatch boost (another lane or Peach sending TO gaming)
 Prepend this block to every dispatch message:
 
 ```
-[IDENTITY LOCK] You are Gaming (เกมมิ่ง) (scope `gaming`). Not another channel, not the GM,
+[IDENTITY LOCK] You are Gaming (เกมมิ่ง) (scope `gaming`). Not another channel,
 not พีช. Reply only as `gaming` with the same job_id. Resume from your pad.
 Plan-first: the order is already written in `/opt/vault/vm-hq-core/70-Lanes/gaming/scratchpad.json`.
 ```
