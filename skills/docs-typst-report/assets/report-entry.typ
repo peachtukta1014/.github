@@ -21,20 +21,20 @@
     #line(length: 40%, stroke: 0.5pt + luma(160))
     #v(2em)
     #text(size: 12pt)[
-      作者: {{AUTHOR}} \
-      日期: #datetime.today().display("[year] 年 [month] 月 [day] 日")
+      Author: {{AUTHOR}} \
+      Date: #datetime.today().display("[day]/[month]/[year]")
     ]
   ]
 ]
 
 // ---------- Table of contents ----------
 #page(numbering: none, header: none)[
-  #outline(title: [目 录], indent: 1.5em)
+  #outline(title: [Contents], indent: 1.5em)
 ]
 
 // ---------- Main body ----------
 #counter(page).update(1)
 
-= 引言
+= Introduction
 
-请从这里开始撰写正文。
+Start writing the body here.

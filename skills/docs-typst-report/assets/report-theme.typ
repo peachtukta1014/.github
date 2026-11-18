@@ -85,10 +85,10 @@
   )
 
   set text(
-    font: ("Libertinus Serif", "Noto Serif CJK SC"),
+    font: ("Libertinus Serif", "Noto Serif Thai", "Noto Serif CJK SC"),
     size: body-size,
-    lang: "zh",
-    region: "cn",
+    lang: "th",
+    region: "TH",
   )
 
   set par(
@@ -104,7 +104,7 @@
 
   set heading(numbering: "1.1")
   show heading: set text(
-    font: ("Noto Sans", "Noto Sans CJK SC"),
+    font: ("Noto Sans", "Noto Sans Thai", "Noto Sans CJK SC"),
     fill: report-accent,
   )
 
