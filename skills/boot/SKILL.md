@@ -7,7 +7,7 @@ description: Boot one lane (identity + SCOPE + pad + board). Use when Peach says
 
 ```
 WHERE  VM /opt/vault/vm-hq-core/bin/om-boot
-RUN    scripts/ws_exec.py --command "bash /opt/vault/vm-hq-core/bin/om-boot <scope>"
+RUN    /var/minis/shared/tools/bin/ws_exec.py --command "bash /opt/vault/vm-hq-core/bin/om-boot <scope>"
        (ws_exec opens the tunnel itself; if ssh fails it calls ws_tunnel_guard, then om-ssh — no manual step)
 READ   /opt/vault/vm-hq-core/70-Lanes/<scope>/SCOPE.md · PROTOCOL/00_INDEX.md
 DON'T  no ls/find/md5 before boot · no om-sync during boot

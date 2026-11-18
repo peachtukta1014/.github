@@ -10,7 +10,6 @@ _Prefix = category. Updated 2026-11-18 (6 new skills)_
 | Dev discipline | `dev-debugging-recovery` | Guides systematic root-cause debugging. Use when tests fail, builds break, something that worked yesterday broke, behavior doesn't match exp |
 | Dev discipline | `dev-git-workflow` | Structures git workflow practices. Use when making any code change. Use when committing, branching, resolving conflicts, splitting uncommitt |
 | Dev discipline | `dev-parallel-agents` | Use when facing 2+ independent tasks that can be worked on without shared state or sequential dependencies --- # Dispatching Parallel Agents |
-| Dev discipline | `dev-skill-creator` | Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that exte |
 | Dev discipline | `dev-sql-optimization` | Master SQL query optimization, indexing strategies, and EXPLAIN analysis to dramatically improve database performance and eliminate slow que |
 | Dev discipline | `dev-verification-gate` | Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and  |
 | Docs & documents | `docs-mermaid` | Writes scientific Markdown documentation and Mermaid diagrams for workflows, relationships, timelines, and schemas. Provides syntax referenc |

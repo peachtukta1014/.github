@@ -30,7 +30,7 @@ TodooCard / 土豆片的**父技能**。
 ## 设备命令
 
 ```bash
-ROOT=/var/minis/skills/todoocard
+ROOT=/var/minis/skills/hw-todoocard
 CLI="python3 $ROOT/today-eats/scripts/cli.py"
 
 $CLI scan
