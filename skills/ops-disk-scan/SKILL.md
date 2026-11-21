@@ -1,16 +1,6 @@
 ---
-name: ops-disk-scan
-description: >
-  Report what is actually taking up space in a directory tree — the biggest
-  subdirectories and the biggest individual files, largest first. Use this skill
-  whenever the user asks where their storage went or what is eating space: "why is my
-  phone full", "what's using all my space", "find the big files", "what's in this
-  folder taking up 8 GB", "which folder should I clean", "外接盘爆了", "手机满了",
-  "哪个文件夹最大", "找大文件", "磁盘占用", "清理空间", 용량 확인, 가장 큰 파일,
-  ストレージ不足, 大きいファイル. Also use it before any cleanup, archive or move, so
-  the target is chosen from measurements rather than from a guess — and when a scan
-  comes back empty or short, to confirm the directory really is empty instead of
-  assuming the tool failed.
+name: ops-disk-scan (หาพื้นที่เต็ม)
+description: "Find what actually eats disk space: biggest subdirectories and files, largest first."
 compatibility: >
   Python 3.8+ on PATH. Standard library only, no network. Read-only: it never
   creates, moves, renames or deletes anything, on any flag combination.

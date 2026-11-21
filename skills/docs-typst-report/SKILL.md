@@ -1,6 +1,6 @@
 ---
-name: docs-typst-report
-description: "Generate professional, high-quality PDF documents with Typst. Use for reports, academic papers, resumes, structured documents, mathematical typesetting, code-rich documents, precise layouts, and CJK typography when Markdown-to-PDF is insufficient. Select one skill-owned asset or compatible Typst Universe base before adding packages. Route ordinary presentation requests to Manus Slides/PPTX unless the user explicitly requires Typst-generated PDF slides."
+name: docs-typst-report (รายงาน PDF)
+description: "Build professional PDF reports, papers and resumes with Typst, including CJK and math."
 ---
 
 # Typst PDF Maker

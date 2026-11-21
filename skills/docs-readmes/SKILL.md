@@ -1,6 +1,6 @@
 ---
-name: docs-readmes
-description: Use when writing or improving README files. Not all READMEs are the same — provides templates and guidance matched to your audience and project type.
+name: docs-readmes (เขียน README)
+description: "Write or improve README files matched to the audience and the project type."
 ---
 
 # Crafting Effective READMEs

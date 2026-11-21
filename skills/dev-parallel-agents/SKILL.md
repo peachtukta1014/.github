@@ -1,6 +1,6 @@
 ---
-name: dev-parallel-agents
-description: Use when facing 2+ independent tasks that can be worked on without shared state or sequential dependencies
+name: dev-parallel-agents (งานขนาน)
+description: "Split 2+ independent tasks into parallel sub-agent work with no shared state."
 ---
 
 # Dispatching Parallel Agents

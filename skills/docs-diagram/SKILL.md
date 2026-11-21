@@ -1,6 +1,6 @@
 ---
-name: docs-diagram
-description: Draw diagrams (flowchart, sequence, ER, architecture, charts) as real PDF/SVG/PNG files, offline, with Typst + CeTZ, and embed them straight into a Typst report. Uses a 38-type Mermaid syntax library as the design-time knowledge base. Use when the user asks for a diagram, a flowchart, an architecture picture, or a PDF that must contain one, and no browser/Chromium is available.
+name: docs-diagram (วาดแผนภาพ)
+description: "Draw diagrams (flowchart, sequence, ER, architecture, charts) to PDF/SVG/PNG offline via Typst + CeTZ."
 allowed-tools: Read Write Edit Bash
 ---
 

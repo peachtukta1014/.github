@@ -1,6 +1,6 @@
 ---
-name: dev-verification-gate
-description: Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always
+name: dev-verification-gate (ตรวจก่อนบอกเสร็จ)
+description: "Run real verification before claiming work is complete, fixed or passing. Evidence before assertions."
 ---
 
 # Verification Before Completion

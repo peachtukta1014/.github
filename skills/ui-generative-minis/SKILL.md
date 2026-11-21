@@ -1,6 +1,6 @@
 ---
-name: ui-generative-minis
-description: In the current Minis environment, automatically convert text descriptions into a single-file HTML generator similar to Claude Artifact, with unified support for outputs such as cards, tables, records, timelines, code blocks, and charts. Use this skill first when users mention these components or visualization pages.
+name: ui-generative-minis (สร้าง UI/HTML)
+description: "Turn a text description into a single-file HTML artifact: cards, tables, timelines, charts."
 metadata:
   openclaw:
     emoji: "🧩"

@@ -1,6 +1,6 @@
 ---
-name: dev-sql-optimization
-description: Master SQL query optimization, indexing strategies, and EXPLAIN analysis to dramatically improve database performance and eliminate slow queries. Use when debugging slow queries, designing database schemas, or optimizing application performance.
+name: dev-sql-optimization (ปรับ SQL)
+description: "Master SQL optimization and indexing; read EXPLAIN to kill slow queries."
 ---
 
 # SQL Optimization Patterns

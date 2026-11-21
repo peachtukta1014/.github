@@ -1,9 +1,9 @@
 ---
-name: cloud-gcp-waf
+name: cloud-gcp-waf (ตรวจ GCP)
 metadata:
   version: "1.0.2"
   category: WellArchitectedFramework
-description: Evaluates Google Cloud workloads for cost efficiency and FinOps alignment using the Google Cloud Well-Architected Framework Cost Optimization pillar. Use when the user asks to analyze Google Cloud spend, reduce cloud bills, rightsize resources (for example, Compute, GKE, Storage, Databases), evaluate discount options (for example, CUDs, SUDs, Spot VMs), or eliminate idle capacity. Do not use for standalone product pricing lookups or non-cost architecture design.
+description: "GCP security review for the chincha stack: IAM roles, firewall rules, service accounts, secrets."
 ---
 
 # Google Cloud Well-Architected Framework skill for the Cost Optimization pillar

@@ -1,6 +1,6 @@
 ---
-name: wo-loop
-description: Boot a lane, then run the whole work-order loop — dispatch, board, pad, close, report, PR, exec. The single toolkit for working with other lanes. Use on "/boot <lane>", when ordering or closing work, or when a lane needs its identity, pad and board.
+name: wo-loop (ลูปใบงาน)
+description: "Run the work-order loop with other lanes: boot, dispatch, board, pad, close, report, PR."
 ---
 
 # wo-loop

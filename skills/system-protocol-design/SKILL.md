@@ -1,6 +1,6 @@
 ---
-name: system-protocol-design
-description: Design or repair a multi-agent/multi-service protocol - message envelopes, state machines, addressing, delivery, failure paths and the evidence contract that decides when work may be called closed. Use when two or more agents, services or channels must agree on "who owns which fact, what states exist, and what proves completion" - e.g. a team room, an event ledger, a dispatch/ACK/close contract, a webhook or CI notification path, or when a system keeps producing "not found", "duplicate", "unknown scope" or "closed but nobody knows" errors. NOT for writing application features.
+name: system-protocol-design (ออกแบบโปรโตคอล)
+description: "Design or repair multi-agent protocols: message envelopes, state machines, delivery, failure paths."
 ---
 
 # System protocol design

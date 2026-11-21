@@ -1,6 +1,6 @@
 ---
-name: research-reader
-description: Clean and extract the main body content from a webpage URL. Use this skill whenever the user asks to extract, scrape, or read the main article, text, or content from a webpage, especially if they mention wanting clean Markdown or text without ads and navigation.
+name: research-reader (อ่านเว็บสะอาด)
+description: "Extract the clean main article text or Markdown from a URL, without ads or navigation."
 ---
 
 # Web Content Extractor

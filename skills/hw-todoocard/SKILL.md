@@ -1,10 +1,7 @@
 ---
-name: hw-todoocard
+name: hw-todoocard (การ์ดอีเปเปอร์)
 version: 1.2.0
-description: >
-  TodooCard（土豆片 / NEWSTONE）六色电子纸技能族。用户提到土豆片、TodooCard、电子纸推送，
-  或要在卡上显示内容时使用。当前子技能 today-eats（今天吃点啥：附近随机外卖并推送）。
-  后续可扩展天气卡、任意图推送等子技能。
+description: "TodooCard (土豆片 / NEWSTONE) six-colour e-paper push; sub-skill today-eats."
 compatibility: >
   Minis iOS with apple-bluetooth; py3-pillow; font-noto-cjk.
   Sub-skills may need apple-location / apple-maps / apple-weather.

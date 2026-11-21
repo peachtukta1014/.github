@@ -1,13 +1,6 @@
 ---
-name: bridge-check
-description: >-
-  Bridge WAKE — open the connection path from the app to the VM so events
-  sitting in the central inbox flow into this session. Run it when iOS cut
-  the connection (app was killed / backgrounded / tunnel died).
-  It is NOT a "do I have messages waiting?" peek — it is the act of
-  opening the door so the inbox drains into the lane.
-  Trigger: "เช็คสะพาน", "bridge check", ntfy WAKE, or the Shortcut's fixed
-  wake text (see "Wake from Shortcut" below).
+name: bridge-check (ปลุกการเชื่อมต่อ)
+description: "Bridge WAKE — reopen the app→VM connection so queued events flow again. Run when iOS cut it (app killed / backgrounded / tunnel died)."
 ---
 
 # bridge-check — bridge wake (open the path, not a pending check)

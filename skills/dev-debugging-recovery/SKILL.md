@@ -1,6 +1,6 @@
 ---
-name: dev-debugging-recovery
-description: Guides systematic root-cause debugging. Use when tests fail, builds break, something that worked yesterday broke, behavior doesn't match expectations, or you encounter any unexpected error. Use when you need to figure out what broke and why — a systematic approach to finding and fixing the root cause rather than guessing. Use when asked what broke, why a test started failing, or why code throws, even when the diff, the function, or the stack trace is pasted inline and the cause looks obvious from reading it, so that the cause is named, the fix is minimal, and the reply says how to confirm it.
+name: dev-debugging-recovery (หาสาเหตุที่พัง)
+description: "Systematic root-cause debugging when tests fail, builds break, or behaviour changed unexpectedly."
 ---
 
 # Debugging and Error Recovery

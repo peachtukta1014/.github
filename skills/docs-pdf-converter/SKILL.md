@@ -1,10 +1,6 @@
 ---
-name: docs-pdf-converter
-description: >
-  Convert documents to PDF via a typst-based pipeline. Supports Markdown, HTML, plain text, images, and any
-  pandoc-supported format. Use this skill whenever the user asks to
-  "convert to PDF", "generate a PDF", "export as PDF", "turn X into a PDF",
-  or says "转PDF" / "生成PDF" / "导出PDF". Also covers merging multiple images into one PDF.
+name: docs-pdf-converter (แปลงเป็น PDF)
+description: "Convert Markdown, HTML, plain text or images to PDF through a Typst pipeline."
 compatibility: Python 3, pandoc, typst, py3-pillow; Alpine (iSH) / Termux (Android) / Debian
 ---
 
