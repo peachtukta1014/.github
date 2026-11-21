@@ -23,7 +23,7 @@ Full table: `30-System/AGENT.md` (§Trigger lexicon). Never confuse
 ## Boot (receiving side)
 > **Mandatory VM shell pattern — ALL VM shell use, not only boot (Peach 2026-11-08):** ssh once to open the VM door + WS tunnel (14301→4301), then use `ws_dispatch` (WS-VM direct) as the primary fast path for all boot/shell work. If the tunnel/port drops, run one `om-ssh` round to reopen, then resume WS. Never use bare `om-boot` on this device — no `om-boot` on PATH here.
 1. First round (ssh): `/var/minis/shared/tools/bin/om-ssh 'bash /opt/vault/vm-hq-core/bin/om-boot scheduled'` — identity ok/miss, board rows, pad resume, complete count.
-- **Boot protocol — single home:** `30-System/AGENT_BOOT.md`; tool map: `30-System/TOOLS.md`. Never restate either here.
+- **Boot protocol — single home:** `30-System/AGENT.md`; tool map: `30-System/TOOLS.md`. Never restate either here.
 5. Read `/opt/vault/vm-hq-core/70-Lanes/scheduled/identity/SOUL.md` (single copy) and `/opt/vault/vm-hq-core/70-Lanes/scheduled/scratchpad.json` resume block via `om-ssh 'cat ...'` or MCP `vm_read_file`; continue, never restart.
 6. Rules: `/opt/vault/vm-hq-core/30-System/AGENT.md` (boot order, reply, evidence).
 
