@@ -1,5 +1,5 @@
 ---
-name: wo-loop
+name: wo-loop-app
 description: >-
   BOOT + identity lock for every channel. Trigger this whenever Peach says any of:
   "บูท", "บู๊ท", "บูทแป้ง", "บูทปั้นแป้ง", "ปั้นแป้ง", "บูทโค้ด", "boot code",
