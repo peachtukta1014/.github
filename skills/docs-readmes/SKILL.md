@@ -56,10 +56,10 @@ After drafting, ask: **"Anything else to highlight or include that I might have 
 
 | Type | Audience | Key Sections | Template |
 |------|----------|--------------|----------|
-| **Open Source** | Contributors, users worldwide | Install, Usage, Contributing, License | `templates/oss.md` |
-| **Personal** | Future you, portfolio viewers | What it does, Tech stack, Learnings | `templates/personal.md` |
-| **Internal** | Teammates, new hires | Setup, Architecture, Runbooks | `templates/internal.md` |
-| **Config** | Future you (confused) | What's here, Why, How to extend, Gotchas | `templates/xdg-config.md` |
+| **Open Source** | Contributors, users worldwide | Install, Usage, Contributing, License | `assets/templates/oss.md` |
+| **Personal** | Future you, portfolio viewers | What it does, Tech stack, Learnings | `assets/templates/personal.md` |
+| **Internal** | Teammates, new hires | Setup, Architecture, Runbooks | `assets/templates/internal.md` |
+| **Config** | Future you (confused) | What's here, Why, How to extend, Gotchas | `assets/templates/xdg-config.md` |
 
 **Ask the user** if unclear. Don't assume OSS defaults for everything.
 

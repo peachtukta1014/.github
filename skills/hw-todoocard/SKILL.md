@@ -37,7 +37,7 @@ $CLI config --show
 
 ```bash
 mkdir -p /srv/repos/hq/vm-hq-core/todoocard
-cp $ROOT/config.example.json /srv/repos/hq/vm-hq-core/todoocard/config.json
+cp $ROOT/references/config.example.json /srv/repos/hq/vm-hq-core/todoocard/config.json
 ```
 
 ## 新增子技能

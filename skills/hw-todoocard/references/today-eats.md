@@ -1,10 +1,4 @@
----
-name: today-eats
-version: 1.1.0
-description: >
-  附近随机外卖「今天吃点啥」并推送到 TodooCard（土豆片）。父技能为 todoocard。
-  用于用户说今天吃点啥、中午吃啥、晚饭吃什么、随机外卖、附近吃什么时。
----
+# today-eats (sub-skill chapter)
 
 # today-eats · 今天吃点啥
 
