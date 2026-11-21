@@ -1,5 +1,5 @@
 # Skills registry — provenance, homes and tags
-_Generated 2026-11-21 22:18 +07 by `skills-shared/bin/gen_skills_index.py` from `skills/SOURCES.json`. Do not hand-edit rows: edit SOURCES.json and re-run._
+_Generated 2026-11-21 23:09 +07 by `skills-shared/bin/gen_skills_index.py` from `skills/SOURCES.json`. Do not hand-edit rows: edit SOURCES.json and re-run._
 ## The homes (one copy each)
 | Home | Path | What it is |
 |---|---|---|
@@ -9,7 +9,7 @@ _Generated 2026-11-21 22:18 +07 by `skills-shared/bin/gen_skills_index.py` from 
 ## Publishing (manual, Peach 2026-11-21)
 The 15-minute `skills-publish.timer` is **off**. Push by hand when the library changes:
 ```
-bash /opt/vault/vm-hq-core/bin/publish-skills.sh
+bash /srv/repos/hq/vm-hq-core/bin/publish-skills.sh
 ```
 ## Tag legend
 `source` = where it came from (**team** ours · **minis** built-in · **OpenMinis** official · a hub name) · `readiness` = **ready** (works as-is) or **adapt** (edit before use) · `where` = **device** (iSH on the phone) / **vm** / **both** / **prompt-only** · `runtime` = what it needs.
