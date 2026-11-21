@@ -51,7 +51,7 @@ assume by default that this skill should be invoked to generate an additional pa
 ### 1) Complete Artifact Generator
 
 ```bash
-python3 /srv/repos/skills-shared/skills/ui-generative-minis/scripts/generative_ui_artifact.py \
+python3 /srv/repos/hq/vm-hq-core/skills/ui-generative-minis/scripts/generative_ui_artifact.py \
   "Weekly Project Report" \
   --text "Need overview cards\nNeed risk table\nNeed timeline\nNeed code block\nNeed chart"
 ```
@@ -65,7 +65,7 @@ By default, this outputs to:
 ### 2) Render from a JSON spec
 
 ```bash
-python3 /srv/repos/skills-shared/skills/ui-generative-minis/scripts/generative_ui_artifact.py \
+python3 /srv/repos/hq/vm-hq-core/skills/ui-generative-minis/scripts/generative_ui_artifact.py \
   "Demo" \
   --spec /path/to/spec.json \
   --out /srv/work/demo_artifact.html \

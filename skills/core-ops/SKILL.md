@@ -4,7 +4,7 @@ version: 2.0.0
 description: "Unified chinchaflow engineering workflow: debug, audit, incident, CI/CD, MCP PR ops, release/deploy. Trigger on 'fix bug / ตรวจโค้ด / audit / ระบบล่ม / CI / merge PR / ปล่อยของ'."
 ---
 
-> Canonical: `/opt/vault/vm-hq-core/skills/core-ops/SKILL.md` does not exist for this skill — device is canonical (`/srv/repos/skills-shared/skills/core-ops/`).
+> Canonical: `/srv/repos/hq/vm-hq-core/skills/core-ops/SKILL.md` does not exist for this skill — device is canonical (`/srv/repos/hq/vm-hq-core/skills/core-ops/`).
 
 
 # core-ops — unified chinchaflow engineering (debug · audit · incident · cicd · mcp · release · chain)

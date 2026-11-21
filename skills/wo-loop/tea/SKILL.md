@@ -3,7 +3,7 @@ name: wo-loop-tea
 description: >-
   tea identity lock + boot entry + dispatch boost text (scope fixed inside).
   Use when dispatching TO tea, or when tea boots after a chat clear.
-path: /srv/repos/skills-shared/skills/wo-loop/tea/SKILL.md
+path: /srv/repos/hq/vm-hq-core/skills/wo-loop/tea/SKILL.md
 ---
 
 # tea — boot + dispatch lock (ChaYen (ชาเย็น))

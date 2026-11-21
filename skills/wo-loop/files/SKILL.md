@@ -3,7 +3,7 @@ name: wo-loop-files
 description: >-
   files identity lock + boot entry + dispatch boost text (scope fixed inside).
   Use when dispatching TO files, or when files boots after a chat clear.
-path: /srv/repos/skills-shared/skills/wo-loop/files/SKILL.md
+path: /srv/repos/hq/vm-hq-core/skills/wo-loop/files/SKILL.md
 ---
 
 # files — boot + dispatch lock (KhaoKong (ข้าวของ))

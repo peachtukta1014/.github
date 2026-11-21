@@ -3,7 +3,7 @@ name: wo-loop-webhook
 description: >-
   webhook identity lock + boot entry + dispatch boost text (scope fixed inside).
   Use when dispatching TO webhook, or when webhook boots after a chat clear.
-path: /srv/repos/skills-shared/skills/wo-loop/webhook/SKILL.md
+path: /srv/repos/hq/vm-hq-core/skills/wo-loop/webhook/SKILL.md
 ---
 
 # webhook — boot + dispatch lock (MuekSai (หมึกสาย))

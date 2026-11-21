@@ -3,7 +3,7 @@ name: wo-loop-jii
 description: >-
   jii identity lock + boot entry + dispatch boost text (scope fixed inside).
   Use when dispatching TO jii, or when jii boots after a chat clear.
-path: /srv/repos/skills-shared/skills/wo-loop/jii/SKILL.md
+path: /srv/repos/hq/vm-hq-core/skills/wo-loop/jii/SKILL.md
 ---
 
 # jii — boot + dispatch lock (Jii (จี้))

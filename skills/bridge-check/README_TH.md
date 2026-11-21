@@ -14,7 +14,7 @@
 | `/srv/repos/hq/vm-hq-core/tools/bridge-check/bridge_open_event.sh` | สคริปต์หลัก — ตัวเดียวที่ถูกรัน |
 | `/srv/repos/hq/vm-hq-core/tools/bridge-check/bin/` | ตัวรันจริง (mesh_guard.sh, mesh_watch.py ฯลฯ) |
 | `/srv/repos/hq/vm-hq-core/tools/bridge-check/runtime/` | pid / hb / log / lock ของการ heal |
-| `/srv/repos/skills-shared/skills/bridge-check/SKILL.md` | ตัวที่แอปโหลด (มิเรอร์ของ SKILL.md ในโฟลเดอร์นี้) |
+| `/srv/repos/hq/vm-hq-core/skills/bridge-check/SKILL.md` | ตัวที่แอปโหลด (มิเรอร์ของ SKILL.md ในโฟลเดอร์นี้) |
 
 ## การติดตั้ง Shortcut บน iPhone
 1. นำเข้า `MinisBridgeHeal-ntfy` (ครั้งแรก iOS จะถาม Allow/Import Anyway — กด Allow)

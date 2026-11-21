@@ -24,7 +24,7 @@ The device holds no identity of its own. Each chat session is bound to one lane 
    and say so. Do not invent tasks, paths or a new role.
 4. Start work only after the lane's board/pad is read:
    ```
-   ws_exec --command "bash /opt/vault/vm-hq-core/bin/om-boot <lane>"
+   ws_exec --command "bash /srv/repos/hq/vm-hq-core/bin/om-boot <lane>"
    ```
 
 ## Rules

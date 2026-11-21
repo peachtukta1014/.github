@@ -10,9 +10,9 @@ ONE skill: **boot a lane, then run the work loop**. (Merged from `boot` + `wo-lo
 ## 1. Boot — start here
 
 ```
-WHERE  VM /opt/vault/vm-hq-core/bin/om-boot
+WHERE  VM /srv/repos/hq/vm-hq-core/bin/om-boot
 RUN    wo-loop boot <scope>          (ws_exec opens the tunnel itself; falls back to ssh vm-ts)
-READ   /opt/vault/vm-hq-core/70-Lanes/<scope>/SCOPE.md · PROTOCOL/00_INDEX.md
+READ   /srv/repos/hq/vm-hq-core/70-Lanes/<scope>/SCOPE.md · PROTOCOL/00_INDEX.md
 DON'T  no ls/find/md5 before boot · no om-sync during boot
 ```
 
@@ -93,14 +93,14 @@ Never run `gh pr checks` / `gh run watch` — wait for the event.
 
 ```json
 {
-  "skill_file": "/srv/repos/skills-shared/skills/wo-loop/SKILL.md",
-  "per_scope_detail": "/srv/repos/skills-shared/skills/wo-loop/<scope>/SKILL.md",
+  "skill_file": "/srv/repos/hq/vm-hq-core/skills/wo-loop/SKILL.md",
+  "per_scope_detail": "/srv/repos/hq/vm-hq-core/skills/wo-loop/<scope>/SKILL.md",
   "vm_wo_loop": "/usr/local/bin/wo-loop",
-  "vm_pad": "/opt/vault/vm-hq-core/70-Lanes/<scope>/scratchpad.json",
-  "vm_scope": "/opt/vault/vm-hq-core/70-Lanes/<scope>/SCOPE.md",
-  "vm_board": "/opt/vault/vm-hq-core/mission-control/board/CENTRAL_WORK_BOARD.md",
-  "assignments": "/opt/vault/vm-hq-core/30-System/ASSIGNMENTS.md",
-  "protocol_map": "/opt/vault/vm-hq-core/PROTOCOL/00_INDEX.md",
+  "vm_pad": "/srv/repos/hq/vm-hq-core/70-Lanes/<scope>/scratchpad.json",
+  "vm_scope": "/srv/repos/hq/vm-hq-core/70-Lanes/<scope>/SCOPE.md",
+  "vm_board": "/srv/repos/hq/vm-hq-core/mission-control/board/CENTRAL_WORK_BOARD.md",
+  "assignments": "/srv/repos/hq/vm-hq-core/30-System/ASSIGNMENTS.md",
+  "protocol_map": "/srv/repos/hq/vm-hq-core/PROTOCOL/00_INDEX.md",
   "dispatch": "ws_dispatch.py",
   "complete": "ws_complete.py",
   "message": "sse_dispatch.py",

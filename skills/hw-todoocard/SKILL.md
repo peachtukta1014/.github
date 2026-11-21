@@ -27,7 +27,7 @@ TodooCard / 土豆片的**父技能**。
 ## 设备命令
 
 ```bash
-ROOT=/srv/repos/skills-shared/skills/hw-todoocard
+ROOT=/srv/repos/hq/vm-hq-core/skills/hw-todoocard
 CLI="python3 $ROOT/today-eats/scripts/cli.py"
 
 $CLI scan

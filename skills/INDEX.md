@@ -1,10 +1,10 @@
 # Skills registry — provenance, homes and tags
-_Generated 2026-11-21 23:21 +07 by `skills-shared/bin/gen_skills_index.py` from `skills/SOURCES.json`. Do not hand-edit rows: edit SOURCES.json and re-run._
+_Generated 2026-11-21 23:36 +07 by `skills-shared/bin/gen_skills_index.py` from `skills/SOURCES.json`. Do not hand-edit rows: edit SOURCES.json and re-run._
 ## The homes (one copy each)
 | Home | Path | What it is |
 |---|---|---|
 | authoring | `peachtukta1014/.github` -> `skills/` | the public repo lanes import from |
-| working copy | `/srv/repos/skills-shared/skills/` | the clone lanes read and edit; this INDEX lives here |
+| working copy | `/srv/repos/hq/vm-hq-core/skills/` | the clone lanes read and edit; this INDEX lives here |
 | install target | `/var/minis/skills/` (device) | what the app loads — installed, never hand-edited |
 ## Publishing (manual, Peach 2026-11-21)
 The 15-minute `skills-publish.timer` is **off**. Push by hand when the library changes:
@@ -71,5 +71,5 @@ bash /srv/repos/hq/vm-hq-core/bin/publish-skills.sh
 
 ## Gates
 ```
-python3 /srv/repos/skills-shared/bin/gen_skills_index.py
+python3 /srv/repos/hq/vm-hq-core/bin/gen_skills_index.py
 ```

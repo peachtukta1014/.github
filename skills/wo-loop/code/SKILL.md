@@ -3,7 +3,7 @@ name: wo-loop-code
 description: >-
   code identity lock + boot entry + dispatch boost text (scope fixed inside).
   Use when dispatching TO code, or when code boots after a chat clear.
-path: /srv/repos/skills-shared/skills/wo-loop/code/SKILL.md
+path: /srv/repos/hq/vm-hq-core/skills/wo-loop/code/SKILL.md
 ---
 
 # code — boot + dispatch lock (PunPaeng (ปั้นแป้ง))

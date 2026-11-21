@@ -3,7 +3,7 @@ name: wo-loop-scheduled
 description: >-
   scheduled identity lock + boot entry + dispatch boost text (scope fixed inside).
   Use when dispatching TO scheduled, or when scheduled boots after a chat clear.
-path: /srv/repos/skills-shared/skills/wo-loop/scheduled/SKILL.md
+path: /srv/repos/hq/vm-hq-core/skills/wo-loop/scheduled/SKILL.md
 ---
 
 # scheduled — boot + dispatch lock (Wela (เวลา))

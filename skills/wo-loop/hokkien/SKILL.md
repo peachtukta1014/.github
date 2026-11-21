@@ -3,7 +3,7 @@ name: wo-loop-hokkien
 description: >-
   hokkien identity lock + boot entry + dispatch boost text (scope fixed inside).
   Use when dispatching TO hokkien, or when hokkien boots after a chat clear.
-path: /srv/repos/skills-shared/skills/wo-loop/hokkien/SKILL.md
+path: /srv/repos/hq/vm-hq-core/skills/wo-loop/hokkien/SKILL.md
 ---
 
 # hokkien — boot + dispatch lock (Kiew (เกี๊ยว))

@@ -19,10 +19,10 @@ from pathlib import Path
 PKG_SHARED = next(
     (Path(p) for p in (
         os.environ.get("TYPST_PACKAGES_SHARED", ""),
-        "/srv/repos/skills-shared/tools/typst-packages",
-        "/srv/repos/skills-shared/tools/typst-packages",
+        "/srv/repos/hq/vm-hq-core/tools/typst-packages",
+        "/srv/repos/hq/vm-hq-core/tools/typst-packages",
     ) if p and Path(p).exists()),
-    Path("/srv/repos/skills-shared/tools/typst-packages"),
+    Path("/srv/repos/hq/vm-hq-core/tools/typst-packages"),
 )
 PKG_SCRATCH = Path(os.environ.get("TYPST_PACKAGES_CACHE")
                    or (Path.home() / ".cache" / "typst-packages"))

@@ -134,4 +134,4 @@ blaming the tunnel.
 - `/srv/repos/hq/vm-hq-core/tools/bridge-check/` — everything lives here:
   `bridge_open_event.sh`, `bin/` (`mesh_guard.sh`, `mesh_watch.py`,
   `mesh_client.py`, `start_mesh.sh`, `device_ping.py`), `runtime/` (pid/hb/log).
-- `/srv/repos/skills-shared/skills/bridge-check` is a **symlink** to this directory (one copy, 2026-11-14).
+- `/srv/repos/hq/vm-hq-core/skills/bridge-check` is a **symlink** to this directory (one copy, 2026-11-14).

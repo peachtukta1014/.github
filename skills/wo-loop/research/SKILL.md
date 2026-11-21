@@ -3,7 +3,7 @@ name: wo-loop-research
 description: >-
   research identity lock + boot entry + dispatch boost text (scope fixed inside).
   Use when dispatching TO research, or when research boots after a chat clear.
-path: /srv/repos/skills-shared/skills/wo-loop/research/SKILL.md
+path: /srv/repos/hq/vm-hq-core/skills/wo-loop/research/SKILL.md
 ---
 
 # research — boot + dispatch lock (KhaoRiam (ข้าวเรียม))
