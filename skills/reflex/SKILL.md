@@ -7,11 +7,10 @@ description: >-
   might have gone stale. Do NOT grep the tree to find something - ask reflex first.
   Trigger: "where is X", "which tool for Y", "หาไฟล์", "reflex", a stale/broken pointer,
   or any moment a lane is about to search the filesystem.
+  ใช้ทำอะไร: หาว่าอะไรอยู่ที่ไหน - เอกสารอยู่ไฟล์ไหน, เครื่องไหนถือครอง (มือถือ Minis หรือ VM), เครื่องมือตัวไหนพาไปไหน, และ pointer นั้นยังใช้ได้อยู่ไหม
 ---
 
 # reflex — where things live, and whether that is still true
-
-**ใช้ทำอะไร:** ที่เดียวสำหรับหาว่าอะไรอยู่ที่ไหน — เอกสารอยู่ไฟล์ไหน เครื่องไหนถือครอง (มือถือ Minis หรือ VM) เครื่องมือตัวไหนพาไปไหน และที่อยู่(pointer)นั้นยังใช้ได้อยู่ไหม เรียกก่อนบูท ก่อนหาไฟล์ ก่อนเลือกเครื่องมือ หรือเมื่อสงสัยว่า pointer ตายแล้ว
 
 **Index only.** Detail lives in `references/`; load ONE file, not all of them.
 

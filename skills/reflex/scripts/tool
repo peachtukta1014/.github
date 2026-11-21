@@ -1,0 +1,8 @@
+#!/bin/sh
+# reflex/tool - which tool for this intent? Prints the catalogue headings + matching rows.
+# Usage: tool <intent words>
+set -e
+[ $# -ge 1 ] || { echo "usage: tool <intent>"; exit 2; }
+W=/var/minis/shared/tools/bin/ws_exec.py
+R=/srv/repos/hq/vm-hq-core
+$W --command "cd $R && C=30-System/TOOL_CATALOGUE.md; [ -f \$C ] || { echo 'MISSING '\$C; exit 1; }; grep -n '^## ' \$C; echo '--- matching rows ---'; grep -i -- '$*' \$C | head -10"

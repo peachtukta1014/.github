@@ -1,0 +1,9 @@
+#!/bin/sh
+# reflex/where - where does X live? Routes to the VM through the tunnel (device holds no data).
+# Usage: where <doc-id|topic>
+set -e
+[ $# -ge 1 ] || { echo "usage: where <doc-id|topic>"; exit 2; }
+W=/var/minis/shared/tools/bin/ws_exec.py
+R=/srv/repos/hq/vm-hq-core
+q="$*"
+$W --command "cd $R && p=\$(bin/doc.py path '$q' 2>/dev/null || true); if [ -n \"\$p\" ]; then echo \"\$p\"; else echo 'not in the id layer. try: SSOT_INDEX.md / refindex.md / TOOL_CATALOGUE.md'; bin/doc.py list 2>/dev/null | grep -i -- '$q' | head -10; fi"
