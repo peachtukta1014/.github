@@ -12,25 +12,25 @@ path: /var/minis/shared/skills/wo-boost/jii/SKILL.md
 - `บูท` — boot this lane · `บูทแชนแนล <lane>` — boot that channel
 - `บูทงาน` / `สั่งงานบูทงาน` — open/operate a work order
 - `ต่อสะพาน` / `เชื่อมสะพาน` / `เช็คสะพาน` — bridge WAKE (open the path)
-Full table: `30-System/CHANNEL_SHARED_RULES.md` (§Trigger lexicon). Never confuse
+Full table: `30-System/AGENT.md` (§Trigger lexicon). Never confuse
 `บูท` (boot a lane) with `บูทงาน` (open a work order).
 
-> **ROOT:** home `30-System/TOOLMAP.md` §4 ("Vault root") — never restated here (Peach 2026-11-17).
+> **ROOT:** home `30-System/TOOLS.md` §4 ("Vault root") — never restated here (Peach 2026-11-17).
 > Every `70-Lanes/...` and `30-System/...` path below is relative to that ROOT.
 
-> **TOOLMAP (source of truth, lives on VM):** `/opt/vault/vm-hq-core/30-System/TOOLMAP.md` — read it at boot, right after identity, before any shell call. The VM is home; this device is only the key. Shell = MCP `ws_exec` (always runs as `ubuntu`; `--root` = uid 0 for that one call — RULE 4's per-action lock still applies; `pr`/`token` stay allowlist-by-full-path, single home `30-System/CHANNEL_SHARED_RULES.md` RULE 4). Device-side script paths: `skills/boot/references/vm-key.md`.
+> **TOOLS (source of truth, lives on VM):** `/opt/vault/vm-hq-core/30-System/TOOLS.md` — read it at boot, right after identity, before any shell call. The VM is home; this device is only the key. Shell = MCP `ws_exec` (always runs as `ubuntu`; `--root` = uid 0 for that one call — RULE 4's per-action lock still applies; `pr`/`token` stay allowlist-by-full-path, single home `30-System/AGENT.md` RULE 4). Device-side script paths: `skills/boot/references/vm-key.md`.
 
 
 
 ## Tool crib
-Subcommand table: single home `30-System/TOOLMAP.md` §2b (§2b.1 = the copy-paste Need -> command block) — a crib is a pointer, not a second table (Peach 2026-11-17).
+Subcommand table: single home `30-System/TOOLS.md` §2b (§2b.1 = the copy-paste Need -> command block) — a crib is a pointer, not a second table (Peach 2026-11-17).
 
 ## Boot (receiving side)
 > **Mandatory VM shell pattern — ALL VM shell use, not only boot (Peach 2026-11-08):** ssh once to open the VM door + WS tunnel (14301→4301), then use `ws_dispatch` (WS-VM direct) as the primary fast path for all boot/shell work. If the tunnel/port drops, run one `om-ssh` round to reopen, then resume WS. Never use bare `om-boot` on this device — no `om-boot` on PATH here.
 1. First round (ssh): `/var/minis/shared/tools/bin/om-ssh 'bash /opt/vault/vm-hq-core/bin/om-boot jii'` — it prints the SOUL/SCOPE/GLOBAL **content**; read it (the old `identity ok/miss` one-liner is gone). `om-boot jii --status` = light view only: byte counts + board rows + pad resume, no content.
 - **Boot steps 2-4** (WS tunnel up · fast path · tunnel cut): home `30-System/TRANSPORT_WS_FIRST.md` — never restated here (Peach 2026-11-17).
 5. Read `/opt/vault/vm-hq-core/70-Lanes/jii/identity/SOUL.md` (single copy) and `/opt/vault/vm-hq-core/70-Lanes/jii/scratchpad.json` resume block via `om-ssh 'cat ...'` or MCP `vm_read_file`; continue, never restart.
-6. Rules: `/opt/vault/vm-hq-core/30-System/CHANNEL_SHARED_RULES.md` (boot order, reply, evidence).
+6. Rules: `/opt/vault/vm-hq-core/30-System/AGENT.md` (boot order, reply, evidence).
 
 ## Dispatch boost (another lane or Peach sending TO jii)
 Prepend this block to every dispatch message:
@@ -53,7 +53,7 @@ mtime + grep count + exit code. Finished work -> `/opt/vault/vm-hq-core/70-Lanes
 Dispatch / complete / boot / shell / board / ws all go through ONE wrapper:
 `/var/minis/shared/tools/wo-loop/wo-loop` (VM mirror: `/opt/vault/vm-hq-core/tools/bin/wo-loop/wo-loop`).
 `wo-loop dispatch` = the MAIN ORDER PATH; `wo-loop complete` = the MAIN CLOSE PATH
-(self-close per RULE 2 of CHANNEL_SHARED_RULES); `wo-loop boot` = channel boot
+(self-close per RULE 2 of AGENT.md); `wo-loop boot` = channel boot
 (`om-boot` is VM-only); `wo-loop shell` = VM shell via om-ssh; `wo-loop board` =
 read-only status; `wo-loop ws` = WS-VM direct fast path. Thin wrapper ONLY —
 canonical scripts unchanged (RULE 1). Details: `/var/minis/shared/tools/wo-loop/SKILL.md`.
@@ -67,4 +67,4 @@ already WS-first. Read that file; do not restate the rule here.
 Execution = WS: `ws_exec` (primary) / `wo-loop shell` (om-ssh fallback). Real shell work runs here.
 Bookkeeping = `wo-loop` only: dispatch/complete/pad/item/sp/render/board. It never runs the work.
 Never run shell work through `wo-loop ws-exec`; never hand-edit pad JSON.
-Rule: `PROTOCOL/protocol/wo-loop.md` "Two planes" · table: `30-System/TOOLMAP.md` 2b.1.
+Rule: `PROTOCOL/protocol/wo-loop.md` "Two planes" · table: `30-System/TOOLS.md` 2b.1.

@@ -15,9 +15,9 @@ description: >-
 - `บูท` — boot this lane · `บูทแชนแนล <lane>` — boot that channel
 - `บูทงาน` / `สั่งงานบูทงาน` — open/operate a work order
 - `ต่อสะพาน` / `เชื่อมสะพาน` / `เช็คสะพาน` — bridge WAKE (open the path)
-Full table: `30-System/CHANNEL_SHARED_RULES.md` (§Trigger lexicon). Never confuse
+Full table: `30-System/AGENT.md` (§Trigger lexicon). Never confuse
 `บูท` (boot a lane) with `บูทงาน` (open a work order).
-> **TOOLMAP (source of truth, lives on VM):** `/opt/vault/vm-hq-core/30-System/TOOLMAP.md` — read it at boot, right after identity, before any shell call. The VM is home; this device is only the key. Shell = MCP `ws_exec` (always runs as `ubuntu`; `--root` = uid 0 for that one call — RULE 4's per-action lock still applies; `pr`/`token` stay allowlist-by-full-path, single home `30-System/CHANNEL_SHARED_RULES.md` RULE 4). Device-side script paths: `skills/boot/references/vm-key.md`.
+> **TOOLS (source of truth, lives on VM):** `/opt/vault/vm-hq-core/30-System/TOOLS.md` — read it at boot, right after identity, before any shell call. The VM is home; this device is only the key. Shell = MCP `ws_exec` (always runs as `ubuntu`; `--root` = uid 0 for that one call — RULE 4's per-action lock still applies; `pr`/`token` stay allowlist-by-full-path, single home `30-System/AGENT.md` RULE 4). Device-side script paths: `skills/boot/references/vm-key.md`.
 
 
 Peach commands by plain speech — no terminal. A message like **"บูทแป้ง"** in any
@@ -49,7 +49,7 @@ No channel named → ask one short question, or boot the lane this chat belongs 
 1. `bash /opt/vault/vm-hq-core/bin/om-boot <scope>` (full path — not on PATH over non-interactive SSH).
 2. Read `/opt/vault/vm-hq-core/70-Lanes/<scope>/identity/SOUL.md`.
 3. Read `/opt/vault/vm-hq-core/70-Lanes/<scope>/scratchpad.json` resume block; continue, never restart.
-4. Rules: `/opt/vault/vm-hq-core/30-System/CHANNEL_SHARED_RULES.md`.
+4. Rules: `/opt/vault/vm-hq-core/30-System/AGENT.md`.
 Then answer in the lane's own voice, in Thai, with the evidence from step 1.
 
 ## 3. Dispatch boost (sending TO a scope)
@@ -80,4 +80,4 @@ already WS-first. Read that file; do not restate the rule here.
 Execution = WS: `ws_exec` (primary) / `wo-loop shell` (om-ssh fallback). Real shell work runs here.
 Bookkeeping = `wo-loop` only: dispatch/complete/pad/item/sp/render/board. It never runs the work.
 Never run shell work through `wo-loop ws-exec`; never hand-edit pad JSON.
-Rule: `PROTOCOL/protocol/wo-loop.md` "Two planes" · table: `30-System/TOOLMAP.md` 2b.1.
+Rule: `PROTOCOL/protocol/wo-loop.md` "Two planes" · table: `30-System/TOOLS.md` 2b.1.

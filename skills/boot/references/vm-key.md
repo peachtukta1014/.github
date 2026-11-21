@@ -3,7 +3,7 @@ name: vm-key
 description: >-
   Device-side entry skill (the key). Use whenever a channel needs to reach the
   VM: run shell commands, open the WS tunnel, choose privilege level, or load
-  the canonical TOOLMAP. This skill is the on-device map of which local script
+  the canonical TOOLS. This skill is the on-device map of which local script
   lives where; the VM stays the source of truth.
 path: /var/minis/skills/vm-key/SKILL.md
 ---
@@ -12,7 +12,7 @@ path: /var/minis/skills/vm-key/SKILL.md
 
 **Rule:** the VM is the home. This device holds only the key: transport scripts,
 protocol clients, and skills. No identity, no code, no secrets live here.
-Canonical tool map: `/opt/vault/vm-hq-core/30-System/TOOLMAP.md` (read it at boot).
+Canonical tool map: `/opt/vault/vm-hq-core/30-System/TOOLS.md` (read it at boot).
 
 ## 1. One command to work on the VM
 
