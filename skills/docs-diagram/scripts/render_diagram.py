@@ -1,30 +1,41 @@
 #!/usr/bin/env python3
 """Render a CeTZ/Typst diagram (or a report embedding one) to PDF/SVG/PNG.
 
-Typst cannot read files under /var/minis on this device (iSH bind mount), so the
-build always happens in a scratch dir under /root and artifacts are copied back.
+Typst cannot read files under /srv/repos/hq/vm-hq-core on this device (iSH bind mount), so the
+build happens in a temp dir, then artifacts are copied next to the source.
 
 Usage:
   render_diagram.py diagram.typ [--format pdf,svg,png] [--outdir DIR] [--dpi 150]
   render_diagram.py diagram.typ --strict
 """
 import argparse
+import os
 import shutil
 import subprocess
 import sys
 import tempfile
 from pathlib import Path
 
-PKG_SHARED = Path("/var/minis/shared/tools/typst-packages")
-PKG_SCRATCH = Path("/root/.cache/typst-packages")
+PKG_SHARED = next(
+    (Path(p) for p in (
+        os.environ.get("TYPST_PACKAGES_SHARED", ""),
+        "/srv/repos/skills-shared/tools/typst-packages",
+        "/srv/repos/skills-shared/tools/typst-packages",
+    ) if p and Path(p).exists()),
+    Path("/srv/repos/skills-shared/tools/typst-packages"),
+)
+PKG_SCRATCH = Path(os.environ.get("TYPST_PACKAGES_CACHE")
+                   or (Path.home() / ".cache" / "typst-packages"))
 
 
 def ensure_packages() -> Path:
     """Vendored @preview packages (cetz, oxifmt...) copied where typst can read them."""
     if not PKG_SCRATCH.exists():
-        if not PKG_SHARED.exists():
-            sys.exit("missing vendored packages: %s" % PKG_SHARED)
-        shutil.copytree(PKG_SHARED, PKG_SCRATCH)
+        if PKG_SHARED.exists():
+            PKG_SCRATCH.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copytree(PKG_SHARED, PKG_SCRATCH)
+        else:
+            PKG_SCRATCH.mkdir(parents=True, exist_ok=True)
     return PKG_SCRATCH
 
 
@@ -46,7 +57,7 @@ def main() -> int:
 
     formats = [f.strip().lower() for f in args.format.split(",") if f.strip()]
     ok = True
-    with tempfile.TemporaryDirectory(prefix="cetz-", dir="/root") as td:
+    with tempfile.TemporaryDirectory(prefix="cetz-") as td:
         build = Path(td)
         copy_src = build / src.name
         shutil.copy2(src, copy_src)

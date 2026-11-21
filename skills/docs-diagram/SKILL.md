@@ -1,44 +1,54 @@
 ---
 name: docs-diagram
-description: วาดไดอะแกรม (flowchart, sequence, ER, สถาปัตยกรรม, กราฟ) เป็นไฟล์จริง PDF/SVG/PNG แบบออฟไลน์ ด้วย Typst+CeTZ และฝังลงรายงาน Typst ได้ทันที ใช้คลัง syntax Mermaid 38 ชนิดเป็นคลังความรู้ตอนออกแบบ. Use when the user asks for a diagram, flowchart, architecture picture, or a PDF that must contain one, and no browser/Chromium is available.
+description: Draw diagrams (flowchart, sequence, ER, architecture, charts) as real PDF/SVG/PNG files, offline, with Typst + CeTZ, and embed them straight into a Typst report. Uses a 38-type Mermaid syntax library as the design-time knowledge base. Use when the user asks for a diagram, a flowchart, an architecture picture, or a PDF that must contain one, and no browser/Chromium is available.
 allowed-tools: Read Write Edit Bash
 ---
 
-# docs-diagram — ไดอะแกรมจริงในไฟล์ PDF ออฟไลน์
+# docs-diagram — real diagram files, rendered offline
 
-เครื่องนี้ **ไม่มี Chromium** → Mermaid render เป็นไฟล์ไม่ได้ (mmdc/mermaid.ink/Kroki ใช้ไม่ได้)
-ทางที่ใช้ได้จริงคือ **Typst + CeTZ** (เวกเตอร์, ออฟไลน์, ฝังลงรายงานได้เลย) และเก็บ Mermaid ไว้เป็นภาษากลางตอนออกแบบ
+There is **no Chromium** in this setup, so Mermaid cannot be rendered to a file (mmdc / mermaid.ink /
+Kroki are all out). The path that works is **Typst + CeTZ** (vector, offline, embeddable), with Mermaid
+kept as the design-time lingua franca.
 
-## โครงสร้าง
+**Execution host: the VM.** All commands here run on `vm-chincha-hq` (Tailscale SSH `om-ssh`, or the WS
+tunnel `ws_exec`). The device holds no tooling.
+
+## Layout
 ```
 docs-diagram/
-  SKILL.md                    ← ไฟล์นี้
-  scripts/render_diagram.py   ← ตัวเรนเดอร์ (คัดลอก build ไป /root เพราะ typst อ่าน /var/minis ไม่ได้)
-  assets/diagram-template.typ ← เทมเพลต flowchart พร้อมใช้
-  assets/report-embed.typ     ← วิธีฝัง SVG ลงรายงาน + caption/figure
-  references/*.md             ← คลัง knowledge: Mermaid 38 ชนิด (จาก WH-2099/mermaid-skill)
-  references/MERMAID_UPSTREAM_SKILL.md ← SKILL.md ต้นฉบับ upstream (workflow + ตารางชนิด)
+  SKILL.md                    ← this file
+  scripts/render_diagram.py   ← the renderer (resolves the package path per host, builds in a temp dir)
+  assets/diagram-template.typ ← ready-to-edit flowchart template
+  assets/report-embed.typ     ← how to embed an SVG in a report with caption/figure
+  references/*.md             ← the knowledge library: 38 Mermaid types (from WH-2099/mermaid-skill)
+  references/MERMAID_UPSTREAM_SKILL.md ← the upstream SKILL.md (workflow + type table)
 ```
 
-## เวิร์กโฟลว์
-1. **เลือกชนิด** — เปิด `references/<type>.md` (flowchart.md, sequenceDiagram.md, entityRelationshipDiagram.md, c4.md, architecture.md …) ดูว่าผู้อ่านต้องเห็นอะไร
-2. **ร่างเป็น Mermaid ก่อน** (`.mmd` หรือ fenced block) เพื่อตกลงโครงกับผู้ใช้ — ใช้เป็นภาษากลาง ราคาถูกและแก้ไว
-3. **เรนเดอร์จริงเป็น CeTZ** — คัดลอก `assets/diagram-template.typ` แล้วแก้ node/edge
-4. **คอมไพล์**
+## Workflow
+1. **Pick the type** — open `references/<type>.md` (flowchart.md, sequenceDiagram.md,
+   entityRelationshipDiagram.md, c4.md, architecture.md …) and decide what the reader must see.
+2. **Draft in Mermaid first** (`.mmd` or a fenced block) to agree the structure with the user — cheap and fast to revise.
+3. **Render for real as CeTZ** — copy `assets/diagram-template.typ` and edit the nodes/edges.
+4. **Compile**
    ```
-   python3 /var/minis/skills/docs-diagram/scripts/render_diagram.py <file.typ> --format pdf,svg,png --outdir <dir> --strict
+   python3 <skill-dir>/scripts/render_diagram.py <file.typ> --format pdf,svg,png --outdir <dir> --strict
    ```
-5. **ฝังลงรายงาน** — `image("<diagram>.svg")` ใน figure พร้อม caption (ดู `assets/report-embed.typ`)
-6. **ตรวจด้วยตา** — `pdftoppm -png -r 90 <file>.pdf <prefix>` แล้วเปิดภาพดู ต้องไม่มีกล่องสี่เหลี่ยม/ตัวอักษรทับเส้น
+5. **Embed in a report** — `image("<diagram>.svg")` inside a figure with a caption (see `assets/report-embed.typ`).
+6. **Check by eye** — `pdftoppm -png -r 90 <file>.pdf <prefix>` and look at the PNGs: no boxes or text crossing lines.
 
-## กฎที่ต้องรู้ (วัดจริงในเครื่องนี้)
-- `typst` ดึง package จาก Universe **ไม่ได้** (`Network Error ... os error 92`) → ทุก `@preview` ต้อง vendor ไว้ที่ `/var/minis/shared/tools/typst-packages/` (มี `cetz 0.2.2`, `oxifmt 0.2.0`)
-- typst อ่านไฟล์ใต้ `/var/minis` **ไม่ได้** → สคริปต์จะ copy ไป `/root` ก่อนเสมอ ห้ามเรียก `typst` ตรง ๆ บน path ใต้ `/var/minis`
-- ฟอนต์: `("Noto Sans Thai", "Noto Sans")` สำหรับเนื้อหา, `("Libertinus Serif", "Noto Serif Thai")` สำหรับเอกสารพิมพ์
-- `mmdc` / `chromium` / `d2` / `draw.io` / `plantuml` / `dot` **ไม่มี** (graphviz ลงได้ด้วย `apk add graphviz` ถ้าต้องการกราฟ DOT)
-- CeTZ 0.2.2 บน typst 0.12 เตือน `style is deprecated` — เป็น warning ปกติ ไม่กระทบผล
+## Rules measured on the host
+- `typst` (0.15.1 on the VM) **does** fetch `@preview` packages from Universe; a vendored copy also exists at
+  `/srv/repos/skills-shared/tools/typst-packages/` (cetz 0.2.2, oxifmt 0.2.1) and `render_diagram.py` picks
+  whichever host path exists. Nothing needs the device.
+- The VM can read files under `/srv/...` normally — always render through `render_diagram.py` (it handles the
+  package path and the scratch dir).
+- Fonts: `("Noto Sans Thai", "Noto Sans")` for body text; `("Libertinus Serif", "Noto Serif Thai")` for print
+  documents. `fonts-noto-cjk` is installed on the VM.
+- `mmdc` / `chromium` / `d2` / `draw.io` / `plantuml` / `dot` are absent; graphviz can be added with
+  `apt-get install graphviz` when a DOT graph is genuinely wanted.
+- CeTZ 0.2.2 on Typst 0.15 is fine (the old `style is deprecated` warning is harmless).
 
-## เทมเพลตขั้นต่ำ
+## Minimum template
 ```typ
 #import "@preview/cetz:0.2.2": canvas, draw
 #canvas({
@@ -49,7 +59,7 @@ docs-diagram/
 })
 ```
 
-## ข้อจำกัดที่รู้ตัว
-- ไม่มี auto-layout: CeTZ วางพิกัดเอง (ต้องคำนวณ) — งานกราฟใหญ่มากให้ใช้ graphviz
-- ผังซับซ้อน 50+ node ทำมือไม่ไหว → แนะนำ Graphviz (`dot -Tsvg`) หรือแยกเป็นหลายภาพ
-- ไม่มี diagram-diff อัตโนมัติ: เทียบด้วยตาจาก PNG ที่เรนเดอร์
+## Known limits
+- No auto-layout: CeTZ places coordinates by hand. For very large graphs use graphviz.
+- A 50+ node diagram is not practical by hand — split it into several images or reach for Graphviz (`dot -Tsvg`).
+- No automatic diagram diff: compare the rendered PNGs by eye.

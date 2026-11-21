@@ -31,7 +31,7 @@ Search for GitHub projects using effective query patterns:
 | Need Type | Query Pattern | Example |
 |-----------|---------------|---------|
 | Tool/utility | `github [task] tool` | `github video download tool` |
-| Library | `github [language] [function] library` | `github python pdf library` |
+| Library | `github [language] [function] library` | `github python3 pdf library` |
 | Alternative | `github [known-tool] alternative` | `github ffmpeg alternative` |
 
 ### Step 3: Evaluate Quality (Quick Check)

@@ -1,0 +1,621 @@
+{
+  "_note": "SOURCES.json — one row per skill: where it really came from, what it was called upstream, where it runs, and whether we adapted it. Edit this file, then re-run bin/gen_skills_index.py. Sources: docs/reports/skills-audit-20261118.md (code lane, KEEP/KEEP+PATCH) + live description-match against the public hubs (2026-11-21).",
+  "_updated": "2026-11-21",
+  "_fields": "repo = github owner/name, or 'ours' / 'minis-builtin'. upstream = the original folder name before our rename. verified = the match was proven (audit record or description match 1.00). verdict = the 2026-11-18 audit call (KEEP | KEEP+PATCH | ours). where = device | vm | both | prompt-only. adapted = we have edited the body/scripts.",
+  "skills": {
+    "wo-loop": {
+      "repo": "ours",
+      "upstream": "boot + wo-boost (merged 2026-11-21)",
+      "verified": true,
+      "verdict": "ours",
+      "license": "internal",
+      "where": "vm",
+      "adapted": true,
+      "notes": "Our own. Boot a lane then run the work loop; absorbed the two former team skills.",
+      "use_short": "Lane boot + work-order loop (dispatch/ACK/close)",
+      "useful": "high",
+      "use_for": "Every lane session starts here",
+      "tools": [
+        "python3"
+      ],
+      "note": "Replaces boot + wo-boost.",
+      "inspected": "2026-11-21",
+      "run_tested": "not-run",
+      "tested_on": "vm-chincha-hq (10.128.0.4)",
+      "tested_date": "2026-11-21",
+      "category": "1. Team + system"
+    },
+    "bridge-check": {
+      "repo": "ours",
+      "upstream": null,
+      "verified": true,
+      "verdict": "ours",
+      "license": "internal",
+      "where": "vm",
+      "adapted": true,
+      "notes": "Our own. Bridge WAKE — open/heal the device-to-VM path.",
+      "use_short": "Wake the app->VM bridge so queued events flow in",
+      "useful": "high",
+      "use_for": "Run whenever iOS killed the connection",
+      "tools": [
+        "python3"
+      ],
+      "note": "Our own.",
+      "inspected": "2026-11-21",
+      "run_tested": "not-run",
+      "tested_on": "vm-chincha-hq (10.128.0.4)",
+      "tested_date": "2026-11-21",
+      "category": "1. Team + system"
+    },
+    "core-ops": {
+      "repo": "ours",
+      "upstream": null,
+      "verified": true,
+      "verdict": "ours",
+      "license": "internal",
+      "where": "vm",
+      "adapted": true,
+      "notes": "Our own. One engineering workflow for the chinchaflow repo.",
+      "use_short": "Unified engineering workflow for the chinchaflow repo",
+      "useful": "high",
+      "use_for": "Debug/audit/incident/CI/PR/release for chinchaflow",
+      "tools": [
+        "git",
+        "gh-cli"
+      ],
+      "note": "Our own.",
+      "inspected": "2026-11-21",
+      "run_tested": "not-run",
+      "tested_on": "vm-chincha-hq (10.128.0.4)",
+      "tested_date": "2026-11-21",
+      "category": "1. Team + system"
+    },
+    "system-protocol-design": {
+      "repo": "ours",
+      "upstream": null,
+      "verified": true,
+      "verdict": "ours",
+      "license": "internal",
+      "where": "vm",
+      "adapted": true,
+      "notes": "Our own. Design or repair a multi-agent protocol. Peach 2026-11-21: keep, do not delete.",
+      "use_short": "Design or repair multi-agent protocol + evidence contract",
+      "useful": "high",
+      "use_for": "Use when two or more agents/services must agree who owns which fact",
+      "tools": [
+        "none"
+      ],
+      "note": "Our own.",
+      "inspected": "2026-11-21",
+      "run_tested": "not-run",
+      "tested_on": "vm-chincha-hq (10.128.0.4)",
+      "tested_date": "2026-11-21",
+      "category": "1. Team + system"
+    },
+    "skill-creator": {
+      "repo": "minis-builtin",
+      "upstream": "skill-creator",
+      "verified": true,
+      "verdict": "KEEP",
+      "license": "app / see anthropics/skills",
+      "where": "vm",
+      "adapted": false,
+      "notes": "Installed by the Minis app and upgraded with it. Also public in anthropics/skills.",
+      "use_short": "Create, modify and measure skills",
+      "useful": "high",
+      "use_for": "Authoring new skills for the library",
+      "tools": [
+        "none"
+      ],
+      "note": "Minis built-in.",
+      "inspected": "2026-11-21",
+      "run_tested": "not-run",
+      "tested_on": "vm-chincha-hq (10.128.0.4)",
+      "tested_date": "2026-11-21",
+      "category": "9. Authoring"
+    },
+    "ops-disk-scan": {
+      "repo": "OpenMinis/MinisSkills",
+      "upstream": "disk-scan",
+      "verified": true,
+      "verdict": "KEEP",
+      "license": "repo default",
+      "where": "vm",
+      "adapted": false,
+      "notes": "Renamed disk-scan -> ops-disk-scan by the prefix rule. Runs in iSH on the phone.",
+      "use_short": "Find what is eating storage, largest first",
+      "useful": "high",
+      "use_for": "Storage triage on device or VM",
+      "tools": [
+        "none"
+      ],
+      "note": "OpenMinis official.",
+      "inspected": "2026-11-21",
+      "run_tested": "not-run",
+      "tested_on": "vm-chincha-hq (10.128.0.4)",
+      "tested_date": "2026-11-21",
+      "category": "5. Ops + infra"
+    },
+    "ui-generative-minis": {
+      "repo": "OpenMinis/MinisSkills",
+      "upstream": "generative-ui-minis",
+      "verified": true,
+      "verdict": "KEEP",
+      "license": "repo default",
+      "where": "vm",
+      "adapted": false,
+      "notes": "Renamed generative-ui-minis -> ui-generative-minis. Runs in iSH (python3).",
+      "use_short": "Make HTML/UI from a description as a real file",
+      "useful": "med",
+      "use_for": "Hand-off pages, dashboards, previews",
+      "tools": [
+        "none"
+      ],
+      "note": "OpenMinis official.",
+      "inspected": "2026-11-21",
+      "run_tested": "not-run",
+      "tested_on": "vm-chincha-hq (10.128.0.4)",
+      "tested_date": "2026-11-21",
+      "category": "7. Devices + UI"
+    },
+    "hw-todoocard": {
+      "repo": "OpenMinis/MinisSkills",
+      "upstream": "todoocard",
+      "verified": true,
+      "verdict": "KEEP",
+      "license": "repo default",
+      "where": "vm",
+      "adapted": false,
+      "notes": "Renamed todoocard -> hw-todoocard. Pushes to Peach's e-paper card; needs the card config.",
+      "use_short": "Push content to the TodooCard e-paper device",
+      "useful": "med",
+      "use_for": "Only when the e-paper card is in play",
+      "tools": [
+        "python3",
+        "net"
+      ],
+      "note": "OpenMinis official.",
+      "inspected": "2026-11-21",
+      "run_tested": "not-run",
+      "tested_on": "vm-chincha-hq (10.128.0.4)",
+      "tested_date": "2026-11-21",
+      "category": "7. Devices + UI"
+    },
+    "docs-pdf-converter": {
+      "repo": "OpenMinis/MinisSkills",
+      "upstream": "pdf-converter",
+      "verified": true,
+      "verdict": "KEEP",
+      "license": "repo default",
+      "where": "vm",
+      "adapted": false,
+      "notes": "Audit: proven on CJK + tables — the single PDF entry point. Needs python3 + pandoc + typst + py3-pillow.",
+      "use_short": "Convert documents to PDF",
+      "useful": "high",
+      "use_for": "Any deliverable that must leave as PDF",
+      "tools": [
+        "python3"
+      ],
+      "note": "OpenMinis official.",
+      "inspected": "2026-11-21",
+      "run_tested": "not-run",
+      "tested_on": "vm-chincha-hq (10.128.0.4)",
+      "tested_date": "2026-11-21",
+      "category": "3. Documents"
+    },
+    "research-reader": {
+      "repo": "OpenMinis/MinisSkills",
+      "upstream": "web-content-extractor",
+      "verified": true,
+      "verdict": "KEEP",
+      "license": "repo default",
+      "where": "vm",
+      "adapted": false,
+      "notes": "Renamed web-content-extractor -> research-reader. Defuddle / Jina reader; needs net.",
+      "use_short": "Read and extract content from web pages",
+      "useful": "high",
+      "use_for": "Research lane input gathering",
+      "tools": [
+        "python3"
+      ],
+      "note": "OpenMinis official.",
+      "inspected": "2026-11-21",
+      "run_tested": "not-run",
+      "tested_on": "vm-chincha-hq (10.128.0.4)",
+      "tested_date": "2026-11-21",
+      "category": "4. Research"
+    },
+    "ai-prompt-engineer": {
+      "repo": "Jeffallan/claude-skills",
+      "upstream": "prompt-engineer",
+      "verified": true,
+      "verdict": "KEEP+PATCH",
+      "license": "MIT",
+      "where": "vm",
+      "adapted": true,
+      "notes": "Audit: retarget as a linter for 70-Lanes/<lane>/identity/{SOUL,GLOBAL}.md + SCOPE.md; drop the eval/structured-output refs. 110 KB -> 28 KB.",
+      "use_short": "Write/refactor/evaluate prompts and rubrics",
+      "useful": "high",
+      "use_for": "Prompt templates, schemas, eval suites",
+      "tools": [
+        "none"
+      ],
+      "note": "Jeffallan/claude-skills.",
+      "inspected": "2026-11-21",
+      "run_tested": "not-run",
+      "tested_on": "vm-chincha-hq (10.128.0.4)",
+      "tested_date": "2026-11-21",
+      "category": "8. Prompt + AI"
+    },
+    "dev-parallel-agents": {
+      "repo": "obra/superpowers",
+      "upstream": "dispatching-parallel-agents",
+      "verified": true,
+      "verdict": "KEEP+PATCH",
+      "license": "see repo",
+      "where": "vm",
+      "adapted": false,
+      "notes": "Description match 1.00. Audit batch A.",
+      "use_short": "Split work across parallel sub-agents",
+      "useful": "high",
+      "use_for": "Fan-out of independent investigation branches",
+      "tools": [
+        "none"
+      ],
+      "note": "obra/superpowers.",
+      "inspected": "2026-11-21",
+      "run_tested": "not-run",
+      "tested_on": "vm-chincha-hq (10.128.0.4)",
+      "tested_date": "2026-11-21",
+      "category": "2. Dev discipline"
+    },
+    "dev-verification-gate": {
+      "repo": "obra/superpowers",
+      "upstream": "verification-before-completion",
+      "verified": true,
+      "verdict": "KEEP",
+      "license": "see repo",
+      "where": "vm",
+      "adapted": false,
+      "notes": "Description match 1.00. Audit: verified working, no edits needed.",
+      "use_short": "Run verification before claiming work is done",
+      "useful": "high",
+      "use_for": "Gate before commit / PR / 'done'",
+      "tools": [
+        "none"
+      ],
+      "note": "obra/superpowers.",
+      "inspected": "2026-11-21",
+      "run_tested": "not-run",
+      "tested_on": "vm-chincha-hq (10.128.0.4)",
+      "tested_date": "2026-11-21",
+      "category": "2. Dev discipline"
+    },
+    "dev-debugging-recovery": {
+      "repo": "hub (unverified)",
+      "upstream": "debugging-and-error-recovery",
+      "verified": false,
+      "verdict": "KEEP+PATCH",
+      "license": "unknown",
+      "where": "vm",
+      "adapted": true,
+      "notes": "Audit batch A. Upstream name known; source repo not yet pinned. Strip the assumptions it ships.",
+      "useful": "high",
+      "use_for": "Use when a service breaks, a test fails, or behaviour stops matching expectation",
+      "tools": [
+        "none"
+      ],
+      "note": "Proven on the skills-publish.timer root-cause hunt.",
+      "inspected": "2026-11-21",
+      "use_short": "Systematic root-cause debugging (stop-the-line, evidence, triage)",
+      "run_tested": "no-scripts",
+      "run_evidence": "Instruction-only (SKILL.md). Nothing to execute.",
+      "tested_on": "vm-chincha-hq (10.128.0.4)",
+      "tested_date": "2026-11-21",
+      "category": "2. Dev discipline"
+    },
+    "dev-git-workflow": {
+      "repo": "hub (unverified)",
+      "upstream": "git-workflow-and-versioning",
+      "verified": false,
+      "verdict": "KEEP+PATCH",
+      "license": "unknown",
+      "where": "vm",
+      "adapted": true,
+      "notes": "Audit batch A. Source repo not yet pinned.",
+      "useful": "high",
+      "use_for": "Every commit/push/PR to skills-shared or .github goes through this",
+      "tools": [
+        "git",
+        "gh-cli"
+      ],
+      "note": "Includes splitting a messy working tree into clean atomic commits.",
+      "inspected": "2026-11-21",
+      "use_short": "Git discipline: trunk-based, atomic commits, PR, worktrees",
+      "run_tested": "no-scripts",
+      "run_evidence": "Instruction-only (SKILL.md). Drives git/gh which are present on the VM.",
+      "tested_on": "vm-chincha-hq (10.128.0.4)",
+      "tested_date": "2026-11-21",
+      "category": "2. Dev discipline"
+    },
+    "dev-agent-md-refactor": {
+      "repo": "hub (unverified)",
+      "upstream": "agent-md-refactor",
+      "verified": false,
+      "verdict": "KEEP+PATCH",
+      "license": "MIT",
+      "where": "vm",
+      "adapted": true,
+      "notes": "Audit batch A. Ships Manus/Claude/macOS assumptions to strip. Source repo not yet pinned.",
+      "useful": "high",
+      "use_for": "Keeps AGENTS.md/SCOPE.md lean - applies directly to our lane identity files",
+      "tools": [
+        "none"
+      ],
+      "note": "MIT. Use whenever an instruction file grows past ~200 lines.",
+      "inspected": "2026-11-21",
+      "use_short": "Refactor bloated AGENTS.md/CLAUDE.md via progressive disclosure",
+      "run_tested": "no-scripts",
+      "run_evidence": "Instruction-only (README.md + SKILL.md). Nothing to execute.",
+      "tested_on": "vm-chincha-hq (10.128.0.4)",
+      "tested_date": "2026-11-21",
+      "category": "2. Dev discipline"
+    },
+    "dev-sql-optimization": {
+      "repo": "hub (unverified)",
+      "upstream": "sql-optimization-patterns",
+      "verified": false,
+      "verdict": "KEEP",
+      "license": "unknown",
+      "where": "vm",
+      "adapted": false,
+      "notes": "Audit batch D: verified working as-is. Source repo not yet pinned.",
+      "useful": "low",
+      "use_for": "Would apply if a relational DB is added",
+      "tools": [
+        "none"
+      ],
+      "note": "No SQL database in our stack today.",
+      "inspected": "2026-11-21",
+      "use_short": "SQL tuning: EXPLAIN, indexing, N+1, schema design",
+      "run_tested": "no-scripts",
+      "run_evidence": "Instruction-only (SKILL.md + references/details.md). No runner shipped.",
+      "tested_on": "vm-chincha-hq (10.128.0.4)",
+      "tested_date": "2026-11-21",
+      "category": "6. Data"
+    },
+    "docs-readmes": {
+      "repo": "hub (unverified)",
+      "upstream": "crafting-effective-readmes",
+      "verified": false,
+      "verdict": "KEEP",
+      "license": "unknown",
+      "where": "vm",
+      "adapted": false,
+      "notes": "Audit batch B: verified working as-is. Source repo not yet pinned.",
+      "useful": "high",
+      "use_for": "We maintain READMEs for 9 lanes plus every repo",
+      "tools": [
+        "none"
+      ],
+      "note": "60KB - load individual template/reference files, never the whole tree.",
+      "inspected": "2026-11-21",
+      "use_short": "Write/review READMEs per audience (internal/oss/personal/xdg)",
+      "run_tested": "no-scripts",
+      "run_evidence": "Instruction-only + template library (14 files). Nothing to execute.",
+      "tested_on": "vm-chincha-hq (10.128.0.4)",
+      "tested_date": "2026-11-21",
+      "category": "3. Documents"
+    },
+    "docs-typst-report": {
+      "repo": "hub (unverified)",
+      "upstream": "typst-pdf-maker",
+      "verified": false,
+      "verdict": "KEEP+PATCH",
+      "license": "unknown",
+      "where": "vm",
+      "adapted": true,
+      "notes": "Audit: survives only as the native-report theme, patched of Manus routing. pdf-converter is the PDF entry point.",
+      "useful": "high",
+      "use_for": "Reports, audits and hand-offs for the docs lane",
+      "tools": [
+        "python3",
+        "typst"
+      ],
+      "note": "Largest asset (111KB). Must PATCH the <skill-dir> placeholder to our path.",
+      "inspected": "2026-11-21",
+      "use_short": "Professional PDF reports with Typst (plan/prepare/render/verify)",
+      "run_tested": "pass",
+      "run_evidence": "6 scripts run end-to-end on the VM: prepare_document -> generate_pdf (COMPILE PASS 21.4KB warnings=no) -> verify_pdf (PASS 6/6) -> render_review (3/3 pages) + plan_document (plan.json). Requires typst, installed to /usr/local/bin (0.15.1).",
+      "tested_on": "vm-chincha-hq (10.128.0.4)",
+      "tested_date": "2026-11-21",
+      "category": "3. Documents"
+    },
+    "docs-diagram": {
+      "repo": "ours",
+      "upstream": "markdown-mermaid-writing + hub reference packs",
+      "verified": true,
+      "verdict": "KEEP+PATCH",
+      "license": "mixed",
+      "where": "vm",
+      "adapted": true,
+      "notes": "Composed here from hub reference material (see shared/skills-hub-sources/INDEX_TH.md). Renders offline with Typst+CeTZ.",
+      "use_short": "Draw real diagram files (PDF/SVG/PNG) offline with Typst+CeTZ",
+      "useful": "high",
+      "use_for": "Diagrams embedded in Typst reports",
+      "tools": [
+        "python3",
+        "typst"
+      ],
+      "note": "Ours, composed from hub syntax references.",
+      "inspected": "2026-11-21",
+      "run_tested": "not-run",
+      "tested_on": "vm-chincha-hq (10.128.0.4)",
+      "tested_date": "2026-11-21",
+      "category": "3. Documents"
+    },
+    "cloud-gcp-waf": {
+      "repo": "hub (unverified)",
+      "upstream": "google-cloud-waf-cost-optimization",
+      "verified": false,
+      "verdict": "KEEP+PATCH",
+      "license": "unknown",
+      "where": "vm",
+      "adapted": true,
+      "notes": "Audit: the 3 GCP WAF skills folded into this one (cost base + performance + operational excellence). Needs gcloud on the VM.",
+      "useful": "med",
+      "use_for": "Only when auditing GCP spend / rightsizing Compute, GKE, Storage or databases",
+      "tools": [
+        "gcloud",
+        "rest"
+      ],
+      "note": "Requires attribution.md compliance and our project ids.",
+      "inspected": "2026-11-21",
+      "use_short": "GCP Well-Architected Framework - Cost Optimization pillar (FinOps)",
+      "run_tested": "no-scripts",
+      "run_evidence": "Instruction-only (SKILL.md + references/attribution.md). Needs gcloud - present on the VM at /snap/bin/gcloud; not installed on the device.",
+      "tested_on": "vm-chincha-hq (10.128.0.4)",
+      "tested_date": "2026-11-21",
+      "category": "5. Ops + infra"
+    },
+    "research-gem-seeker": {
+      "repo": "hub (unverified)",
+      "upstream": "github-gem-seeker",
+      "verified": false,
+      "verdict": "KEEP+PATCH",
+      "license": "unknown",
+      "where": "vm",
+      "adapted": false,
+      "notes": "Audit batch C. Needs net.",
+      "useful": "high",
+      "use_for": "Front half of our import pipeline: search -> use -> package -> register in SOURCES.json",
+      "tools": [
+        "gh-cli"
+      ],
+      "note": "Pairs with SOURCES.json provenance registry.",
+      "inspected": "2026-11-21",
+      "use_short": "Find battle-tested OSS on GitHub, then skill-ify the solution",
+      "run_tested": "no-scripts",
+      "run_evidence": "Instruction-only (SKILL.md). Drives gh, present on the VM.",
+      "tested_on": "vm-chincha-hq (10.128.0.4)",
+      "tested_date": "2026-11-21",
+      "category": "4. Research"
+    },
+    "data-context-extractor": {
+      "repo": "hub (unverified)",
+      "upstream": "data-context-extractor",
+      "verified": false,
+      "verdict": "KEEP",
+      "license": "unknown",
+      "where": "vm",
+      "adapted": false,
+      "notes": "Not in the 2026-11-18 audit. Source repo not yet pinned.",
+      "useful": "low",
+      "use_for": "Reusable as a template for 'generator' style skills",
+      "tools": [
+        "python3",
+        "mcp:data-warehouse"
+      ],
+      "note": "No warehouse in our stack yet.",
+      "inspected": "2026-11-21",
+      "use_short": "Meta-skill: build a warehouse-specific data-analysis skill",
+      "run_tested": "pass",
+      "run_evidence": "scripts/package_data_skill.py runs on the VM: frontmatter validation passed and produced acme.zip.",
+      "tested_on": "vm-chincha-hq (10.128.0.4)",
+      "tested_date": "2026-11-21",
+      "category": "6. Data"
+    },
+    "vector-index-tuning": {
+      "repo": "hub (unverified)",
+      "upstream": "vector-index-tuning",
+      "verified": false,
+      "verdict": "KEEP",
+      "license": "unknown",
+      "where": "vm",
+      "adapted": false,
+      "notes": "Not in the 2026-11-18 audit. Source repo not yet pinned.",
+      "useful": "low",
+      "use_for": "Would apply to semantic search over the vault",
+      "tools": [
+        "none"
+      ],
+      "note": "No vector DB running today.",
+      "inspected": "2026-11-21",
+      "use_short": "Vector index tuning: HNSW params, quantization, IVF/PQ",
+      "run_tested": "no-scripts",
+      "run_evidence": "Instruction-only (SKILL.md + references/details.md). No runner shipped.",
+      "tested_on": "vm-chincha-hq (10.128.0.4)",
+      "tested_date": "2026-11-21",
+      "category": "6. Data"
+    }
+  },
+  "usefulness_legend": {
+    "high": "use now - matches current work",
+    "med": "situational - needs a precondition",
+    "low": "reference only - not in our stack yet"
+  },
+  "language": "en",
+  "execution_host": "vm only (Peach 2026-11-21): the working shell is the VM. The device is a front-end; do not install skill tooling there.",
+  "toolchain_vm": {
+    "verified": [
+      "python3 3.14.4",
+      "typst 0.15.1",
+      "git",
+      "gh",
+      "node/npx",
+      "sqlite3",
+      "gcloud",
+      "pandoc",
+      "pdftoppm",
+      "pdfinfo",
+      "convert",
+      "fonts-noto-cjk"
+    ],
+    "missing": [],
+    "fix_applied_20261121": "installed typst 0.15.1 to /usr/local/bin on the VM"
+  },
+  "categories": {
+    "1. Team + system": [
+      "wo-loop",
+      "bridge-check",
+      "core-ops",
+      "system-protocol-design"
+    ],
+    "2. Dev discipline": [
+      "dev-debugging-recovery",
+      "dev-verification-gate",
+      "dev-git-workflow",
+      "dev-parallel-agents",
+      "dev-agent-md-refactor"
+    ],
+    "3. Documents": [
+      "docs-pdf-converter",
+      "docs-typst-report",
+      "docs-diagram",
+      "docs-readmes"
+    ],
+    "4. Research": [
+      "research-reader",
+      "research-gem-seeker"
+    ],
+    "5. Ops + infra": [
+      "ops-disk-scan",
+      "cloud-gcp-waf"
+    ],
+    "6. Data": [
+      "data-context-extractor",
+      "vector-index-tuning",
+      "dev-sql-optimization"
+    ],
+    "7. Devices + UI": [
+      "hw-todoocard",
+      "ui-generative-minis"
+    ],
+    "8. Prompt + AI": [
+      "ai-prompt-engineer"
+    ],
+    "9. Authoring": [
+      "skill-creator"
+    ]
+  }
+}

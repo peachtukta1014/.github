@@ -18,10 +18,10 @@ SUBSKILL_ROOT = Path(__file__).resolve().parent.parent
 PARENT_ROOT = SUBSKILL_ROOT.parent
 SCRIPTS = Path(__file__).resolve().parent
 PARENT_SCRIPTS = PARENT_ROOT / "scripts"
-CFG_DIR = Path("/var/minis/shared/todoocard")
+CFG_DIR = Path("/srv/repos/hq/vm-hq-core/todoocard")
 CFG_PATH = CFG_DIR / "config.json"
-ATTACH = Path("/var/minis/attachments")
-WORK = Path("/var/minis/workspace/todoocard_run")
+ATTACH = Path("/srv/work/attachments")
+WORK = Path("/srv/work/todoocard_run")
 
 sys.path.insert(0, str(SCRIPTS))
 sys.path.insert(0, str(PARENT_SCRIPTS))

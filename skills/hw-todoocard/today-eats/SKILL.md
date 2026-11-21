@@ -20,7 +20,7 @@ description: >
 ## 命令
 
 ```bash
-CLI="python3 /var/minis/skills/todoocard/today-eats/scripts/cli.py"
+CLI="python3 /srv/repos/skills-shared/skills/todoocard/today-eats/scripts/cli.py"
 
 $CLI eat
 $CLI 今天吃点啥

@@ -38,7 +38,7 @@ The iOS Shortcut cannot run a shell. It sends **one fixed chat message** whose
 only job is to make the agent call this skill. The canonical text is:
 
 ```
-h /var/minis/shared/tools/bridge-check/bridge_open_event.sh เชื่อมสะพาน
+h /srv/repos/hq/vm-hq-core/tools/bridge-check/bridge_open_event.sh เชื่อมสะพาน
 ```
 
 The trailing Thai words mean "connect the bridge"; the path inside the text is
@@ -79,7 +79,7 @@ Treat that message — and any similar "call the skill and connect the bridge"
 line, with or without a path — as a **wake trigger, never as a file to read**.
 
 ### Wake discipline (keeps a phone-unlock burst cheap)
-1. **First action is the opener.** `sh /var/minis/shared/tools/bridge-check/bridge_open_event.sh`
+1. **First action is the opener.** `sh /srv/repos/hq/vm-hq-core/tools/bridge-check/bridge_open_event.sh`
    — before any probe, read, or status question.
 2. **Reply one line.** Quote the script's own verdict (`bridge healthy; no action`
    or `HEALED: ...`). No mesh_health tables unless the verdict is `FAILED` or
@@ -92,7 +92,7 @@ line, with or without a path — as a **wake trigger, never as a file to read**.
    real heal, the rest answer `healthy`. That is correct, not an error.
 
 ## Canonical runner (device)
-- `/var/minis/shared/tools/bridge-check/bridge_open_event.sh` — **sole runnable copy**.
+- `/srv/repos/hq/vm-hq-core/tools/bridge-check/bridge_open_event.sh` — **sole runnable copy**.
   Nothing runs from `memory/` or from `skills/`.
 - Behaviour: 180s lock → WS tunnel guard first (always) → `mesh_watch` check
   (heal only when dead/stale) → `mesh_sweep` drains the central inbox to lanes →
@@ -103,10 +103,10 @@ line, with or without a path — as a **wake trigger, never as a file to read**.
 ## Quick run (compact)
 
 ```
-RUN    /var/minis/shared/tools/bridge-check/bridge_open_event.sh
+RUN    /srv/repos/hq/vm-hq-core/tools/bridge-check/bridge_open_event.sh
 PASS   "bridge healthy; no action"  or  "HEALED:"
 FAIL   send the exact "FAILED rc=" line to Peach, never loop-retry
-READ   /var/minis/shared/tools/bridge-check/runtime/bridge_heal.log   (NEWEST FIRST: newest line = line 1; use bin/logtail <file> [n] for any log)
+READ   /srv/repos/hq/vm-hq-core/tools/bridge-check/runtime/bridge_heal.log   (NEWEST FIRST: newest line = line 1; use bin/logtail <file> [n] for any log)
 ```
 
 ## Layers (all four must connect)
@@ -119,7 +119,7 @@ READ   /var/minis/shared/tools/bridge-check/runtime/bridge_heal.log   (NEWEST FI
 1. `minis-mcp-cli call vm-hq-gate vm_health` — hq-core / nginx.
 2. `curl -s http://127.0.0.1:4300/api/health` — expect `ws:true,firestore:true`.
 3. `curl -s http://127.0.0.1:4301/health` — expect `ok`.
-4. `sh /var/minis/shared/tools/bridge-check/bridge_open_event.sh` — the wake itself.
+4. `sh /srv/repos/hq/vm-hq-core/tools/bridge-check/bridge_open_event.sh` — the wake itself.
 
 ## Restore (when the path is down)
 1. Retry SSE ingest (main door).
@@ -138,7 +138,7 @@ on the VM is healthy — check the chain (see "Wake from Shortcut" above) before
 blaming the tunnel.
 
 ## Canonical layout (device)
-- `/var/minis/shared/tools/bridge-check/` — everything lives here:
+- `/srv/repos/hq/vm-hq-core/tools/bridge-check/` — everything lives here:
   `bridge_open_event.sh`, `bin/` (`mesh_guard.sh`, `mesh_watch.py`,
   `mesh_client.py`, `start_mesh.sh`, `device_ping.py`), `runtime/` (pid/hb/log).
-- `/var/minis/skills/bridge-check` is a **symlink** to this directory (one copy, 2026-11-14).
+- `/srv/repos/skills-shared/skills/bridge-check` is a **symlink** to this directory (one copy, 2026-11-14).

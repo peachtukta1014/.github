@@ -11,10 +11,10 @@
 ## ของที่ต้องมีบนเครื่อง (ไฟล์จริงทั้งหมด)
 | ไฟล์ | หน้าที่ |
 |---|---|
-| `/var/minis/shared/tools/bridge-check/bridge_open_event.sh` | สคริปต์หลัก — ตัวเดียวที่ถูกรัน |
-| `/var/minis/shared/tools/bridge-check/bin/` | ตัวรันจริง (mesh_guard.sh, mesh_watch.py ฯลฯ) |
-| `/var/minis/shared/tools/bridge-check/runtime/` | pid / hb / log / lock ของการ heal |
-| `/var/minis/skills/bridge-check/SKILL.md` | ตัวที่แอปโหลด (มิเรอร์ของ SKILL.md ในโฟลเดอร์นี้) |
+| `/srv/repos/hq/vm-hq-core/tools/bridge-check/bridge_open_event.sh` | สคริปต์หลัก — ตัวเดียวที่ถูกรัน |
+| `/srv/repos/hq/vm-hq-core/tools/bridge-check/bin/` | ตัวรันจริง (mesh_guard.sh, mesh_watch.py ฯลฯ) |
+| `/srv/repos/hq/vm-hq-core/tools/bridge-check/runtime/` | pid / hb / log / lock ของการ heal |
+| `/srv/repos/skills-shared/skills/bridge-check/SKILL.md` | ตัวที่แอปโหลด (มิเรอร์ของ SKILL.md ในโฟลเดอร์นี้) |
 
 ## การติดตั้ง Shortcut บน iPhone
 1. นำเข้า `MinisBridgeHeal-ntfy` (ครั้งแรก iOS จะถาม Allow/Import Anyway — กด Allow)
@@ -41,7 +41,7 @@
    และ `curl -s http://127.0.0.1:4301/health` (ควรได้ ok)
 3. นับ backlog ใน Firestore `webhookInbox` สถานะ new — ถ้า >0 และสะพานลง = ประตูปิด
 4. ทดสอบ SSE ingest → ควรได้ 201 ถ้าไม่ได้ให้ resend คิวค้าง
-5. `sh /var/minis/shared/tools/bridge-check/bridge_open_event.sh` → ตอนปกติต้องได้
+5. `sh /srv/repos/hq/vm-hq-core/tools/bridge-check/bridge_open_event.sh` → ตอนปกติต้องได้
    `bridge healthy; no action`
 
 ## เปิดประตูเมื่อสะพานลง

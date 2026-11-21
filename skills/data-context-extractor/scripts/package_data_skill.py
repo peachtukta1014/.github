@@ -3,11 +3,11 @@
 Package a generated data analysis skill into a distributable .skill file (zip format).
 
 Usage:
-    python package_data_skill.py <path/to/skill-folder> [output-directory]
+    python3 package_data_skill.py <path/to/skill-folder> [output-directory]
 
 Example:
-    python package_data_skill.py /home/claude/acme-data-analyst
-    python package_data_skill.py /home/claude/acme-data-analyst /tmp/outputs
+    python3 package_data_skill.py /home/claude/acme-data-analyst
+    python3 package_data_skill.py /home/claude/acme-data-analyst /tmp/outputs
 """
 
 import sys

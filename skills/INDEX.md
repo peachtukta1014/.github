@@ -1,54 +1,75 @@
-# Skills registry — the library, its prefixes and its homes
-_Generated 2026-11-21 16:44 +07 by `skills-shared/bin/gen_skills_index.py` (files lane). Do not hand-edit rows: re-run the generator._
-## The homes (one copy each, no second source)
+# Skills registry — provenance, homes and tags
+_Generated 2026-11-21 22:18 +07 by `skills-shared/bin/gen_skills_index.py` from `skills/SOURCES.json`. Do not hand-edit rows: edit SOURCES.json and re-run._
+## The homes (one copy each)
 | Home | Path | What it is |
 |---|---|---|
-| authoring | `peachtukta1014/.github` -> `skills/` | the public repo where a skill is written and reviewed (PR) |
-| working copy on the VM | `/srv/repos/skills-shared/skills/` | the clone lanes read and edit; this INDEX lives here |
+| authoring | `peachtukta1014/.github` -> `skills/` | the public repo lanes import from |
+| working copy | `/srv/repos/skills-shared/skills/` | the clone lanes read and edit; this INDEX lives here |
 | install target | `/var/minis/skills/` (device) | what the app loads — installed, never hand-edited |
-The vault mirror `/srv/repos/hq/vm-hq-core/skills/` was **removed on 2026-11-21** (proven byte-duplicate of the working copy; archive `_archive/skills-mirror-20261121/`). Device home `/var/minis/shared/skills` never existed.
-## The prefix rule
-**A prefix is a category, not a rename.** No prefix = a **team/system** skill (boot, bridge-check, core-ops, wo-boost, skill-creator, data-context-extractor, system-protocol-design, vector-index-tuning) — it is used by every lane and keeps its bare name. A prefix = a **supplementary** skill in a subject area (`dev-`, `docs-`, `research-`, `ops-`, `hw-`, `ui-`, `ai-`, `cloud-`). Names are stable identifiers (AGENT.md RULE 1): a move between the two groups is decided by Peach, never by the generator.
-## Team / system skills (7)
-| skill | installed | what it does |
-|---|---|---|
-| `boot` | yes | lane boot (identity + scope + pad + board) |
-| `bridge-check` | yes | open/heal the device-to-VM path (bridge WAKE) |
-| `core-ops` | yes | one engineering workflow for the chinchaflow repo (debug/audit/CI/release) |
-| `data-context-extractor` | yes | grow a company-specific data-analysis skill from analyst knowledge |
-| `system-protocol-design` | yes | design or repair a multi-agent protocol |
-| `vector-index-tuning` | yes | tune a vector index (HNSW, quantisation) |
-| `wo-boost` | yes | work-order skill: dispatch / ACK / close, locator first |
+## Publishing (manual, Peach 2026-11-21)
+The 15-minute `skills-publish.timer` is **off**. Push by hand when the library changes:
+```
+bash /opt/vault/vm-hq-core/bin/publish-skills.sh
+```
+## Tag legend
+`source` = where it came from (**team** ours · **minis** built-in · **OpenMinis** official · a hub name) · `readiness` = **ready** (works as-is) or **adapt** (edit before use) · `where` = **device** (iSH on the phone) / **vm** / **both** / **prompt-only** · `runtime` = what it needs.
+**Provenance rule:** a row is exact only when SOURCES.json says `verified: true`. Rows marked *(unverified)* came from a shared hub / the internet and their repo is not pinned yet — adapt the body and scripts for us before relying on them (Peach 2026-11-21).
 
-## Supplementary skills (17)
-| category | skill | installed | what it does |
-|---|---|---|---|
-| AI / prompt | `ai-prompt-engineer` | yes | Writes, refactors, and evaluates prompts for LLMs — generating optimized prompt templates, structured output schemas, evaluation rubrics, and test sui |
-| Cloud (GCP) | `cloud-gcp-waf` | yes | Evaluates Google Cloud workloads for cost efficiency and FinOps alignment using the Google Cloud Well-Architected Framework Cost Optimization pillar.  |
-| Dev discipline | `dev-agent-md-refactor` | yes | Refactor bloated AGENTS.md, CLAUDE.md, or similar agent instruction files to follow progressive disclosure principles. Splits monolithic files into or |
-| Dev discipline | `dev-debugging-recovery` | yes | Guides systematic root-cause debugging. Use when tests fail, builds break, something that worked yesterday broke, behavior doesn't match expectations, |
-| Dev discipline | `dev-git-workflow` | yes | Structures git workflow practices. Use when making any code change. Use when committing, branching, resolving conflicts, splitting uncommitted work in |
-| Dev discipline | `dev-parallel-agents` | yes | Use when facing 2+ independent tasks that can be worked on without shared state or sequential dependencies |
-| Dev discipline | `dev-sql-optimization` | yes | Master SQL query optimization, indexing strategies, and EXPLAIN analysis to dramatically improve database performance and eliminate slow queries. Use  |
-| Dev discipline | `dev-verification-gate` | yes | Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming |
-| Docs & documents | `docs-diagram` | yes | วาดไดอะแกรม (flowchart, sequence, ER, สถาปัตยกรรม, กราฟ) เป็นไฟล์จริง PDF/SVG/PNG แบบออฟไลน์ ด้วย Typst+CeTZ และฝังลงรายงาน Typst ได้ทันที ใช้คลัง syn |
-| Docs & documents | `docs-pdf-converter` | yes | Convert documents to PDF via a typst-based pipeline. Supports Markdown, HTML, plain text, images, and any pandoc-supported format. Use this skill when |
-| Docs & documents | `docs-readmes` | yes | Use when writing or improving README files. Not all READMEs are the same — provides templates and guidance matched to your audience and project type. |
-| Docs & documents | `docs-typst-report` | yes | "Generate professional, high-quality PDF documents with Typst. Use for reports, academic papers, resumes, structured documents, mathematical typesetti |
-| UI & hardware | `hw-todoocard` | yes | TodooCard（土豆片 / NEWSTONE）六色电子纸技能族。用户提到土豆片、TodooCard、电子纸推送， 或要在卡上显示内容时使用。当前子技能 today-eats（今天吃点啥：附近随机外卖并推送）。 后续可扩展天气卡、任意图推送等子技能。 |
-| Ops / VM & system | `ops-disk-scan` | yes | Report what is actually taking up space in a directory tree — the biggest subdirectories and the biggest individual files, largest first. Use this ski |
-| Research & web | `research-gem-seeker` | yes | Search GitHub for battle-tested solutions instead of reinventing the wheel. Use when the user's problem is universal enough that open source developer |
-| Research & web | `research-reader` | yes | Clean and extract the main body content from a webpage URL. Use this skill whenever the user asks to extract, scrape, or read the main article, text,  |
-| UI & hardware | `ui-generative-minis` | yes | In the current Minis environment, automatically convert text descriptions into a single-file HTML generator similar to Claude Artifact, with unified s |
+## Categories (from SOURCES.json)
+| # | Category | Skills |
+|---|---|---|
+| 1 | Team + system | `bridge-check`, `core-ops`, `system-protocol-design`, `wo-loop` |
+| 2 | Dev discipline | `dev-agent-md-refactor`, `dev-debugging-recovery`, `dev-git-workflow`, `dev-parallel-agents`, `dev-verification-gate` |
+| 3 | Documents | `docs-diagram`, `docs-pdf-converter`, `docs-readmes`, `docs-typst-report` |
+| 4 | Research | `research-gem-seeker`, `research-reader` |
+| 5 | Ops + infra | `cloud-gcp-waf`, `ops-disk-scan` |
+| 6 | Data | `data-context-extractor`, `dev-sql-optimization`, `vector-index-tuning` |
+| 7 | Devices + UI | `hw-todoocard`, `ui-generative-minis` |
+| 8 | Prompt + AI | `ai-prompt-engineer` |
+| 9 | Authoring | `skill-creator` |
+
+
+## Our team skills (5)
+| skill | ไทย | tags | installed | what it does |
+|---|---|---|---|---|
+| `bridge-check` | เปิดสะพานถึง VM | team · ready · vm · net | yes | Our own. Bridge WAKE — open/heal the device-to-VM path. |
+| `core-ops` | งานวิศวกรรม chinchaflow | team · ready · vm · python node net | yes | Our own. One engineering workflow for the chinchaflow repo. |
+| `docs-diagram` | วาดไดอะแกรมเป็นไฟล์จริง | team · ready · vm · python typst | yes | Composed here from hub reference material (see shared/skills-hub-sources/INDEX_TH.md). Renders offline with Ty |
+| `system-protocol-design` | ออกแบบโปรโตคอลเอเจนต์ | team · ready · vm · prompt-only | yes | Our own. Design or repair a multi-agent protocol. Peach 2026-11-21: keep, do not delete. |
+| `wo-loop` | บูทเลน + ใบงาน | team · ready · vm · python gh-cli | no | Our own. Boot a lane then run the work loop; absorbed the two former team skills. |
+
+## Minis built-in (0)
+| skill | ไทย | tags | installed | what it does |
+|---|---|---|---|---|
+
+## Imported — by source (18)
+| skill | upstream | source repo | ไทย | tags | installed | verdict |
+|---|---|---|---|---|---|---|
+| `ai-prompt-engineer` | prompt-engineer | Jeffallan/claude-skills | ออกแบบพรอมต์ LLM | claude-skills · adapt · vm · net | yes | KEEP+PATCH |
+| `docs-pdf-converter` | pdf-converter | OpenMinis/MinisSkills | เอกสาร → PDF | MinisSkills · ready · vm · python typst | yes | KEEP |
+| `hw-todoocard` | todoocard | OpenMinis/MinisSkills | จอ e-paper TodooCard | MinisSkills · ready · vm · python | yes | KEEP |
+| `ops-disk-scan` | disk-scan | OpenMinis/MinisSkills | ดิสก์กินที่ไหน | MinisSkills · ready · vm · python zip git | yes | KEEP |
+| `research-reader` | web-content-extractor | OpenMinis/MinisSkills | อ่านเนื้อหาเว็บ | MinisSkills · ready · vm · net | yes | KEEP |
+| `ui-generative-minis` | generative-ui-minis | OpenMinis/MinisSkills | ข้อความ → HTML | MinisSkills · ready · vm · python | yes | KEEP |
+| `cloud-gcp-waf` | google-cloud-waf-cost-optimization | hub (unverified) **(unverified)** | ค่าใช้จ่าย GCP | hub · adapt · vm · net | yes | KEEP+PATCH |
+| `data-context-extractor` | data-context-extractor | hub (unverified) **(unverified)** | สร้างสกิลข้อมูล | hub · ready · vm · zip | yes | KEEP |
+| `dev-agent-md-refactor` | agent-md-refactor | hub (unverified) **(unverified)** | จัด AGENTS.md | hub · adapt · vm · node git | yes | KEEP+PATCH |
+| `dev-debugging-recovery` | debugging-and-error-recovery | hub (unverified) **(unverified)** | หาสาเหตุบั๊ก | hub · adapt · vm · node git | yes | KEEP+PATCH |
+| `dev-git-workflow` | git-workflow-and-versioning | hub (unverified) **(unverified)** | วินัย git / PR | hub · adapt · vm · node git | yes | KEEP+PATCH |
+| `dev-sql-optimization` | sql-optimization-patterns | hub (unverified) **(unverified)** | จูน SQL | hub · ready · vm · prompt-only | yes | KEEP |
+| `docs-readmes` | crafting-effective-readmes | hub (unverified) **(unverified)** | เขียน README | hub · ready · vm · prompt-only | yes | KEEP |
+| `docs-typst-report` | typst-pdf-maker | hub (unverified) **(unverified)** | รายงาน PDF (Typst) | hub · adapt · vm · python typst | yes | KEEP+PATCH |
+| `research-gem-seeker` | github-gem-seeker | hub (unverified) **(unverified)** | หา OSS จาก GitHub | hub · adapt · vm · python node net | yes | KEEP+PATCH |
+| `vector-index-tuning` | vector-index-tuning | hub (unverified) **(unverified)** | จูน vector index | hub · ready · vm · prompt-only | yes | KEEP |
+| `dev-parallel-agents` | dispatching-parallel-agents | obra/superpowers | แบ่งงานขนาน | superpowers · adapt · vm · prompt-only | yes | KEEP+PATCH |
+| `dev-verification-gate` | verification-before-completion | obra/superpowers | ยืนยันก่อนปิดงาน | superpowers · ready · vm · prompt-only | yes | KEEP |
 
 ## Counts
-- library: **24** skills · installed on the device: **24**
-- in the library but not installed: none
-- installed but missing from the library: `skill-creator`
-- archived (pruned 2026-11-21, on the VM): `_archive/skills-pruned-20261121/` — `agentic-eval`, `internet-skill-finder`, `reflex`
+- library **23** · ours **5** · built-in **0** · imported **18** · installed on device **22**
+- provenance verified: **13** / 23 — the rest are hub/internet imports whose repo is not pinned yet
+- 2026-11-18 audit (code lane): KEEP 6 · KEEP+PATCH 11 · ARCHIVE 9 · DELETE 18 (`docs/reports/skills-audit-20261118.md`)
 
 ## Gates
 ```
-python3 /srv/repos/skills-shared/bin/gen_skills_index.py     # rebuild this file
-python3 /srv/repos/skills-shared/bin/doc_id_lint.py         # doc ids: no BROKEN and no MOVED stub
+python3 /srv/repos/skills-shared/bin/gen_skills_index.py
 ```

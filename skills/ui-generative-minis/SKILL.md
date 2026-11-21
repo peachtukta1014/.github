@@ -16,7 +16,7 @@ The goal is not to modify the chat host itself, but to:
 
 1. Organize user instructions into a structured spec
 2. Render them with Python into a single-file HTML artifact
-3. Save it to `/var/minis/workspace/`
+3. Save it to `/srv/work/`
 4. Let users preview, share, and continue iterating directly
 
 ## Automatic Trigger Scenarios
@@ -51,7 +51,7 @@ assume by default that this skill should be invoked to generate an additional pa
 ### 1) Complete Artifact Generator
 
 ```bash
-python3 /var/minis/skills/ui-generative-minis/scripts/generative_ui_artifact.py \
+python3 /srv/repos/skills-shared/skills/ui-generative-minis/scripts/generative_ui_artifact.py \
   "Weekly Project Report" \
   --text "Need overview cards\nNeed risk table\nNeed timeline\nNeed code block\nNeed chart"
 ```
@@ -59,17 +59,17 @@ python3 /var/minis/skills/ui-generative-minis/scripts/generative_ui_artifact.py 
 By default, this outputs to:
 
 ```bash
-/var/minis/workspace/<title>_artifact.html
+/srv/work/<title>_artifact.html
 ```
 
 ### 2) Render from a JSON spec
 
 ```bash
-python3 /var/minis/skills/ui-generative-minis/scripts/generative_ui_artifact.py \
+python3 /srv/repos/skills-shared/skills/ui-generative-minis/scripts/generative_ui_artifact.py \
   "Demo" \
   --spec /path/to/spec.json \
-  --out /var/minis/workspace/demo_artifact.html \
-  --json-out /var/minis/workspace/demo_spec.json
+  --out /srv/work/demo_artifact.html \
+  --json-out /srv/work/demo_spec.json
 ```
 
 ## spec Format

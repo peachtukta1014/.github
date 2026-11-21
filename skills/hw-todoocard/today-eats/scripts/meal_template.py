@@ -295,7 +295,7 @@ def render(pick: dict, out_path: str | Path, meal_override: str | None = None) -
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--pick-json", default="/tmp/food_pick.json")
-    ap.add_argument("--out", default="/var/minis/attachments/eat_card.png")
+    ap.add_argument("--out", default="/srv/work/attachments/eat_card.png")
     ap.add_argument("--send", action="store_true")
     args = ap.parse_args()
 
@@ -309,7 +309,7 @@ def main():
     out = render(pick, args.out)
     print(f"rendered {out}")
 
-    tdir = Path("/var/minis/shared/todoocard/templates")
+    tdir = Path("/srv/repos/hq/vm-hq-core/todoocard/templates")
     tdir.mkdir(parents=True, exist_ok=True)
     Image.open(out).save(tdir / "eat.png")
     (tdir / "eat.json").write_text(

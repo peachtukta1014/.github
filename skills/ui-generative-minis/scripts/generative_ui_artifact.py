@@ -135,7 +135,7 @@ def main():
     ap.add_argument('--json-out', help='Save resolved spec as JSON')
     args = ap.parse_args()
     spec = json.loads(Path(args.spec).read_text(encoding='utf-8')) if args.spec else infer_blocks(args.title, args.text or args.title)
-    out = Path(args.out or f'/var/minis/workspace/{slugify(args.title)}_artifact.html')
+    out = Path(args.out or f'/srv/work/{slugify(args.title)}_artifact.html')
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(render(spec), encoding='utf-8')
     if args.json_out:

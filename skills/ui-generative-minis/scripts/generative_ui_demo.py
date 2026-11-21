@@ -143,7 +143,7 @@ def main():
     ap.add_argument('topic', help='Topic title')
     ap.add_argument('--text', default='', help='Source text / notes to structure into UI')
     ap.add_argument('--spec', help='Optional JSON spec file path')
-    ap.add_argument('--out', default='/var/minis/workspace/generative_ui_demo.html', help='Output HTML path')
+    ap.add_argument('--out', default='/srv/work/generative_ui_demo.html', help='Output HTML path')
     args = ap.parse_args()
 
     if args.spec:

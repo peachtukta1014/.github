@@ -10,7 +10,7 @@ description: >
   chain) — same repo, same rules, smallest diff. EN body (internal).
 ---
 
-> Canonical: `/opt/vault/vm-hq-core/skills/core-ops/SKILL.md` does not exist for this skill — device is canonical (`/var/minis/skills/core-ops/`).
+> Canonical: `/opt/vault/vm-hq-core/skills/core-ops/SKILL.md` does not exist for this skill — device is canonical (`/srv/repos/skills-shared/skills/core-ops/`).
 
 
 # core-ops — unified chinchaflow engineering (debug · audit · incident · cicd · mcp · release · chain)
@@ -23,7 +23,7 @@ description: >
 > full function signature + grep every reference + run the smoke test before PR.
 
 ## Repo rules (all sections)
-- Clone: `/var/minis/shared/repos/chinchaflow` (pull first) · private repo —
+- Clone: `/srv/repos/hq/vm-hq-core/repos/chinchaflow` (pull first) · private repo —
   every GitHub curl needs `Authorization: Bearer $GH_TOKEN` (env only).
 - Work branch: `open-minis_<agent>_<task>` (e.g. `open-minis_webhook_line-name-size`; underscore or dash allowed) → PR → pr-verify CI
   green → auto-merge (squash). One PR, one intent.
@@ -38,7 +38,7 @@ description: >
 The system's real-world debug flow (built from Peach's own scars, PR #638).
 
 1. **Listen → check the shared board and active task** — translate symptom into expected vs actual behavior; high-risk confirm with Peach first.
-2. **Search the shared Lessons KB first** — `python3 /var/minis/shared/chincha/kb/kb.py search --keywords "<kw>"`. Never start from zero.
+2. **Search the shared Lessons KB first** — `python3 /srv/repos/hq/vm-hq-core/chincha/kb/kb.py search --keywords "<kw>"`. Never start from zero.
 3. **Trace the data flow** — pull repo → open dep-map
    (`kb/dep-map-<system>.json` file→file) → topic→files table → follow the bad
    value upstream to the FIRST divergence.
@@ -77,7 +77,7 @@ failing test · merge on red CI · touch workflow files (.github/) without care.
    (money/stock/slip/voice/3-lang)? Unsure → restate before auditing.
 2. **Use current in-repo truth** — `docs/PROJECT_STRUCTURE.md` (auto-synced) +
    rules files (`firestore.rules`, `storage.rules`) — don't scan the repo
-   blindly. Audit reports live in `/var/minis/shared/audit/`.
+   blindly. Audit reports live in `/srv/repos/hq/vm-hq-core/audit/`.
 3. **Extend with dep-map** — `kb/dep-map-{webhook-core,seafood-pos,chincha-tea}.json`
    forward/reverse to find who a file touches.
 4. **Audit** — search/grep first, ranged reads (full-file only <150 lines);
@@ -139,7 +139,7 @@ Never run them as a watch loop.
 1. **Status check (on demand)** — `minis-mcp-cli call vm-hq-gate gate_call --input '{"category":"chincha","tool":"list_open_prs","arguments":{}}'`,
    `get_pr_status --input '{"prNumber": N}'` (always live, zero local tooling).
 2. **Fallback via API** — curl PRs/runs/jobs with `$GH_TOKEN` (never echo token).
-   Local toolset `/var/minis/workspace/chincha-status/` (`poll_gh.Use MCP.
+   Local toolset `/srv/work/chincha-status/` (`poll_gh.Use MCP.
 3. **Merge** — normally do NOT merge by hand: auto-merge workflow handles green
    PRs (minis/*, hq/*, vm/*). Gate merge - special cases only (`gate_call(category='chincha', tool='merge_pr')`)
    only for special cases Peach orders, and only when CI is verified green.
@@ -202,12 +202,12 @@ after functions deploy; report Thai.
 
 ## G. CHAIN — project changes via MINIS_CHANGELOG ("มี PR ใหม่/อ่าน chain")
 
-1. `cat /var/minis/shared/chincha/MINIS_CHANGELOG/<YYYY-MM>/<YYYY-MM-DD>.md` — read today's
+1. `cat /srv/repos/hq/vm-hq-core/chincha/MINIS_CHANGELOG/<YYYY-MM>/<YYYY-MM-DD>.md` — read today's
    manual team PR chain (newest PR at top). Folder rules: `MINIS_CHANGELOG/README.md`.
    Not auto-synced — agents write it by hand each time any PR is opened/merged on chinchaflow
    (full repo history stays in `docs/AGENT_CHANGELOG_TH.md`).
 2. Deep dive only when needed — the full repo history lives in the repo (not mirrored to the app);
-   for older PR detail use `git -C /var/minis/shared/repos/chinchaflow` (central clone).
+   for older PR detail use `git -C /srv/repos/hq/vm-hq-core/repos/chinchaflow` (central clone).
 3. Sync KB to reality (main-pilot duty) — update `kb/<system>.json`. Repo rule
    docs (AGENTS.md etc.) are Peach's auto-sync — read, don't edit.
 4. Report to Peach: what's new (PR/CI) · what updated (KB) · anything for her

@@ -75,7 +75,7 @@ wait_refresh default: `8` (panel may still be finishing).
 
 ## Config keys
 
-`/var/minis/shared/todoocard/config.json`:
+`/srv/repos/hq/vm-hq-core/todoocard/config.json`:
 
 ```json
 {

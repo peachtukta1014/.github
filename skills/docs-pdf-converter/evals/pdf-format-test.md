@@ -170,7 +170,7 @@ LIMIT 12;
 
 ### 3.5 行内代码
 
-使用 `pip install -r requirements.txt` 安装依赖，通过 `python manage.py runserver` 启动开发服务器，
+使用 `pip install -r requirements.txt` 安装依赖，通过 `python3 manage.py runserver` 启动开发服务器，
 用 `curl -X POST http://localhost:8080/api/v1/items` 测试接口，最后用 `docker compose up -d` 部署。
 
 ---

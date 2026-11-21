@@ -538,14 +538,14 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
-          python evaluation/run_evaluation.py \
+          python3 evaluation/run_evaluation.py \
             --prompt prompts/latest.txt \
             --suites evaluation/test_cases/*.json \
             --output results/
 
       - name: Check thresholds
         run: |
-          python evaluation/check_thresholds.py \
+          python3 evaluation/check_thresholds.py \
             --results results/report.json \
             --min-accuracy 0.90 \
             --max-latency 2.0
