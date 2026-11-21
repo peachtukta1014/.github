@@ -324,7 +324,7 @@
       "adapted": true,
       "notes": "Audit batch A. Source repo not yet pinned.",
       "useful": "high",
-      "use_for": "Every commit/push/PR to skills-shared or .github goes through this",
+      "use_for": "Every commit/push/PR to the trunk or .github goes through this",
       "tools": [
         "git",
         "gh-cli"
