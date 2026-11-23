@@ -233,7 +233,7 @@
       "license": "MIT",
       "where": "vm",
       "adapted": true,
-      "notes": "Audit: retarget as a linter for 70-Lanes/<lane>/identity/{SOUL,GLOBAL}.md + SCOPE.md; drop the eval/structured-output refs. 110 KB -> 28 KB.",
+      "notes": "Audit: retarget as a linter for lanes/<lane>/identity/{SOUL,GLOBAL}.md + SCOPE.md; drop the eval/structured-output refs. 110 KB -> 28 KB.",
       "use_short": "Write/refactor/evaluate prompts and rubrics",
       "useful": "high",
       "use_for": "Prompt templates, schemas, eval suites",
@@ -548,7 +548,7 @@
       "tested_date": "2026-11-21",
       "category": "6. Data"
     },
-    "wo-loop-lane-boost": {
+    "lane-boot": {
       "repo": "ours",
       "upstream": null,
       "verified": true,

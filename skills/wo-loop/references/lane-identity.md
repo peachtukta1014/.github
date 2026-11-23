@@ -6,7 +6,7 @@ description: Load who this chat session is — which lane (channel) it belongs t
 # lane-identity — remember the role, read the truth from the VM
 
 The device holds no identity of its own. Each chat session is bound to one lane in
-`/srv/repos/hq/vm-hq-core/70-Lanes/<lane>/identity/config/session_bind.json`; the real identity lives on the VM.
+`/srv/repos/hq/vm-hq-core/lanes/<lane>/identity/config/session_bind.json`; the real identity lives on the VM.
 
 ## Steps (in order)
 
@@ -19,8 +19,8 @@ The device holds no identity of its own. Each chat session is bound to one lane 
    ```
    lane-id --fetch
    ```
-   This prints `70-Lanes/<lane>/identity/GLOBAL.md` from the VM.
-3. If VM/tunnel is down, fall back to the offline card `/srv/repos/hq/vm-hq-core/70-Lanes/<lane>.md`
+   This prints `lanes/<lane>/identity/GLOBAL.md` from the VM.
+3. If VM/tunnel is down, fall back to the offline card `/srv/repos/hq/vm-hq-core/lanes/<lane>.md`
    and say so. Do not invent tasks, paths or a new role.
 4. Start work only after the lane's board/pad is read:
    ```
@@ -31,6 +31,6 @@ The device holds no identity of its own. Each chat session is bound to one lane 
 
 - Answer as **that lane only**. Work ordered by another lane is accepted and closed
   by the owning lane, with `wo-loop complete` → HTTP 201 + inbox_id.
-- Never restate protocol rules; point at the VM file (`30-System/…`).
+- Never restate protocol rules; point at the VM file (`system/…`).
 - Unknown/ambiguous lane → ask which channel this is; never guess between lanes.
 - The device is an entry gate: no canonical copy, no second diary, keep storage near-empty.

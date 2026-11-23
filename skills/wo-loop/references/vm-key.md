@@ -12,7 +12,7 @@ path: /srv/repos/hq/vm-hq-core/skills/vm-key/SKILL.md
 
 **Rule:** the VM is the home. This device holds only the key: transport scripts,
 protocol clients, and skills. No identity, no code, no secrets live here.
-Canonical tool map: `/srv/repos/hq/vm-hq-core/30-System/TOOLS.md` (read it at boot).
+Canonical tool map: `/srv/repos/hq/vm-hq-core/system/TOOLS.md` (read it at boot).
 
 ## 1. One command to work on the VM
 
@@ -40,7 +40,7 @@ minis-tools ▶ ws_exec {"command": "<shell command>"}
 | MCP server (device) | `/srv/repos/hq/vm-hq-core/tools/mcp/minis_tools_mcp.py` |
 | MCP server (VM) | `vm-hq-gate` -> `/srv/repos/hq/vm-hq-core/mcp/gate/mcp_gate.py` |
 | Chapter skills | `/srv/repos/hq/vm-hq-core/skills/wo-loop/<scope>/SKILL.md` |
-| Device inventory | `30-System/CONNECTION_POINTS.md` on the VM (device keymap was retired 2026-11-15) |
+| Device inventory | `system/CONNECTION_POINTS.md` on the VM (device keymap was retired 2026-11-15) |
 
 **Skill rule:** every skill has exactly ONE real copy at
 `/srv/repos/hq/vm-hq-core/skills/<name>/` and `/srv/repos/hq/vm-hq-core/skills/<name>` is a symlink to it.
@@ -60,5 +60,5 @@ Two diverging copies = a bug.
 
 ## 4. Never on the device
 
-`70-Lanes/<scope>/identity/*`, `/home/ubuntu/chinchaflow`, secrets, reports, logs,
+`lanes/<scope>/identity/*`, `/home/ubuntu/chinchaflow`, secrets, reports, logs,
 Firestore data, service state. Load identity from the VM, never from the phone.

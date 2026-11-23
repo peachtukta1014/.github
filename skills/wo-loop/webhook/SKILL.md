@@ -11,14 +11,14 @@ description: >-
 - `บูท` — boot this lane · `บูทแชนแนล <lane>` — boot that channel
 - `บูทงาน` / `สั่งงานบูทงาน` — open/operate a work order
 - `ต่อสะพาน` / `เชื่อมสะพาน` / `เช็คสะพาน` — bridge WAKE (open the path)
-Full table: `30-System/AGENT.md` (§Trigger lexicon). Never confuse
+Full table: `system/AGENT.md` (§Trigger lexicon). Never confuse
 `บูท` (boot a lane) with `บูทงาน` (open a work order).
 
-> **Canonical root** is `/srv/repos/hq/vm-hq-core`, and every `70-Lanes/...` / `30-System/...`
-> path in this crib is relative to it. That fact is stated in exactly one place: `30-System/SYSTEM_MINDMAP.md`
+> **Canonical root** is `/srv/repos/hq/vm-hq-core`, and every `lanes/...` / `system/...`
+> path in this crib is relative to it. That fact is stated in exactly one place: `system/SYSTEM_MINDMAP.md`
 > (section "Folded from ROOT_STANDARD.md", SSOT topic #6) — not restated here.
 
-> **TOOLS (source of truth, lives on VM):** `/srv/repos/hq/vm-hq-core/30-System/TOOLS.md` — read it at boot, right after identity, before any shell call. The VM is home; this device is only the key. Shell = MCP `ws_exec` (always runs as `ubuntu`; `--root` = uid 0 for that one call — RULE 4's per-action lock still applies; `pr`/`token` stay allowlist-by-full-path, single home `30-System/AGENT.md` RULE 4). Device-side script paths: `30-System/DEVICE_POINTER.md`.
+> **TOOLS (source of truth, lives on VM):** `/srv/repos/hq/vm-hq-core/system/TOOLS.md` — read it at boot, right after identity, before any shell call. The VM is home; this device is only the key. Shell = MCP `ws_exec` (always runs as `ubuntu`; `--root` = uid 0 for that one call — RULE 4's per-action lock still applies; `pr`/`token` stay allowlist-by-full-path, single home `system/AGENT.md` RULE 4). Device-side script paths: `system/DEVICE_POINTER.md`.
 
 
 
@@ -29,14 +29,14 @@ The VM is the execution and durable-state authority. Resolve the logical capabil
 1. Run `wo-loop boot webhook` after resolving this session with `lane-id`.
 2. Read only the identity, scope, protocol, pad, and board paths returned by boot.
 3. Continue from the VM-owned pad; never restart or hand-edit pad JSON.
-4. Read `30-System/AGENT.md` and `30-System/TOOLS.md` for current rules and capability routing.
+4. Read `system/AGENT.md` and `system/TOOLS.md` for current rules and capability routing.
 ## Dispatch boost (another lane or Peach sending TO webhook)
 Prepend this block to every dispatch message:
 
 ```
 [IDENTITY LOCK] You are MuekSai (หมึกสาย) (scope `webhook`). Not another channel,
 not พีช. Reply only as `webhook` with the same job_id. Resume from your pad.
-Plan-first: the order is already written in `/srv/repos/hq/vm-hq-core/70-Lanes/webhook/scratchpad.json`.
+Plan-first: the order is already written in `/srv/repos/hq/vm-hq-core/lanes/webhook/scratchpad.json`.
 ```
 
 ## Reply contract
@@ -44,7 +44,7 @@ Plan-first: the order is already written in `/srv/repos/hq/vm-hq-core/70-Lanes/w
 `wo-loop report` (MCP `sse_dispatch`); proof = HTTP 201 + inbox_id.
 
 ## Evidence
-mtime + grep count + exit code. Finished work -> `/srv/repos/hq/vm-hq-core/70-Lanes/webhook/complete/` +
+mtime + grep count + exit code. Finished work -> `/srv/repos/hq/vm-hq-core/lanes/webhook/complete/` +
 `complete/COMPLETE_INDEX.md`; clear the board row.
 
 ## wo-loop — one logical lifecycle entry

@@ -20,7 +20,7 @@ Maintain skill identity separately from the current filesystem location. Treat t
 - Resolve `skill_id` or an approved alias through `registry/skills.json`.
 - Keep the skill body in the canonical `skills/<current-id>/SKILL.md` location unless the registry says otherwise.
 - Keep provenance in `skills/SOURCES.json`; do not invent a second provenance table.
-- Treat `30-System/SKILL_REGISTRY.md` and `skills/INDEX.md` as generated or human-facing projections, never as runtime authorities.
+- Treat `system/SKILL_REGISTRY.md` and `skills/INDEX.md` as generated or human-facing projections, never as runtime authorities.
 - Never register `skills/_inbox/` or other quarantine content as runnable.
 - Never place secrets, credentials, or tokens in the registry, skill body, test fixtures, or evidence.
 

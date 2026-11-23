@@ -78,4 +78,4 @@ Load only when needed:
 
 - `references/README_TH.md` — user-facing bridge explanation and current deployment notes.
 - `registry/transports.json` — capability-to-route policy.
-- `30-System/CONNECTION_POINTS.md` — endpoint facts and authority boundary.
+- `system/CONNECTION_POINTS.md` — endpoint facts and authority boundary.

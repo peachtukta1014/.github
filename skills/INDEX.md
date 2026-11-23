@@ -1,5 +1,5 @@
 # Skills registry — provenance, homes and tags
-_Generated 2026-11-23 09:39 UTC by `bin/gen_skills_index.py` from `skills/SOURCES.json`. Do not hand-edit rows: edit SOURCES.json and re-run._
+_Generated 2026-11-24 01:40 +07 by `bin/gen_skills_index.py` from `skills/SOURCES.json`. Do not hand-edit rows: edit SOURCES.json and re-run._
 ## The homes (one copy each)
 | Home | Path | What it is |
 |---|---|---|
@@ -15,7 +15,7 @@ _Generated 2026-11-23 09:39 UTC by `bin/gen_skills_index.py` from `skills/SOURCE
 ## Categories (from SOURCES.json)
 | # | Category | Skills |
 |---|---|---|
-| 1 | Team + system | `bridge-check`, `core-ops`, `skill-registry-maintenance`, `system-protocol-design`, `wo-loop`, `wo-loop-lane-boost` |
+| 1 | Team + system | `bridge-check`, `core-ops`, `lane-boot`, `skill-registry-maintenance`, `system-protocol-design`, `wo-loop` |
 | 2 | Dev discipline | `dev-agent-md-refactor`, `dev-debugging-recovery`, `dev-git-workflow`, `dev-parallel-agents`, `dev-verification-gate` |
 | 3 | Documents | `docs-diagram`, `docs-pdf-converter`, `docs-readmes`, `docs-typst-report` |
 | 4 | Research | `research-gem-seeker`, `research-reader` |
@@ -29,13 +29,13 @@ _Generated 2026-11-23 09:39 UTC by `bin/gen_skills_index.py` from `skills/SOURCE
 ## Our team skills (7)
 | skill | ไทย | tags | installed | what it does |
 |---|---|---|---|---|
-| `bridge-check` | เปิดสะพานถึง VM | team · ready · vm · net | yes | Our own. Bridge WAKE — open/heal the device-to-VM path. |
+| `bridge-check` | เปิดสะพานถึง VM | team · ready · vm · prompt-only | yes | Our own. Bridge WAKE — open/heal the device-to-VM path. |
 | `core-ops` | งานวิศวกรรม chinchaflow | team · ready · vm · python node net | yes | Our own. One engineering workflow for the chinchaflow repo. |
 | `docs-diagram` | วาดไดอะแกรมเป็นไฟล์จริง | team · ready · vm · python typst | yes | Composed here from hub reference material (see shared/skills-hub-sources/INDEX_TH.md). Renders offline with Ty |
+| `lane-boot` | บูสต์เลนผ่าน VM | team · ready · vm · prompt-only | no | Lean English lane boost entry for Open Minis and the HQ VM; covers all ten lanes. |
 | `skill-registry-maintenance` |  | team · ready · vm · python git | no | Reusable workflow for stable-ID skill registry maintenance, resolver changes, and evidence-led validation. |
 | `system-protocol-design` | ออกแบบโปรโตคอลเอเจนต์ | team · ready · vm · prompt-only | yes | Our own. Design or repair a multi-agent protocol. Peach 2026-11-21: keep, do not delete. |
-| `wo-loop` | บูทเลน + ใบงาน | team · ready · vm · python gh-cli | no | Our own. Boot a lane then run the work loop; absorbed the two former team skills. |
-| `wo-loop-lane-boost` | บูสต์เลนผ่าน VM | team · ready · vm · prompt-only | no | Lean English lane boost entry for Open Minis and the HQ VM; covers all ten lanes. |
+| `wo-loop` | บูทเลน + ใบงาน | team · ready · vm · prompt-only | no | Our own. Boot a lane then run the work loop; absorbed the two former team skills. |
 
 ## Minis built-in (0)
 | skill | ไทย | tags | installed | what it does |

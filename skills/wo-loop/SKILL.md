@@ -59,7 +59,7 @@ Run `bridge-check` only for connection health, recovery, or push-wake. It must n
 - Ask before assuming: voice input may be misspelled.
 - Job IDs use `WO-<lane>-<slug>-<YYYYMMDD>-NN`.
 - One asset = one owner; shared skills have no lane owner.
-- Read `PROTOCOL/00_INDEX.md` and callers before touching shared scripts.
+- Read `specs/00_INDEX.md` and callers before touching shared scripts.
 - No ACK/RESULT means the job is not done.
 - Update the VM-owned pad before ending any turn that changed work.
 - Report to Peach in Thai: what, measurable result, risk, and what she must decide.
@@ -78,7 +78,7 @@ Open the PR and stop. Do not poll CI from this skill. The CI/event workflow repo
   "vm_wo_loop": "runtime-verified VM entry; currently declared by the VM authority model",
   "vm_pad": "boot-reported VM path",
   "vm_board": "boot-reported VM path",
-  "protocol_map": "PROTOCOL/00_INDEX.md",
+  "protocol_map": "specs/00_INDEX.md",
   "dispatch": "logical wo-loop dispatch",
   "complete": "logical wo-loop complete",
   "message": "logical wo-loop report",
