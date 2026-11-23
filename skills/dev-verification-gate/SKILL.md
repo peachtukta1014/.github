@@ -1,6 +1,7 @@
 ---
 name: dev-verification-gate (ตรวจก่อนบอกเสร็จ)
 description: "Run real verification before claiming work is complete, fixed or passing. Evidence before assertions."
+tags: [2. Dev discipline, vm, KEEP, obra/superpowers]
 ---
 
 # Verification Before Completion

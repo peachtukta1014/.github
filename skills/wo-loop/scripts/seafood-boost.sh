@@ -1,6 +1,6 @@
 #!/bin/sh
-# scripts/seafood-boost.sh
-# Canonical invocation (run on the VM): vm "cat /srv/repos/hq/vm-hq-core/skills/wo-loop/seafood/SKILL.md
-# vm = om-ssh (auto route, IAP pinned).
-# This shell file is a static pointer to the complete skill body; no identity data is duplicated.
-cat /srv/repos/hq/vm-hq-core/skills/wo-loop/seafood/SKILL.md
+# Canonical lane boost pointer for seafood.
+# Resolve transport through registry/transports.json; this script does not own VM state.
+set -eu
+HQ_ROOT=${HQ_ROOT:-/srv/repos/hq/vm-hq-core}
+cat "$HQ_ROOT/skills/wo-loop/seafood/SKILL.md"

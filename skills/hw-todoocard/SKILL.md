@@ -5,6 +5,7 @@ description: "TodooCard (土豆片 / NEWSTONE) six-colour e-paper push; sub-skil
 compatibility: >
   Minis iOS with apple-bluetooth; py3-pillow; font-noto-cjk.
   Sub-skills may need apple-location / apple-maps / apple-weather.
+tags: [7. Devices + UI, vm, KEEP, OpenMinis/MinisSkills]
 ---
 
 # todoocard
@@ -28,7 +29,7 @@ TodooCard / 土豆片的**父技能**。
 
 ```bash
 ROOT=/srv/repos/hq/vm-hq-core/skills/hw-todoocard
-CLI="python3 $ROOT/today-eats/scripts/cli.py"
+CLI="python3 $ROOT/scripts/safe_send.py"
 
 $CLI scan
 $CLI probe --device-id <UUID> --save

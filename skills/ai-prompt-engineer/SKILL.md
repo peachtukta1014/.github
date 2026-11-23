@@ -12,6 +12,7 @@ metadata:
   scope: design
   output-format: document
   related-skills: test-master, rag-architect, debugging-wizard
+tags: [8. Prompt + AI, vm, KEEP+PATCH, Jeffallan/claude-skills]
 ---
 
 # Prompt Engineer

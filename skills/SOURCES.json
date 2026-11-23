@@ -1,6 +1,6 @@
 {
   "_note": "SOURCES.json — one row per skill: where it really came from, what it was called upstream, where it runs, and whether we adapted it. Edit this file, then re-run bin/gen_skills_index.py. Sources: docs/reports/skills-audit-20261118.md (code lane, KEEP/KEEP+PATCH) + live description-match against the public hubs (2026-11-21).",
-  "_updated": "2026-11-21",
+  "_updated": "2026-11-23",
   "_fields": "repo = github owner/name, or 'ours' / 'minis-builtin'. upstream = the original folder name before our rename. verified = the match was proven (audit record or description match 1.00). verdict = the 2026-11-18 audit call (KEEP | KEEP+PATCH | ours). where = device | vm | both | prompt-only. adapted = we have edited the body/scripts.",
   "skills": {
     "wo-loop": {
@@ -305,7 +305,7 @@
       "tools": [
         "none"
       ],
-      "note": "Proven on the skills-publish.timer root-cause hunt.",
+      "note": "Proven during the legacy skill-publisher incident investigation.",
       "inspected": "2026-11-21",
       "use_short": "Systematic root-cause debugging (stop-the-line, evidence, triage)",
       "run_tested": "no-scripts",
@@ -547,6 +547,51 @@
       "tested_on": "vm-chincha-hq (10.128.0.4)",
       "tested_date": "2026-11-21",
       "category": "6. Data"
+    },
+    "wo-loop-lane-boost": {
+      "repo": "ours",
+      "upstream": null,
+      "verified": true,
+      "verdict": "ours",
+      "license": "internal",
+      "where": "vm",
+      "adapted": true,
+      "notes": "Lean English lane boost entry for Open Minis and the HQ VM; covers all ten lanes.",
+      "use_short": "Boost one or more HQ VM lanes with bounded execution and evidence",
+      "useful": "high",
+      "use_for": "Open Minis lane boot, execution, dispatch, pad, report, and closeout",
+      "tools": [
+        "python3"
+      ],
+      "note": "New shared lane boost entry.",
+      "inspected": "2026-11-23",
+      "run_tested": "not-run",
+      "tested_on": "sandbox; VM not connected in this session",
+      "tested_date": "2026-11-23",
+      "category": "1. Team + system"
+    },
+    "skill-registry-maintenance": {
+      "repo": "ours",
+      "upstream": null,
+      "verified": true,
+      "verdict": "ours",
+      "license": "internal",
+      "where": "vm",
+      "adapted": true,
+      "notes": "Reusable workflow for stable-ID skill registry maintenance, resolver changes, and evidence-led validation.",
+      "use_short": "Maintain stable skill IDs, registry entries, and safe resolvers",
+      "useful": "high",
+      "use_for": "Add, move, rename, deprecate, or audit repository skills",
+      "tools": [
+        "python3",
+        "git"
+      ],
+      "note": "Created from the 2026-11-23 registry/resolver implementation workflow.",
+      "inspected": "2026-11-23",
+      "run_tested": "not-run",
+      "tested_on": "sandbox",
+      "tested_date": "2026-11-23",
+      "category": "1. Team + system"
     }
   },
   "usefulness_legend": {
@@ -579,7 +624,8 @@
       "wo-loop",
       "bridge-check",
       "core-ops",
-      "system-protocol-design"
+      "system-protocol-design",
+      "skill-registry-maintenance"
     ],
     "2. Dev discipline": [
       "dev-debugging-recovery",

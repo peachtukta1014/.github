@@ -1,6 +1,7 @@
 ---
 name: docs-readmes (เขียน README)
 description: "Write or improve README files matched to the audience and the project type."
+tags: [3. Documents, vm, KEEP, hub (unverified)]
 ---
 
 # Crafting Effective READMEs

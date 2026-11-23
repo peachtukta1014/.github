@@ -2,12 +2,15 @@
 name: core-ops (งานวิศวกรรม chinchaflow)
 version: 2.0.0
 description: "Unified chinchaflow engineering workflow: debug, audit, incident, CI/CD, MCP PR ops, release/deploy. Trigger on 'fix bug / ตรวจโค้ด / audit / ระบบล่ม / CI / merge PR / ปล่อยของ'."
+tags: [1. Team + system, vm, ours, ours]
 ---
 
 > Canonical: `/srv/repos/hq/vm-hq-core/skills/core-ops/SKILL.md` does not exist for this skill — device is canonical (`/srv/repos/hq/vm-hq-core/skills/core-ops/`).
 
 
 # core-ops — unified chinchaflow engineering (debug · audit · incident · cicd · mcp · release · chain)
+
+**Registered for the whole team.** Every lane may call this directly - no order, no owner's permission (Peach 2026-11-22). It is registered, so any agent reaches it; the lane's own scope decides what it *works on*, never what tooling it may *use*.
 
 > ONE place for every engineering workflow in chinchaflow. The old
 > `core-ops debug/audit/incident/cicd/mcp/release/chain` skills are merged here.
@@ -43,8 +46,8 @@ The system's real-world debug flow (built from Peach's own scars, PR #638).
    - L2 references: `grep -rn '<new-name>' apps/<app>/src/` — names must match
      what's actually defined (never reference a `data` object inside a
      destructured-params function!)
-   - L3 local smoke: `node apps/seafood-pos/scripts/smoke-test.mjs` (shrimp) /
-     `node apps/chincha-tea/scripts/smoke-test.mjs` (tea). Heavy/cross-app → E2B
+   - L3 local smoke: `node /srv/repos/chinchaflow/apps/seafood-pos/scripts/smoke-test.mjs` (shrimp) /
+     `node /srv/repos/chinchaflow/apps/chincha-tea/scripts/smoke-test.mjs` (tea). Heavy/cross-app → E2B
      (no cloud sandbox helper is shipped — the `e2b_smoke.py` route was removed 2026-10-26; run smoke tests locally or on the VM)
 6. **Open PR → verify CI STARTED → done** (Mode A, Peach approved):
    - Auto-merge fires for **any branch** once the `CI` workflow is fully green
@@ -129,6 +132,8 @@ CI workflow, full set).
 The tools below are ON-DEMAND ONLY — use them when Peach asks for a status
 check or when a notification says something went red and needs reading.
 Never run them as a watch loop.
+
+**Use the whole gate, not one partition.** `vm-hq-gate` is the team's single entrance and it has seven channels - `chincha` (shop channels) · `wo-channels` (dispatch, external: minis-tools) · `vm-shell` · `vm-operations` · `github` · `gcloud-platform` · `host-diagnostics`. This skill reaches for whichever one the step needs: `chincha` for the shop apps (PRs, CI, Firestore), `github` for org-level operations, `vm-shell`/`vm-operations` for host and service work, `gcloud-platform` for cloud resources, `host-diagnostics` for Peach's PC. Skill bodies are NOT a gate channel - they live in this trunk under `skills/` and are read through `vm-shell`. Registration is team-wide (Peach 2026-11-22): the tooling is never limited to the repo you are working in.
 
 1. **Status check (on demand)** — `minis-mcp-cli call vm-hq-gate gate_call --input '{"category":"chincha","tool":"list_open_prs","arguments":{}}'`,
    `get_pr_status --input '{"prNumber": N}'` (always live, zero local tooling).

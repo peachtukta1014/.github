@@ -4,6 +4,7 @@ description: "Find what actually eats disk space: biggest subdirectories and fil
 compatibility: >
   Python 3.8+ on PATH. Standard library only, no network. Read-only: it never
   creates, moves, renames or deletes anything, on any flag combination.
+tags: [5. Ops + infra, vm, KEEP, OpenMinis/MinisSkills]
 ---
 
 # Disk Scan

@@ -6,6 +6,7 @@ metadata:
     emoji: "🧩"
     requires:
       bins: ["python3"]
+tags: [7. Devices + UI, vm, KEEP, OpenMinis/MinisSkills]
 ---
 
 # Generative UI Minis Skill

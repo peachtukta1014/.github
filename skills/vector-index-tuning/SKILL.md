@@ -1,6 +1,7 @@
 ---
 name: vector-index-tuning (ปรับ vector index)
 description: "Tune vector index parameters (HNSW / IVF, recall versus latency) for search quality."
+tags: [6. Data, vm, KEEP, hub (unverified)]
 ---
 
 # Vector Index Tuning

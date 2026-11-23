@@ -2,6 +2,7 @@
 name: dev-agent-md-refactor (ย่อไฟล์คำสั่ง agent)
 description: "Refactor bloated AGENTS.md / CLAUDE.md into progressive disclosure with linked docs."
 license: MIT
+tags: [2. Dev discipline, vm, KEEP+PATCH, hub (unverified)]
 ---
 
 # Agent MD Refactor

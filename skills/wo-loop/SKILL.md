@@ -1,110 +1,87 @@
 ---
-name: wo-loop (ลูปใบงาน)
-description: "Run the work-order loop with other lanes: boot, dispatch, board, pad, close, report, PR."
+name: wo-loop
+description: "Run the work-order loop across HQ VM lanes: boot, dispatch, board, pad, close, report, and PR."
 ---
 
 # wo-loop
 
-ONE skill: **boot a lane, then run the work loop**. (Merged from `boot` + `wo-loop`, 2026-11-21.)
+Use one logical work-order entry for lane boot, dispatch, pad, board, report, closeout, and PR preparation. The VM owns execution, pads, boards, repositories, services, and durable work-order state. Open Minis is only the conversational UI/MCP client.
 
 ## 1. Boot — start here
 
-```
-WHERE  VM /srv/repos/hq/vm-hq-core/bin/om-boot
-RUN    wo-loop boot <scope>          (ws_exec opens the tunnel itself; falls back to ssh vm-ts)
-READ   /srv/repos/hq/vm-hq-core/70-Lanes/<scope>/SCOPE.md · PROTOCOL/00_INDEX.md
-DON'T  no ls/find/md5 before boot · no om-sync during boot
+```text
+Resolve: lane-id -> ASCII lane ID
+Run:    wo-loop boot <scope>
+Read:   only the paths reported by boot
+Do not: inspect broad paths or read pad/identity files before boot
 ```
 
 Lane names: ปั้นแป้ง=code · ข้าวของ=files · เกมมิ่ง=gaming · เกี๊ยว=hokkien · จี้=jii · ข้าวเรียม=research · เวลา=scheduled · กุ้งทอง=seafood · ชาเย็น=tea · หมึกสาย=webhook
 
-Unknown scope? `lane-id` resolves this chat session → lane
-(bindings: `memory/config/session_bind.json`; offline card: `shared/lanes/<lane>.md`).
+Unknown scope: use `lane-id`; never infer from a misspelled voice command.
 
-After boot report: identity loaded · pad tasks · board rows · what must be done now.
-Scripts are symlinks to the single real copy — never duplicate them (RULE 11).
+After boot, report identity loaded, pad tasks, board rows, and what must be done now. Scripts have one canonical home; adapters and public copies are projections.
 
-- **Which lane am I** → `references/lane-identity.md` (bindings → live identity from `70-Lanes/<lane>/identity/` → offline card).
-- **The key to the VM** → `references/vm-key.md` (which local script lives where, which door to use).
+## 2. Capability routing
 
-## 2. VM-side command (`wo-loop <command>`)
+Resolve the operation through `registry/transports.json` and the registered MCP surface. Do not name a device implementation path as if it were the VM authority.
 
-```bash
-ws_exec.py --command "wo-loop <command> --scope <lane> [options]"
+- `wo.lifecycle`, `vm.command.small`, and `vm.command.structured`: WS primary.
+- `vm.command.large`, `vm.file.bulk`, `vm.command.raw`, and `vm.interactive`: Tailscale direct SSH primary.
+- IAP: compatibility-only; never present it as the current primary route.
+- `vm-hq-gate`: primary typed VM gateway.
+- `minis-tools`: device/WS adapter and transitional entrypoint; not durable-state owner.
+
+If registration, path, or SHA is not live-verified, label it `runtime verification pending` and keep the command logical.
+
+## 3. VM-side logical commands
+
+```text
+wo-loop boot <scope>
+wo-loop dispatch --to <lane> --from <me> --job WO-... --title "..." [--checklist "a|b"]
+wo-loop sp status --scope <lane>
+wo-loop pad --lane <lane> --log "..." [--status "..."] [--next-action "..."]
+wo-loop item --lane <lane> --n <N> --status done --evidence "..."
+wo-loop complete --to <orderer> --from <lane> --job <JOB> --summary "..." [--evidence "..."]
+wo-loop board [--scope <lane>]
+wo-loop report --lane <lane> --title "..."
+wo-loop pr <branch> <title> [body-file]
 ```
 
-| command | what it does |
-|---|---|
-| `boot <scope>` | identity + SCOPE + pad + board (one VM command) |
-| `sp status --scope <lane>` | pad state for a lane |
-| `sp update/note` | change active_job / status / next_action |
-| `pad --lane <lane> --log "..." [--status] [--next-action]` | write the scratchpad |
-| `item --lane <lane> --n <N> --status done --evidence "..."` | tick a checklist item |
-| `close --lane <lane> --result "..." [--evidence] [--tick 1,2,3]` | close the WO + clear the board |
-| `board [--scope <lane>]` | read the central board |
-| `report --lane <lane> --title "..."` | render a Peach report |
-| `pr <branch> <title> [body-file]` | commit + push + open PR |
-| `exec "<command>"` | run a shell command on the VM |
-| `render --lane <lane>` | re-render pad/board |
+`exec` is only for a bounded VM command selected by the capability resolver. `wo-loop` is not a generic shell catalogue.
 
-## 3. Device-side commands
+## 4. Bridge boundary
 
-```bash
-# order work for another lane (cross-lane allowed, RULE 10)
-python3 ws_dispatch.py --to <lane> --from <me> --reply-to <me> \
-  --job WO-<lane>-<slug>-<YYYYMMDD>-01 --title "<one line>" --checklist "a,b,c"
+Run `bridge-check` only for connection health, recovery, or push-wake. It must never create, own, or close work-order state. A failed bridge opener is reported exactly once; do not loop-retry.
 
-# close your own work (RULE 2 — never edit the pad by hand)
-python3 ws_complete.py --to <lane> --from <lane> --reply-to <origin> \
-  --job <JOB> --summary "<what changed + proof>" --report-file <path.md>
+## 5. Rules
 
-# message only (no pad, no board)
-python3 sse_dispatch.py --to <lane> --from <me> --job <JOB> --task reply \
-  --type RESULT --params '{"text":"..."}'
-```
+- Ask before assuming: voice input may be misspelled.
+- Job IDs use `WO-<lane>-<slug>-<YYYYMMDD>-NN`.
+- One asset = one owner; shared skills have no lane owner.
+- Read `PROTOCOL/00_INDEX.md` and callers before touching shared scripts.
+- No ACK/RESULT means the job is not done.
+- Update the VM-owned pad before ending any turn that changed work.
+- Report to Peach in Thai: what, measurable result, risk, and what she must decide.
+- Never hand-edit pad JSON.
 
-## Rules
+## 6. CI
 
-- **RULE 0 — ask before assuming.** Peach drives by voice; words are misspelled. Confirm what she means before searching or acting.
-- Job id format is fixed: `WO-<lane>-<slug>-<YYYYMMDD>-NN`. Never invent another shape.
-- One asset = one owner (`ASSIGNMENTS.md`). The skills repo is **shared (no owner)**; everything else belongs to a lane → dispatch, do not edit.
-- Before touching a shared script or service: read `PROTOCOL/00_INDEX.md` for "depended on by", then `rg` the callers.
-- No ACK/RESULT = the job is not done. The lane that took the order clears its own board row.
-- Report to Peach in Thai: what → measurable result → risk → what she must decide.
-- **SCRATCHPAD HARD RULE:** before ending any turn that did work, update the pad
-  (`wo-loop pad --lane <lane> --log "..." --status "..." --next-action "..."`). If it is not on the pad, it did not happen.
-
-## CI: do not poll (Peach 2026-11-14)
-
-Open the PR and stop. The CI aggregator sends one event per outcome
-(`PR #N is ready` + auto squash-merge, `PR #N has a problem: <check> <url>`, `deploy ...`).
-Never run `gh pr checks` / `gh run watch` — wait for the event.
-
-## Reference files (this folder)
-
-| file | read it for |
-|---|---|
-| `references/lane-identity.md` | who this session is (lane-id, live identity, offline card) |
-| `references/vm-key.md` | the device-side script map and which door to use |
-| `references/routing.md` | lane routing / dispatch detail |
-| `references/env.md` | environment and paths |
+Open the PR and stop. Do not poll CI from this skill. The CI/event workflow reports success or failure.
 
 ## Locator
 
 ```json
 {
-  "skill_file": "/srv/repos/hq/vm-hq-core/skills/wo-loop/SKILL.md",
-  "per_scope_detail": "/srv/repos/hq/vm-hq-core/skills/wo-loop/<scope>/SKILL.md",
-  "vm_wo_loop": "/usr/local/bin/wo-loop",
-  "vm_pad": "/srv/repos/hq/vm-hq-core/70-Lanes/<scope>/scratchpad.json",
-  "vm_scope": "/srv/repos/hq/vm-hq-core/70-Lanes/<scope>/SCOPE.md",
-  "vm_board": "/srv/repos/hq/vm-hq-core/mission-control/board/CENTRAL_WORK_BOARD.md",
-  "assignments": "/srv/repos/hq/vm-hq-core/30-System/ASSIGNMENTS.md",
-  "protocol_map": "/srv/repos/hq/vm-hq-core/PROTOCOL/00_INDEX.md",
-  "dispatch": "ws_dispatch.py",
-  "complete": "ws_complete.py",
-  "message": "sse_dispatch.py",
-  "board_read": "board_check.py",
-  "ws_exec": "ws_exec.py"
+  "skill_file": "registry/skills.json -> skills/wo-loop/SKILL.md",
+  "per_scope_detail": "skills/wo-loop/<scope>/SKILL.md",
+  "vm_wo_loop": "runtime-verified VM entry; currently declared by the VM authority model",
+  "vm_pad": "boot-reported VM path",
+  "vm_board": "boot-reported VM path",
+  "protocol_map": "PROTOCOL/00_INDEX.md",
+  "dispatch": "logical wo-loop dispatch",
+  "complete": "logical wo-loop complete",
+  "message": "logical wo-loop report",
+  "ws_exec": "resolved WS capability, when selected by registry"
 }
 ```

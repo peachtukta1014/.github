@@ -2,6 +2,7 @@
 name: docs-diagram (วาดแผนภาพ)
 description: "Draw diagrams (flowchart, sequence, ER, architecture, charts) to PDF/SVG/PNG offline via Typst + CeTZ."
 allowed-tools: Read Write Edit Bash
+tags: [3. Documents, vm, KEEP+PATCH, ours]
 ---
 
 # docs-diagram — real diagram files, rendered offline

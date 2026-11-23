@@ -1,6 +1,7 @@
 ---
 name: research-gem-seeker (หาโค้ดสำเร็จรูป)
 description: "Search GitHub for battle-tested open source instead of reinventing: format conversion, media, file ops."
+tags: [4. Research, vm, KEEP+PATCH, hub (unverified)]
 ---
 
 # GitHub Gem Seeker

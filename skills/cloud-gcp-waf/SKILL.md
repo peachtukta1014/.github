@@ -4,6 +4,7 @@ metadata:
   version: "1.0.2"
   category: WellArchitectedFramework
 description: "GCP security review for the chincha stack: IAM roles, firewall rules, service accounts, secrets."
+tags: [5. Ops + infra, vm, KEEP+PATCH, hub (unverified)]
 ---
 
 # Google Cloud Well-Architected Framework skill for the Cost Optimization pillar

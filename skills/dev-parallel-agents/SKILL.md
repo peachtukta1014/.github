@@ -1,6 +1,7 @@
 ---
 name: dev-parallel-agents (งานขนาน)
 description: "Split 2+ independent tasks into parallel sub-agent work with no shared state."
+tags: [2. Dev discipline, vm, KEEP+PATCH, obra/superpowers]
 ---
 
 # Dispatching Parallel Agents
