@@ -1,6 +1,6 @@
 # Skills published from the HQ trunk
 
-_Generated 2026-11-27 11:36 +0700 by `bin/publish_github.py`. Do not edit by hand._
+_Generated 2026-11-27 13:37 +0700 by `bin/publish_github.py`. Do not edit by hand._
 
 | skill | files |
 |---|---|
@@ -9,7 +9,6 @@ _Generated 2026-11-27 11:36 +0700 by `bin/publish_github.py`. Do not edit by han
 | [`bridge-check`](skills/bridge-check/SKILL.md) | 2 |
 | [`cloud-gcp-waf`](skills/cloud-gcp-waf/SKILL.md) | 2 |
 | [`code-documenter`](skills/code-documenter/SKILL.md) | 9 |
-| [`core-ops`](skills/core-ops/SKILL.md) | 1 |
 | [`data-context-extractor`](skills/data-context-extractor/SKILL.md) | 6 |
 | [`dbt-transformation-patterns`](skills/dbt-transformation-patterns/SKILL.md) | 2 |
 | [`dev-agent-md-refactor`](skills/dev-agent-md-refactor/SKILL.md) | 1 |
@@ -24,6 +23,7 @@ _Generated 2026-11-27 11:36 +0700 by `bin/publish_github.py`. Do not edit by han
 | [`docs-typst-report`](skills/docs-typst-report/SKILL.md) | 13 |
 | [`excalidraw-diagram`](skills/excalidraw-diagram/SKILL.md) | 2 |
 | [`final-release-review`](skills/final-release-review/SKILL.md) | 3 |
+| [`firecrawl-research`](skills/firecrawl-research/SKILL.md) | 1 |
 | [`git-commit`](skills/git-commit/SKILL.md) | 1 |
 | [`huggingface-datasets`](skills/huggingface-datasets/SKILL.md) | 1 |
 | [`hw-todoocard`](skills/hw-todoocard/SKILL.md) | 10 |
