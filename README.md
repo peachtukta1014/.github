@@ -1,31 +1,14 @@
-# .github — shared assets (CI is OFF)
+# .github — shared assets
 
-**Status: GitHub Actions is turned off for this account (Peach 2026-11). Nothing here runs.**
+**CI is OFF for this account (Peach 2026-11). Nothing here runs.**
 
-The public content of this repo is the **skills** folder, published from the HQ VM trunk
-(`bin/publish_public.sh` → `skills/`). That is the only part that is live and it is what the
-phone imports.
+The only live content is **`skills/`**, published from the HQ VM trunk by
+`bin/publish_public.sh`. That folder is what the phone imports when Peach presses
+"update skills from URL".
 
-## Archived (kept for reference, not active)
+Everything that used to be shared CI (workflow templates, the `notify-ingest` composite action,
+the installer and the stale generator copies) has been deleted, not archived — the VM trunk holds
+the live versions, and GitHub history keeps the rest if it is ever needed.
 
-`archive/ci/` holds what used to be shared CI:
-
-- `templates/sync-project-tree.yml`, `templates/pr-status.yml`, `templates/deploy-status-job.yml`
-- `notify-ingest/action.yml` — the composite action that POSTed one wo/1 EVENT to the HQ ingest door
-- `install-ci-workflows` — the installer that dropped those workflows into each repo
-- `gen_skills_index.py`, `doc_id_lint.py` — stale copies; the live versions live in the VM trunk
-
-To revive any of it: copy the file back out of `archive/ci/`, and re-check the paths against the
-VM trunk first (`system/AGENT.md`, `bin/publish_public.sh`) — the old `notify-ingest@v2` path in
-the snippets below no longer resolves.
-
-## Old usage (archived, for reference)
-
-```yaml
-- uses: peachtukta1014/.github/archive/ci/notify-ingest@main
-  with:
-    endpoint: ${{ vars.EVENT_URL }}
-    token: ${{ secrets.VM_SSE_TOKEN }}
-    lane: code
-    repo: ${{ github.repository }}
-```
+The phone reaches the VM directly over Tailscale; there is no Cloud Function bridge any more
+(`proxyToVm` was deleted 2026-11-24).
