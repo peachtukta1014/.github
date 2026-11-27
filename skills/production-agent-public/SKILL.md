@@ -3,6 +3,7 @@ name: production-agent-public
 
 compatibility: No external dependencies; pure prompt-based skill; compatible with Minis / Claude.ai / API calls
 description: "Production-grade delivery discipline: mandatory ReAct (Thought/Action/Observation), self-reflection cadence, a production checklist (error handling, persistence, observability, deployment) and a fixed delivery format. Use for deployable code that must keep running unattended."
+tags: [2. Dev discipline, vm, KEEP, OpenMinis/MinisSkills]
 ---
 
 # Claude Production Agent Skill

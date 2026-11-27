@@ -15,15 +15,14 @@ _Generated 2026-11-27 18:46 +07 by `bin/gen_skills_index.py` from `skills/SOURCE
 | # | Category | Skills |
 |---|---|---|
 | 1 | Team + system | `bridge-check`, `lane-boot`, `mcp-cli`, `skill-registry-maintenance`, `system-protocol-design`, `team-composition-analysis`, `wo-loop` |
-| 2 | Dev discipline | `dev-agent-md-refactor`, `dev-debugging-recovery`, `dev-git-workflow`, `dev-parallel-agents`, `dev-verification-gate`, `final-release-review`, `git-commit`, `jest-skill`, `lesson-learned`, `pnpm-upgrade`, `refactor`, `tdd`, `writing-plans` |
+| 2 | Dev discipline | `dev-agent-md-refactor`, `dev-debugging-recovery`, `dev-git-workflow`, `dev-parallel-agents`, `dev-verification-gate`, `final-release-review`, `git-commit`, `jest-skill`, `lesson-learned`, `pnpm-upgrade`, `production-agent-public`, `refactor`, `tdd`, `webapp-testing`, `writing-plans` |
 | 3 | Documents | `code-documenter`, `docs-diagram`, `docs-pdf-converter`, `docs-readmes`, `docs-typst-report`, `excalidraw-diagram`, `plantuml-ascii` |
-| 4 | Research | `internet-skill-finder`, `research-gem-seeker`, `research-reader`, `research-search` |
+| 4 | Research | `evidence-chain-builder`, `firecrawl-research`, `internet-skill-finder`, `research-gem-seeker`, `research-reader`, `research-search` |
 | 5 | Ops + infra | `cloud-gcp-waf`, `ops-disk-scan`, `sentry-sdk-setup` |
 | 6 | Data | `data-context-extractor`, `dbt-transformation-patterns`, `dev-sql-optimization`, `huggingface-datasets`, `ml-pipeline`, `shap`, `similarity-search-patterns`, `spark-optimization`, `stable-baselines3`, `vector-index-tuning` |
-| 7 | Devices + UI | `hw-todoocard`, `ui-generative-minis`, `webapp-template` |
+| 7 | Devices + UI | `hw-todoocard`, `tts-voice`, `ui-generative-minis`, `webapp-template` |
 | 8 | Prompt + AI | `agentic-eval`, `ai-prompt-engineer`, `langchain-architecture` |
 | 9 | Authoring | `skill-creator`, `writing-skills` |
-| 99 | Uncategorised | `evidence-chain-builder`, `firecrawl-research`, `production-agent-public`, `tts-voice`, `webapp-testing` |
 
 
 ## Our team skills (7)

@@ -5,6 +5,7 @@ compatibility: >
   Python 3.8+ on PATH. Standard library only — nothing to install, no network, works
   offline. Writes nothing to disk unless the caller redirects the output.
 description: "Score a claim against the evidence behind it: verifiability by source type and what is not independently checkable. Use before repeating a number or statistic, or when asked \"is that true\", \"what's the source\", \"can you back that up\"."
+tags: [4. Research, vm, KEEP, OpenMinis/MinisSkills]
 ---
 
 # Evidence Chain Builder
