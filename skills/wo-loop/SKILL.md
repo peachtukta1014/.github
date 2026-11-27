@@ -1,11 +1,11 @@
 ---
 name: wo-loop
-description: "Run the work-order loop across HQ VM lanes: boot, dispatch, board, pad, close, report, and PR."
+description: "Run the work-order loop across HQ VM lanes: boot, dispatch, pad, room, close, report, and PR."
 ---
 
 # wo-loop
 
-Use one logical work-order entry for lane boot, dispatch, pad, board, report, closeout, and PR preparation. The VM owns execution, pads, boards, repositories, services, and durable work-order state. Open Minis is only the conversational UI/MCP client.
+Use one logical work-order entry for lane boot, dispatch, pad, room, report, closeout, and PR preparation. The VM owns execution, pads, rooms, repositories, services, and durable work-order state. The pad is the work state and memory; the room is the log. There is no board (retired 2026-11-27). Open Minis is only the conversational UI/MCP client.
 
 ## 1. Boot — start here
 
@@ -20,7 +20,7 @@ Lane names: ปั้นแป้ง=code · ข้าวของ=files · จ�
 
 Unknown scope: use `lane-id`; never infer from a misspelled voice command.
 
-After boot, report identity loaded, pad tasks, board rows, and what must be done now. Scripts have one canonical home; adapters and public copies are projections.
+After boot, report identity loaded, the active pad item, unread room messages, and what must be done now. Scripts have one canonical home; adapters and public copies are projections.
 
 ## 2. Capability routing
 
@@ -39,11 +39,11 @@ If registration, path, or SHA is not live-verified, label it `runtime verificati
 ```text
 lane-boot <scope>
 wo-loop dispatch --to <lane> --from <me> --job WO-... --title "..." [--checklist "a|b"]
-wo-loop sp status --lane <lane>
+wo-loop sp status --lane <lane>   # bin/pad.py - the ONE pad reader
 wo-loop pad --lane <lane> --log "..." [--status "..."] [--next-action "..."]
 wo-loop item --lane <lane> --n <N> --status done --evidence "..."
 wo-loop complete --to <orderer> --from <lane> --job <JOB> --summary "..." [--evidence "..."]
-wo-loop board [--scope <lane>]     # retired name -> delegates to wo.py status
+wo-loop render [--lane <lane>]     # the live pad (bin/pad.py status); no rendered file to go stale
 wo-loop report --lane <lane> --title "..."
 wo-loop pr <branch> <title> [body-file]
 ```
@@ -77,7 +77,7 @@ Open the PR and stop. Do not poll CI from this skill. The CI/event workflow repo
   "per_scope_detail": "skills/wo-loop/<scope>/SKILL.md",
   "vm_wo_loop": "runtime-verified VM entry; currently declared by the VM authority model",
   "vm_pad": "boot-reported VM path",
-  "vm_board": "boot-reported VM path",
+  "vm_pad": "boot-reported VM path",
   "protocol_map": "specs/00_INDEX.md",
   "dispatch": "logical wo-loop dispatch",
   "complete": "logical wo-loop complete",
