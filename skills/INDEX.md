@@ -1,13 +1,12 @@
 # Skills registry — provenance, homes and tags
-_Generated 2026-11-27 13:58 +07 by `bin/gen_skills_index.py` from `skills/SOURCES.json`. Do not hand-edit rows: edit SOURCES.json and re-run._
+_Generated 2026-11-27 13:59 +07 by `bin/gen_skills_index.py` from `skills/SOURCES.json`. Do not hand-edit rows: edit SOURCES.json and re-run._
 ## The homes (one copy each)
 | Home | Path | What it is |
 |---|---|---|
 | canonical source | `hq-infra/skills/` | trunk skills edited and reviewed here |
-| public distribution | `peachtukta1014/.github/skills/` | public URL that Open Minis imports from |
 | install target | `/var/minis/skills/` (device) | what the app loads — imported, never authoritative |
 ## Publishing
-`hq-infra/.github/workflows/publish-skills.yml` is the sole publisher. It publishes the canonical trunk `skills/` to `peachtukta1014/.github/skills/` after CI on `main` passes (or by explicit workflow dispatch). Open Minis imports skills from the public URL.
+`hq-infra/.github/workflows/publish-skills.yml` is the sole publisher. It publishes the canonical workflow dispatch). Open Minis imports skills from the public URL.
 ## Tag legend
 `source` = where it came from (**team** ours · **minis** built-in · **OpenMinis** official · a hub name) · `readiness` = **ready** (works as-is) or **adapt** (edit before use) · `where` = **device** (iSH on the phone) / **vm** / **both** / **prompt-only** · `runtime` = what it needs.
 **Provenance rule:** a row is exact only when SOURCES.json says `verified: true`. Rows marked *(unverified)* came from a shared hub / the internet and their repo is not pinned yet — adapt the body and scripts for us before relying on them (Peach 2026-11-21).
