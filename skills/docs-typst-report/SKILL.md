@@ -70,7 +70,7 @@ The catalog is a registry, not a directory containing downloaded template source
 | `state: "ambiguous"` or `"needs-confirmation"` | Ask only the plan's `question`, update the manifest, and rerun. Do not initialize anything yet. |
 | `state: "blocked"` | Stop before initialization and report `base.block_reason`. |
 | `state: "patch-required"` | Apply only `base.patch_note`, then run the minimum compile preflight. |
-| `base.kind: "asset"` | Use the matching `prepare_document.py` workflow documented below. `base.path` is relative to `<skill-dir>` and identifies the skill-owned entry; it is not relative to the document project or shell working directory. |
+| `base.kind: "asset"` | Use the matching `scripts/prepare_document.py` workflow documented below. `base.path` is relative to `<skill-dir>` and identifies the skill-owned entry; it is not relative to the document project or shell working directory. |
 | `base.kind: "universe-template"` | Run `base.init_command` after replacing `<output-dir>` with the project directory. This command is derived from the exact `base.universe_ref`, for example `typst init @preview/charged-ieee:0.1.4 my-paper`. |
 | `base.kind: "existing-project"` | Preserve the existing project's entry points and style ownership; do not initialize a second base. |
 | `base.kind: "universe-package"` used as an explicit slide engine | Use `base.universe_ref`, inspect that package's public entry API, and run its minimum sample compile. Do not treat it as a local template file. |
@@ -165,7 +165,7 @@ Deliver the requested PDF and only the additional artifacts the user or acceptan
 | Check | Required evidence |
 |---|---|
 | Build | Strict compilation exits successfully with no warnings. |
-| Deterministic PDF verification | The selected `verify_pdf.py` profile reports no failures; unavailable inspection tools are recorded as `UNKNOWN`, not silently treated as pass. |
+| Deterministic PDF verification | The selected `scripts/verify_pdf.py` profile reports no failures; unavailable inspection tools are recorded as `UNKNOWN`, not silently treated as pass. |
 | Plan reuse | A matching `.typst-build-plan.json` is reused without reloading the ecosystem catalog. |
 | Numbering | Automatic and literal heading or figure numbers are not duplicated. |
 | Page flow | No unintended blank pages; referenced figures and tables remain near their discussion. |

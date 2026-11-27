@@ -128,11 +128,11 @@ Design actually shipped:
   (`services/hq-core/src/http.js`, best-effort spawn, never blocks delivery)
 - states `new → acked → done`, `done` idempotent ("ALREADY done <id> at <ts> by <lane>")
 - addressing `--lane`; delivery pull (`mesh_event inbox --lane L`, cursor in
-  `_mesh/event_cursors/`) **plus** an announcer (`mesh_event_notify.py`) on a systemd timer
+  `_mesh/event_cursors/`) **plus** an announcer (`bin/mesh_event_notify.py`) on a systemd timer
   that posts one `@lane` line into the room and stamps `notified_at`
 - failure: room down → ledger write still succeeds, announcement retried next round
 - evidence: `done` needs `--result` + `--evidence`; contract lives in `system/EVENT_LEDGER.md`
-  (SSOT #29), room side in `ROOM_PROTOCOL.md` (#28)
+  (SSOT #29), room side in `system/ROOM_PROTOCOL.md` (#28)
 - verification: dispatched at 05:48:16, announced by the timer at 05:48:31 with no manual run;
   repeat close printed `ALREADY done`; `list --status new` = empty
 

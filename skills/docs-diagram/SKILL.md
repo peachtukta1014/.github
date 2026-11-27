@@ -39,9 +39,9 @@ docs-diagram/
 
 ## Rules measured on the host
 - `typst` (0.15.1 on the VM) **does** fetch `@preview` packages from Universe; a vendored copy also exists at
-  `$HQ_ROOT/tools/typst-packages/` (cetz 0.2.2, oxifmt 0.2.1) and `render_diagram.py` picks
+  `$HQ_ROOT/tools/typst-packages/` (cetz 0.2.2, oxifmt 0.2.1) and `scripts/render_diagram.py` picks
   whichever host path exists. Nothing needs the device.
-- The VM can read its own files normally — always render through `render_diagram.py` (it handles the
+- The VM can read its own files normally — always render through `scripts/render_diagram.py` (it handles the
   package path and the scratch dir).
 - Fonts: `("Noto Sans Thai", "Noto Sans")` for body text; `("Libertinus Serif", "Noto Serif Thai")` for print
   documents. `fonts-noto-cjk` is installed on the VM.

@@ -97,8 +97,8 @@ A lane boots itself when work arrives; the caller never has to wake it by hand.
 
 Verified on the VM today: `bin/om-boot <lane>` (ASCII and Thai name), the pad resume block,
 the board row, and the doc-id layer behind them. **Device side:** the dispatch hop
-(`ws_dispatch.py`) is installed at `/var/minis/shared/tools/bin/` next to `ws_exec.py`,
-`ws_complete.py` and `om-ssh` (see `registry/device_tools.json`); when the iOS session is
+(`tools/device/ws_dispatch.py`) is installed at `/var/minis/shared/tools/bin/` next to `tools/device/ws_exec.py`,
+`tools/device/ws_complete.py` and `om-ssh` (see `registry/device_tools.json`); when the iOS session is
 suspended the notice half of step 1 falls back to the VM SSE/ntfy path.
 
 ## References

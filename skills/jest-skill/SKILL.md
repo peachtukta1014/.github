@@ -149,7 +149,7 @@ test('renders correctly', () => {
 
 ## Deep Patterns
 
-For production-grade patterns, see `reference/playbook.md`:
+For production-grade patterns, see `references/playbook.md`:
 
 | Section | What's Inside |
 |---------|--------------|

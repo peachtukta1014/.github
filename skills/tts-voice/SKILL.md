@@ -83,8 +83,8 @@ edge-tts; `th-TH-Neural2-C` for Google Cloud. The Gemini studio whitelist is wha
 
 ## Where the code lives
 
-`tools/tts/` is a **registered tool group** (not a copy of the upstream skill): `find_voice.py`,
-`edge_say.py`, `tools/tts/references/voice_library.tsv`, and `README.md` with the full limits list. This
+`tools/tts/` is a **registered tool group** (not a copy of the upstream skill): `scripts/find_voice.py`,
+`tools/tts/edge_say.py`, `tools/tts/references/voice_library.tsv`, and `README.md` with the full limits list. This
 skill is the routing layer — when to use which path; the tools are the implementation. Do not
 duplicate the scripts here.
 
@@ -107,7 +107,7 @@ Nothing was dropped. The files live in the trunk's tool group; this skill routes
 | `references/voice_catalog.md` | `tools/tts/references/voice_catalog.md` | kept |
 | `references/language_catalog.md` | `tools/tts/references/language_catalog.md` | kept |
 | `SKILL.md` (21.8 KB) | `references/upstream-tts-prompter-SKILL.md` (this skill) | kept verbatim, **reference only** — it documents `turns[]`/`style`/`speaker_voice_configs`/`backchannel`, which our `{model,input,voice}` API cannot express |
-| `edge_say.py` (ours, same day) | `tools/tts/edge_say.py` (tool `tools.tts.edge_say`) | the free keyless path; the only one with `--rate`/`--volume` |
+| `tools/tts/edge_say.py` (ours, same day) | `tools/tts/edge_say.py` (tool `tools.tts.edge_say`) | the free keyless path; the only one with `--rate`/`--volume` |
 
 Why the pack is also in `tools/tts/`: executable code belongs where every channel can call it as
 a registered tool (RULE 14). This skill is the portable package — it ships the same files so an

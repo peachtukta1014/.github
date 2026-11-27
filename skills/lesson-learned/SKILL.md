@@ -16,7 +16,7 @@ Extract specific, grounded software engineering lessons from actual code changes
 2. Optionally read `references/anti-patterns.md` if you suspect the changes include areas for improvement
 3. Determine the scope of analysis (see Phase 1)
 
-**Do not proceed until you've loaded at least `se-principles.md`.**
+**Do not proceed until you've loaded at least `references/se-principles.md`.**
 
 ## Phase 1: Determine Scope
 

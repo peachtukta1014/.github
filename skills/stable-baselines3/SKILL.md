@@ -348,15 +348,15 @@ illustrative; retain the task-specific wrappers and validation described there.
 ## Resources
 
 ### scripts/
-- `train_rl_agent.py`: Complete training script template with best practices
-- `evaluate_agent.py`: Agent evaluation and video recording template
-- `custom_env_template.py`: Custom Gym environment template
+- `scripts/train_rl_agent.py`: Complete training script template with best practices
+- `scripts/evaluate_agent.py`: Agent evaluation and video recording template
+- `scripts/custom_env_template.py`: Custom Gym environment template
 
 ### references/
-- `algorithms.md`: Detailed algorithm comparison and selection guide
-- `custom_environments.md`: Comprehensive custom environment creation guide
-- `callbacks.md`: Complete callback system reference
-- `vectorized_envs.md`: Vectorized environment usage and wrappers
+- `references/algorithms.md`: Detailed algorithm comparison and selection guide
+- `references/custom_environments.md`: Comprehensive custom environment creation guide
+- `references/callbacks.md`: Complete callback system reference
+- `references/vectorized_envs.md`: Vectorized environment usage and wrappers
 
 ## Citing Scientific Agent Skills
 
