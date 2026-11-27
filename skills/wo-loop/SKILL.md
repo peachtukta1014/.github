@@ -39,7 +39,7 @@ If registration, path, or SHA is not live-verified, label it `runtime verificati
 ```text
 lane-boot <scope>
 wo-loop dispatch --to <lane> --from <me> --job WO-... --title "..." [--checklist "a|b"]
-wo-loop sp status --scope <lane>
+wo-loop sp status --lane <lane>
 wo-loop pad --lane <lane> --log "..." [--status "..."] [--next-action "..."]
 wo-loop item --lane <lane> --n <N> --status done --evidence "..."
 wo-loop complete --to <orderer> --from <lane> --job <JOB> --summary "..." [--evidence "..."]
