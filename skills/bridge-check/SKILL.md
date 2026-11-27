@@ -1,81 +1,60 @@
 ---
 name: bridge-check
-description: "Bridge WAKE — reopen the app-to-VM connection so queued events flow again. Use when iOS suspends the app, a tunnel dies, or a wake alert arrives."
+description: "Probe the VM bridge and, when it is down, run the ONE opener. Use when the app was suspended, a tunnel died, queued events stopped flowing, or Peach says เช็คสะพาน / ต่อสะพาน / เชื่อมสะพาน."
 ---
 
-# bridge-check — health, recovery, and push-wake
+# bridge-check
 
-`bridge-check` opens or heals the app-to-VM path so already queued events can flow into the correct lane. It is a connectivity mechanism, not a pending-count query and not a work-order state store.
+Two halves, one skill. **Probe** answers "is the path alive?"; **opener** reopens it. Neither
+writes a pad, a room or a work order — the bridge carries messages, it does not hold state.
 
-## Scope
+## What is alive today (2026-11-27)
 
-It may:
+| half | where it runs | how you call it | what you get |
+|---|---|---|---|
+| probe | VM | MCP tool `bridge_check` (server `minis-tools`) or `tools/bin/bridge-check` | JSON `{"bridge":"ok"}` plus `hq_core`, `services`, `mesh_heartbeat`, `lanes` |
+| opener | device | MCP tool `bridge_open_event` (device tool, registry `registry/device_tools.json`) | its own verdict line: `healthy; no action`, `HEALED: …`, or `FAILED rc=…` |
+| opener, from the VM | VM | `bin/device_run.py --tool bridge_open_event` | the same verdict (P14: a tool is named, never a device path) |
 
-- check or reopen the configured app-to-VM door;
-- restore the configured WS/tunnel guard;
-- restart or heal the mesh watcher when the authorized runtime says it is stale;
-- sweep already queued events into lanes;
-- report a fresh `healthy`, `HEALED`, or exact `FAILED rc=` verdict.
-
-It must not:
-
-- create, dispatch, complete, or own a work order;
-- write a lane pad or board row as its own state machine;
-- invent a host, URL, token, SSH target, or implementation path;
-- be used as a generic shell or MCP tool catalogue.
+`bridge_check` acking is **not** proof that events flow: the probe can be green while the session
+is asleep. The opener is what makes a sleeping session wake.
 
 ## When to run
 
-Run once when:
+Run **once** when any of these is true:
 
-- iOS killed or backgrounded the app and the session went quiet;
-- a configured wake alert arrives;
-- the configured WS/tunnel heartbeat is stale or unavailable;
-- Peach says `เช็คสะพาน`, `ต่อสะพาน`, or `เชื่อมสะพาน`.
+- the app was backgrounded or killed and the chat went quiet;
+- a wake alert arrived in the inbox;
+- the WS tunnel or the SSE path stopped delivering events;
+- Peach asks to check / reopen the bridge.
 
-A wake message is a trigger to call this skill, not a file to read. The scheduled lane owns the wake conversation when the configured Shortcut routes it there.
+Do not run it on a timer, and do not run it twice to be sure.
 
-## Wake discipline
+## The four steps
 
-1. Resolve the registered bridge-health/recovery capability before invoking anything.
-2. Run the authorized bridge opener once. Do not hard-code a device or VM path from this document while runtime verification is pending.
-3. Reply with the opener's own verdict: `bridge healthy; no action`, `HEALED: ...`, or the exact `FAILED rc=...` line.
-4. If the result says `heal already running; skipped`, inspect only the authorized process/lock evidence defined by the runtime deployment.
-5. Never loop-retry. A failed wake is reported, not hidden.
-6. Do not claim the bridge is healthy without fresh output from the opener or registered health capability.
+1. **Probe.** Call `bridge_check`. Read all four sub-checks, not just `bridge`.
+   - `lanes.missing_pad` non-empty → a lane has no pad: that is a data problem, not a bridge problem; report it, do not fix it here.
+   - `services` with anything not `active` → name the service and stop; a dead service is not healed by an opener.
+2. **Decide.** Everything green → report `bridge healthy; no action` and stop. Nothing else to do.
+3. **Open.** Something is down → call the opener **once** (`bridge_open_event`, or `bin/device_run.py --tool bridge_open_event` from the VM). Use its verdict verbatim.
+4. **Report.** One line with the verdict and the probe you ran after it. If the opener failed, give the exact `FAILED rc=…` and the probe field that is still red — never a guess.
 
-## Transport boundary
+## Verdicts you may report
 
-The route is capability-selected, not a fixed primary/fallback pair:
+- `bridge healthy; no action` — probe green, nothing was done.
+- `HEALED: <what the opener said>` — the opener ran and the path is up.
+- `FAILED: <exact opener line>` — the opener ran and did not heal it. Do not retry in the same turn.
+- `UNKNOWN: probe unavailable` — the probe itself could not run (VM unreachable). Stop and say so.
 
-- WS is primary for lifecycle and small/structured bridge coordination.
-- Tailscale direct SSH is primary for large/raw/interactive recovery operations when selected by the registry.
-- IAP is compatibility-only.
-- `vm-hq-gate` is the typed VM gateway; `minis-tools` may expose a device/WS adapter.
-- The VM owns durable event, lane, board, and work-order state. The device exposes transport/UI adapters only.
+## Never
 
-The machine-readable route policy is `registry/transports.json`. Live registration and implementation paths remain runtime facts; if they are not verified, say so.
+- Never retry in a loop or start a keep-alive daemon: the opener is one shot by design.
+- Never claim healthy without fresh probe output from this turn.
+- Never write a pad, a room entry or a work order as part of a bridge check.
+- Never invent a host, URL, token or device path — the registry is the only place those live
+  (`registry/transports.json`, `registry/device_tools.json`).
 
-## Evidence contract
+## What to leave behind
 
-A successful run reports one of:
-
-```text
-bridge healthy; no action
-HEALED: <opener-provided detail>
-FAILED rc=<n>: <opener-provided detail>
-```
-
-When healing drains queued events, include the opener-provided `moved=N` evidence. Do not manufacture health tables or counts.
-
-## Shortcut boundary
-
-Peach owns the iOS Shortcut. This skill does not install, sign, edit, or mutate it. A configured notification-to-chat wake message should invoke this skill in the configured lane; the path text in that message is not executed by the Shortcut itself.
-
-## References
-
-Load only when needed:
-
-- `references/README_TH.md` — user-facing bridge explanation and current deployment notes.
-- `registry/transports.json` — capability-to-route policy.
-- `system/CONNECTION_POINTS.md` — endpoint facts and authority boundary.
+Nothing durable: a wake is an operation, not a fact. If the path kept dying, that is a lesson for
+the room (`bin/room post team --from <lane> --kind note "…"`) — not a pad entry and not a new file.
