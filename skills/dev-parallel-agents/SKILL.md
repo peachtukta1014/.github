@@ -1,6 +1,6 @@
 ---
 name: dev-parallel-agents
-description: "Split 2+ independent tasks into parallel sub-agent work with no shared state."
+description: "Split 2+ independent tasks into parallel sub-agent work with no shared state. Covers Open Minis subagent_task: 3 at a time per conversation, 60-minute budget, app-side only, and where the team-readable report goes."
 tags: [2. Dev discipline, vm, KEEP+PATCH, obra/superpowers]
 ---
 
@@ -13,6 +13,45 @@ You delegate tasks to specialized agents with isolated context. By precisely cra
 When you have multiple unrelated failures (different test files, different subsystems, different bugs), investigating them sequentially wastes time. Each investigation is independent and can happen in parallel.
 
 **Core principle:** Dispatch one agent per independent problem domain. Let them work concurrently.
+
+
+## In our system (Open Minis + the HQ VM) — added 2026-11-27
+
+The pattern above is upstream (`obra/superpowers`). These are OUR constraints, and they change
+the arithmetic.
+
+| Fact | Value | Source |
+|---|---|---|
+| The tool | `subagent_task` — **app-side**; Open Minis sends it to the model | Settings → Agent Runtime → Sub Agents (`minis-config chat.tools.subAgents`), on by default |
+| Who can dispatch | only a session running **inside the app**. A VM-only process (hq-core, cron, a worker) cannot: neither door carries such a tool | `minis-tools` = 10 tools, `vm-hq-gate` = 3, none of them a dispatcher |
+| Concurrency | **3 at a time per conversation**; extras queue and start as slots free | `/var/minis/docs/concepts/subagents.md` |
+| Budget | **60 minutes total per run**, one 90-second no-tool wrap-up at the end | same |
+| Child session | no memory (no `GLOBAL.md`, no `memory_write`), no SOUL persona, cannot see the parent conversation | same |
+| Models | roster group is `Sub-agents`; Peach pins the group per roster entry (max 10 agents) | `minis-config get subagents` |
+| Result | arrives in the parent chat as `<agent_callback>`; levers are `status` / `steer` / `cancel` / `extend` / `resume` | same |
+
+Two consequences for the pattern above:
+
+1. **Batch by 3, not by all.** Issue at most three dispatches in one response, then wait for a
+   slot. Queueing eight heavy investigations on a 2-vCPU VM only moves the wait — see
+   `specs/N3-parallel-shell.md` for the measured door cost (3.0 s flat per call).
+2. **Use parallel sub-agents for investigation, not for VM-heavy work.** Each sub-agent's
+   shell calls ride the same door, so N of them at once multiply that toll.
+
+### Reporting: the team-readable record (RULE 19)
+
+A sub-agent's answer comes back in the parent chat — that is for the parent, not the team.
+When Peach has ordered a report, the team-readable record goes to one place only, in English:
+
+```
+bin/peach_report.py --lane <lane> --kind subagent --ordered \
+  --title "<what was checked>" --task "<what was asked>" --result "<findings>" \
+  [--evidence '<url + sha256>'] [--job <WO-id>]
+```
+
+→ `lanes/<lane>/workspace/reports/<YYYYMMDD-HHMM>-<slug>-en.json`. No order = no file; the
+pad stays the SSOT. A sub-agent's behaviour comes from the roster entry's instructions —
+`bin/subagent_instructions.py` prints the canonical text, so never hand-write a second copy.
 
 ## When to Use
 
@@ -66,7 +105,8 @@ Each agent gets:
 
 ### 3. Dispatch in Parallel
 
-Issue all three subagent dispatches in the same response — they run in parallel:
+Issue all three subagent dispatches in the same response — they run in parallel.
+Three is also our ceiling per conversation, so a fourth dispatch queues instead.
 
 ```text
 Subagent (general-purpose): "Fix agent-tool-abort.test.ts failures"
