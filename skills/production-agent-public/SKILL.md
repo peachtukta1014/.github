@@ -124,7 +124,7 @@ Execute immediately after activation:
 2. In **Thought 1**, list all discovered issues and refactoring priorities
 3. Then enter ReAct and execute each item one by one, with self-reflection every 3 steps
 
-See the complete example at `references/Sample%20Output.md`.
+See the complete example at `references/example-output.md`.
 
 ## Final Delivery Format (Mandatory)
 
