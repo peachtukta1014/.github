@@ -1,5 +1,5 @@
 # Skills registry — provenance, homes and tags
-_Generated 2026-11-24 01:40 +07 by `bin/gen_skills_index.py` from `skills/SOURCES.json`. Do not hand-edit rows: edit SOURCES.json and re-run._
+_Generated 2026-11-27 01:10 +07 by `bin/gen_skills_index.py` from `skills/SOURCES.json`. Do not hand-edit rows: edit SOURCES.json and re-run._
 ## The homes (one copy each)
 | Home | Path | What it is |
 |---|---|---|
@@ -32,7 +32,7 @@ _Generated 2026-11-24 01:40 +07 by `bin/gen_skills_index.py` from `skills/SOURCE
 | `bridge-check` | เปิดสะพานถึง VM | team · ready · vm · prompt-only | yes | Our own. Bridge WAKE — open/heal the device-to-VM path. |
 | `core-ops` | งานวิศวกรรม chinchaflow | team · ready · vm · python node net | yes | Our own. One engineering workflow for the chinchaflow repo. |
 | `docs-diagram` | วาดไดอะแกรมเป็นไฟล์จริง | team · ready · vm · python typst | yes | Composed here from hub reference material (see shared/skills-hub-sources/INDEX_TH.md). Renders offline with Ty |
-| `lane-boot` | บูสต์เลนผ่าน VM | team · ready · vm · prompt-only | no | Lean English lane boost entry for Open Minis and the HQ VM; covers all ten lanes. |
+| `lane-boot` | บูสต์เลนผ่าน VM | team · ready · vm · prompt-only | no | Lean English lane boost entry for Open Minis and the HQ VM; covers all eight lanes. |
 | `skill-registry-maintenance` |  | team · ready · vm · python git | no | Reusable workflow for stable-ID skill registry maintenance, resolver changes, and evidence-led validation. |
 | `system-protocol-design` | ออกแบบโปรโตคอลเอเจนต์ | team · ready · vm · prompt-only | yes | Our own. Design or repair a multi-agent protocol. Peach 2026-11-21: keep, do not delete. |
 | `wo-loop` | บูทเลน + ใบงาน | team · ready · vm · prompt-only | no | Our own. Boot a lane then run the work loop; absorbed the two former team skills. |
@@ -41,9 +41,10 @@ _Generated 2026-11-24 01:40 +07 by `bin/gen_skills_index.py` from `skills/SOURCE
 | skill | ไทย | tags | installed | what it does |
 |---|---|---|---|---|
 
-## Imported — by source (18)
+## Imported — by source (19)
 | skill | upstream | source repo | ไทย | tags | installed | verdict |
 |---|---|---|---|---|---|---|
+| `research-search` | — | ? **(unverified)** |  | ? · ready · ? · python net | no | ? |
 | `ai-prompt-engineer` | prompt-engineer | Jeffallan/claude-skills | ออกแบบพรอมต์ LLM | claude-skills · adapt · vm · net | yes | KEEP+PATCH |
 | `docs-pdf-converter` | pdf-converter | OpenMinis/MinisSkills | เอกสาร → PDF | MinisSkills · ready · vm · python typst | yes | KEEP |
 | `hw-todoocard` | todoocard | OpenMinis/MinisSkills | จอ e-paper TodooCard | MinisSkills · ready · vm · python | yes | KEEP |
@@ -64,11 +65,11 @@ _Generated 2026-11-24 01:40 +07 by `bin/gen_skills_index.py` from `skills/SOURCE
 | `dev-verification-gate` | verification-before-completion | obra/superpowers | ยืนยันก่อนปิดงาน | superpowers · ready · vm · prompt-only | yes | KEEP |
 
 ## Counts
-- library **25** · ours **7** · built-in **0** · imported **18** · installed on device **22**
-- provenance verified: **15** / 25 — the rest are hub/internet imports whose repo is not pinned yet
+- library **26** · ours **7** · built-in **0** · imported **19** · installed on device **22**
+- provenance verified: **15** / 26 — the rest are hub/internet imports whose repo is not pinned yet
 - 2026-11-18 audit (code lane): KEEP 6 · KEEP+PATCH 11 · ARCHIVE 9 · DELETE 18 (`docs/reports/skills-audit-20261118.md`)
 
 ## Gates
 ```
-python3 /srv/repos/hq/vm-hq-core/bin/gen_skills_index.py
+python3 $HQ_ROOT/bin/gen_skills_index.py
 ```

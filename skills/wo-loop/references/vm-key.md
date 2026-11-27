@@ -5,14 +5,14 @@ description: >-
   VM: run shell commands, open the WS tunnel, choose privilege level, or load
   the canonical TOOLS. This skill is the on-device map of which local script
   lives where; the VM stays the source of truth.
-path: /srv/repos/hq/vm-hq-core/skills/vm-key/SKILL.md
+path: $HQ_ROOT/skills/vm-key/SKILL.md
 ---
 
 # vm-key — the key to the VM (device side only)
 
 **Rule:** the VM is the home. This device holds only the key: transport scripts,
 protocol clients, and skills. No identity, no code, no secrets live here.
-Canonical tool map: `/srv/repos/hq/vm-hq-core/system/TOOLS.md` (read it at boot).
+Canonical tool map: `$HQ_ROOT/system/TOOLS.md` (read it at boot).
 
 ## 1. One command to work on the VM
 
@@ -36,14 +36,14 @@ minis-tools ▶ ws_exec {"command": "<shell command>"}
 | Chat ping | `sse_ping.py` |
 | Board | `board_check.py` |
 | One-entry CLI | `wo-loop` |
-| Bridge heal | `/srv/repos/hq/vm-hq-core/tools/bridge-check/bridge_open_event.sh` |
-| MCP server (device) | `/srv/repos/hq/vm-hq-core/tools/mcp/minis_tools_mcp.py` |
-| MCP server (VM) | `vm-hq-gate` -> `/srv/repos/hq/vm-hq-core/mcp/gate/mcp_gate.py` |
-| Chapter skills | `/srv/repos/hq/vm-hq-core/skills/wo-loop/<scope>/SKILL.md` |
+| Bridge heal | `$HQ_ROOT/tools/bridge-check/bridge_open_event.sh` |
+| MCP server (device) | `$HQ_ROOT/tools/mcp/minis_tools_mcp.py` |
+| MCP server (VM) | `vm-hq-gate` -> `$HQ_ROOT/mcp/gate/mcp_gate.py` |
+| Chapter skills | `$HQ_ROOT/skills/wo-loop/<scope>/SKILL.md` |
 | Device inventory | `system/CONNECTION_POINTS.md` on the VM (device keymap was retired 2026-11-15) |
 
 **Skill rule:** every skill has exactly ONE real copy at
-`/srv/repos/hq/vm-hq-core/skills/<name>/` and `/srv/repos/hq/vm-hq-core/skills/<name>` is a symlink to it.
+`$HQ_ROOT/skills/<name>/` and `$HQ_ROOT/skills/<name>` is a symlink to it.
 Two diverging copies = a bug.
 
 ## 3. Choose the door

@@ -1,5 +1,5 @@
 ---
-name: data-context-extractor (เก็บข้อมูลก่อนทำ)
+name: data-context-extractor
 description: "Gather the data and context a task needs from files, logs or repos before acting."
 tags: [6. Data, vm, KEEP, hub (unverified)]
 ---

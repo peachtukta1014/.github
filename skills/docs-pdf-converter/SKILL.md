@@ -1,5 +1,5 @@
 ---
-name: docs-pdf-converter (แปลงเป็น PDF)
+name: docs-pdf-converter
 description: "Convert Markdown, HTML, plain text or images to PDF through a Typst pipeline."
 compatibility: Python 3, pandoc, typst, py3-pillow; Alpine (iSH) / Termux (Android) / Debian
 tags: [3. Documents, vm, KEEP, OpenMinis/MinisSkills]

@@ -1,5 +1,5 @@
 ---
-name: system-protocol-design (ออกแบบโปรโตคอล)
+name: system-protocol-design
 description: "Design or repair multi-agent protocols: message envelopes, state machines, delivery, failure paths."
 tags: [1. Team + system, vm, ours, ours]
 ---

@@ -11,12 +11,12 @@ Use one logical work-order entry for lane boot, dispatch, pad, board, report, cl
 
 ```text
 Resolve: lane-id -> ASCII lane ID
-Run:    wo-loop boot <scope>
+Run:    lane-boot <scope>
 Read:   only the paths reported by boot
 Do not: inspect broad paths or read pad/identity files before boot
 ```
 
-Lane names: ปั้นแป้ง=code · ข้าวของ=files · เกมมิ่ง=gaming · เกี๊ยว=hokkien · จี้=jii · ข้าวเรียม=research · เวลา=scheduled · กุ้งทอง=seafood · ชาเย็น=tea · หมึกสาย=webhook
+Lane names: ปั้นแป้ง=code · ข้าวของ=files · จี้=jii · ข้าวเรียม=research · เวลา=scheduled · กุ้งทอง=seafood · ชาเย็น=tea · หมึกสาย=webhook
 
 Unknown scope: use `lane-id`; never infer from a misspelled voice command.
 
@@ -37,7 +37,7 @@ If registration, path, or SHA is not live-verified, label it `runtime verificati
 ## 3. VM-side logical commands
 
 ```text
-wo-loop boot <scope>
+lane-boot <scope>
 wo-loop dispatch --to <lane> --from <me> --job WO-... --title "..." [--checklist "a|b"]
 wo-loop sp status --scope <lane>
 wo-loop pad --lane <lane> --log "..." [--status "..."] [--next-action "..."]

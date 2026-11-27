@@ -1,6 +1,6 @@
 ---
 name: lane-boot
-description: Boost one or more HQ VM lanes through Open Minis. Use for lane boot, bounded execution, dispatch, pad updates, reports, and closeout.
+description: "Boost one or more HQ VM lanes through Open Minis. Use for lane boot, bounded execution, dispatch, pad updates, reports, and closeout."
 ---
 
 # wo-loop lane boost
@@ -12,7 +12,7 @@ Use the HQ VM as the execution and durable-state authority. Treat Open Minis as 
 1. Resolve the session lane with `lane-id`; never guess an ambiguous lane.
 2. Resolve each operation through `registry/transports.json` and the registered MCP capability. Do not hard-code `minis-tools`, `vm-hq-gate`, WS, Tailscale, IAP, a host, or a credential into a lane boost.
 3. If the bridge is unhealthy or a wake trigger is received, run `bridge-check` once. It handles health/recovery/push-wake only; it does not own work-order state.
-4. Boot before reading lane state: `wo-loop boot <lane>`.
+4. Boot before reading lane state: `lane-boot <lane>`.
 5. Read only the boot-reported scope, protocol index, pad, and board paths.
 6. Use the resolved VM execution capability for bounded shell work. Use `wo-loop` for boot, board, pad, dispatch, report, item, and closeout. Do not use the work-order facade as an unbounded shell.
 7. Before ending a turn that changed work, update the VM-owned lane pad.
@@ -23,7 +23,7 @@ Use the HQ VM as the execution and durable-state authority. Treat Open Minis as 
 Open Minis sends a logical command to the registered gateway or adapter; it does not create durable files or own lane state.
 
 ```json
-{"command":"wo-loop boot <lane>"}
+{"command":"lane-boot <lane>"}
 ```
 
 The runtime selects the route from `registry/transports.json`:
@@ -37,12 +37,12 @@ If the live registration or path is not verified, say `runtime verification pend
 ## Command crib
 
 ```text
-wo-loop boot <lane>
+lane-boot <lane>
 wo-loop board --scope <lane>
-wo-loop exec "<bounded-command>" --scope <lane>
+wo-loop exec "<bounded-command>"
 wo-loop pad --lane <lane> --log "<result>" --status "<status>" --next-action "<next>"
-wo-loop report --lane <lane> --title "<title>"
-wo-loop complete --to <orderer> --from <lane> --job <JOB> --summary "<what changed>" --evidence "<path, id, sha, or command output>"
+wo-loop report --lane <lane> --title "<title>"          # internal only: writes docs/reports/<lane>/ (the Peach folder was deleted 2026-11-24)
+wo-loop close --lane <lane> --result "<what changed>" --evidence "<path, id, sha, or command output>"
 ```
 
 For a work order, use `WO-<lane>-<slug>-<YYYYMMDD>-NN`. Close only with evidence.
@@ -65,7 +65,7 @@ Use ASCII scope IDs in commands. Thai names are display labels only.
 
 ## Trigger — the first call
 
-One chat line boots a lane. The alias table is `registry/channels.json` (`aliases` per lane),
+One chat line boots a lane. The alias table is `registry/channels.json` (`aliases` inside each `channels[]` entry),
 which `bin/om-boot` reads, so the Thai name, the English name and the scope id all resolve:
 
 | Lane | First call | Also accepted |
@@ -96,10 +96,10 @@ A lane boots itself when work arrives; the caller never has to wake it by hand.
    the moment it is awake.
 
 Verified on the VM today: `bin/om-boot <lane>` (ASCII and Thai name), the pad resume block,
-the board row, and the doc-id layer behind them. **Runtime verification pending:** the
-device-side dispatch hop (`ws_dispatch.py`) is not installed on this device — only `om-ssh`
-exists under the shared tools — so the notice half of step 1 is carried by the VM SSE/ntfy
-path rather than by a device dispatcher.
+the board row, and the doc-id layer behind them. **Device side:** the dispatch hop
+(`ws_dispatch.py`) is installed at `/var/minis/shared/tools/bin/` next to `ws_exec.py`,
+`ws_complete.py` and `om-ssh` (see `registry/device_tools.json`); when the iOS session is
+suspended the notice half of step 1 falls back to the VM SSE/ntfy path.
 
 ## References
 

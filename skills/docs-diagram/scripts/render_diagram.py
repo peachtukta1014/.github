@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Render a CeTZ/Typst diagram (or a report embedding one) to PDF/SVG/PNG.
 
-Typst cannot read files under /srv/repos/hq/vm-hq-core on this device (iSH bind mount), so the
+Typst cannot read files under $HQ_ROOT on this device (iSH bind mount), so the
 build happens in a temp dir, then artifacts are copied next to the source.
 
 Usage:
@@ -19,10 +19,10 @@ from pathlib import Path
 PKG_SHARED = next(
     (Path(p) for p in (
         os.environ.get("TYPST_PACKAGES_SHARED", ""),
-        "/srv/repos/hq/vm-hq-core/tools/typst-packages",
-        "/srv/repos/hq/vm-hq-core/tools/typst-packages",
+        "$HQ_ROOT/tools/typst-packages",
+        "$HQ_ROOT/tools/typst-packages",
     ) if p and Path(p).exists()),
-    Path("/srv/repos/hq/vm-hq-core/tools/typst-packages"),
+    Path("$HQ_ROOT/tools/typst-packages"),
 )
 PKG_SCRATCH = Path(os.environ.get("TYPST_PACKAGES_CACHE")
                    or (Path.home() / ".cache" / "typst-packages"))

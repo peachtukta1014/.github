@@ -1,5 +1,5 @@
 ---
-name: ai-prompt-engineer (เขียนพรอมต์)
+name: ai-prompt-engineer
 description: "Write, refactor and evaluate LLM prompts: templates, output schemas, rubrics, test suites."
 license: MIT
 metadata:

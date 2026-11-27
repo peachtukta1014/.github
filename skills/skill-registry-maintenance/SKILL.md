@@ -1,6 +1,6 @@
 ---
 name: skill-registry-maintenance
-description: Maintain a stable-ID skill registry and resolver without scattering hard-coded paths. Use when adding, moving, renaming, deprecating, or auditing repository skills and their machine-readable lookup.
+description: "Maintain a stable-ID skill registry and resolver without scattering hard-coded paths. Use when adding, moving, renaming, deprecating, or auditing repository skills and their machine-readable lookup."
 license: Internal
 metadata:
   version: "1.0.0"

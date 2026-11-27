@@ -2,7 +2,7 @@
 
 # today-eats · 今天吃点啥
 
-**父技能：** `todoocard`
+**Parent skill:** `hw-todoocard`
 
 附近随机一家外卖 →「今天吃点啥」卡片 → 推送到土豆片。
 
@@ -14,7 +14,7 @@
 ## 命令
 
 ```bash
-CLI="python3 /srv/repos/hq/vm-hq-core/skills/todoocard/today-eats/scripts/cli.py"
+CLI="python3 $HQ_ROOT/skills/hw-todoocard/today-eats/scripts/cli.py"
 
 $CLI eat
 $CLI 今天吃点啥
@@ -22,6 +22,9 @@ $CLI eat --prepare-only
 ```
 
 设备未绑定时，用同一 CLI 的 `scan` / `probe --save`。
+
+> Note: the `today-eats/` sub-skill tree is not shipped in this trunk - this file is a
+> reference chapter only until those scripts land. Path above = the intended home.
 
 ## 流程
 

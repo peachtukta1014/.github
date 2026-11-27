@@ -1,5 +1,5 @@
 ---
-name: hw-todoocard (การ์ดอีเปเปอร์)
+name: hw-todoocard
 version: 1.2.0
 description: "TodooCard (土豆片 / NEWSTONE) six-colour e-paper push; sub-skill today-eats."
 compatibility: >
@@ -28,7 +28,7 @@ TodooCard / 土豆片的**父技能**。
 ## 设备命令
 
 ```bash
-ROOT=/srv/repos/hq/vm-hq-core/skills/hw-todoocard
+ROOT=$HQ_ROOT/skills/hw-todoocard
 CLI="python3 $ROOT/scripts/safe_send.py"
 
 $CLI scan
@@ -37,8 +37,8 @@ $CLI config --show
 ```
 
 ```bash
-mkdir -p /srv/repos/hq/vm-hq-core/todoocard
-cp $ROOT/references/config.example.json /srv/repos/hq/vm-hq-core/todoocard/config.json
+mkdir -p $HQ_ROOT/todoocard
+cp $ROOT/references/config.example.json $HQ_ROOT/todoocard/config.json
 ```
 
 ## 新增子技能

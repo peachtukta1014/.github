@@ -1,5 +1,5 @@
 ---
-name: dev-git-workflow (งาน git/PR)
+name: dev-git-workflow
 description: "Git discipline: atomic commits, branching, conflict resolution, opening and reviewing PRs."
 tags: [2. Dev discipline, vm, KEEP+PATCH, hub (unverified)]
 ---

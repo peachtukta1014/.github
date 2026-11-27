@@ -1,5 +1,5 @@
 ---
-name: cloud-gcp-waf (ตรวจ GCP)
+name: cloud-gcp-waf
 metadata:
   version: "1.0.2"
   category: WellArchitectedFramework

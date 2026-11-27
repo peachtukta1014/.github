@@ -1,5 +1,5 @@
 ---
-name: docs-readmes (เขียน README)
+name: docs-readmes
 description: "Write or improve README files matched to the audience and the project type."
 tags: [3. Documents, vm, KEEP, hub (unverified)]
 ---

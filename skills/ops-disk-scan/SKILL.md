@@ -1,5 +1,5 @@
 ---
-name: ops-disk-scan (หาพื้นที่เต็ม)
+name: ops-disk-scan
 description: "Find what actually eats disk space: biggest subdirectories and files, largest first."
 compatibility: >
   Python 3.8+ on PATH. Standard library only, no network. Read-only: it never

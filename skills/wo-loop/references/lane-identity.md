@@ -6,7 +6,7 @@ description: Load who this chat session is — which lane (channel) it belongs t
 # lane-identity — remember the role, read the truth from the VM
 
 The device holds no identity of its own. Each chat session is bound to one lane in
-`/srv/repos/hq/vm-hq-core/lanes/<lane>/identity/config/session_bind.json`; the real identity lives on the VM.
+`$HQ_ROOT/lanes/<lane>/identity/config/session_bind.json`; the real identity lives on the VM.
 
 ## Steps (in order)
 
@@ -20,11 +20,11 @@ The device holds no identity of its own. Each chat session is bound to one lane 
    lane-id --fetch
    ```
    This prints `lanes/<lane>/identity/GLOBAL.md` from the VM.
-3. If VM/tunnel is down, fall back to the offline card `/srv/repos/hq/vm-hq-core/lanes/<lane>.md`
+3. If VM/tunnel is down, fall back to the offline card `$HQ_ROOT/lanes/<lane>.md`
    and say so. Do not invent tasks, paths or a new role.
 4. Start work only after the lane's board/pad is read:
    ```
-   ws_exec --command "bash /srv/repos/hq/vm-hq-core/bin/om-boot <lane>"
+   ws_exec --command "bash $HQ_ROOT/bin/om-boot <lane>"
    ```
 
 ## Rules

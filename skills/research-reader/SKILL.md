@@ -1,5 +1,5 @@
 ---
-name: research-reader (อ่านเว็บสะอาด)
+name: research-reader
 description: "Extract the clean main article text or Markdown from a URL, without ads or navigation."
 tags: [4. Research, vm, KEEP, OpenMinis/MinisSkills]
 ---

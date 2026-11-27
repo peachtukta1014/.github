@@ -1,11 +1,11 @@
 ---
-name: core-ops (งานวิศวกรรม chinchaflow)
+name: core-ops
 version: 2.0.0
 description: "Unified chinchaflow engineering workflow: debug, audit, incident, CI/CD, MCP PR ops, release/deploy. Trigger on 'fix bug / ตรวจโค้ด / audit / ระบบล่ม / CI / merge PR / ปล่อยของ'."
 tags: [1. Team + system, vm, ours, ours]
 ---
 
-> Canonical: `/srv/repos/hq/vm-hq-core/skills/core-ops/SKILL.md` does not exist for this skill — device is canonical (`/srv/repos/hq/vm-hq-core/skills/core-ops/`).
+> Canonical: `$HQ_ROOT/skills/core-ops/SKILL.md` does not exist for this skill — device is canonical (`$HQ_ROOT/skills/core-ops/`).
 
 
 # core-ops — unified chinchaflow engineering (debug · audit · incident · cicd · mcp · release · chain)
@@ -20,13 +20,13 @@ tags: [1. Team + system, vm, ours, ours]
 > full function signature + grep every reference + run the smoke test before PR.
 
 ## Repo rules (all sections)
-- Clone: `/srv/repos/hq/vm-hq-core/repos/chinchaflow` (pull first) · private repo —
+- Clone: `$HQ_ROOT/repos/chinchaflow` (pull first) · private repo —
   every GitHub curl needs `Authorization: Bearer $GH_TOKEN` (env only).
 - Work branch: `open-minis_<agent>_<task>` (e.g. `open-minis_webhook_line-name-size`; underscore or dash allowed) → PR → pr-verify CI
   green → auto-merge (squash). One PR, one intent.
 - High-risk (price/stock/order/bill/schema/delete-feature) → restate in Thai +
   wait for Peach's "OK" BEFORE editing.
-- Repo rules (all sections) — current truth (2026-09-13): agent-control docs are NOT in the repo anymore (moved to Open Minis). In-repo truth = the code + rules files themselves (`firestore.rules`, `storage.rules`) + `docs/PROJECT_STRUCTURE.md` (auto-synced).
+- Repo rules (all sections) — current truth (2026-09-13): agent-control docs are NOT in the repo anymore (moved to Open Minis). In-repo truth = the code + rules files themselves (`firestore.rules`, `storage.rules`) + `system/SYSMAP_AGENT.md` (the path map).
 
 ---
 
@@ -35,7 +35,7 @@ tags: [1. Team + system, vm, ours, ours]
 The system's real-world debug flow (built from Peach's own scars, PR #638).
 
 1. **Listen → check the shared board and active task** — translate symptom into expected vs actual behavior; high-risk confirm with Peach first.
-2. **Search the shared Lessons KB first** — `python3 /srv/repos/hq/vm-hq-core/chincha/kb/kb.py search --keywords "<kw>"`. Never start from zero.
+2. **Search the shared Lessons KB first** — `python3 $HQ_ROOT/chincha/kb/kb.py search --keywords "<kw>"`. Never start from zero.
 3. **Trace the data flow** — pull repo → open dep-map
    (`kb/dep-map-<system>.json` file→file) → topic→files table → follow the bad
    value upstream to the FIRST divergence.
@@ -72,9 +72,9 @@ failing test · merge on red CI · touch workflow files (.github/) without care.
 
 1. **Scope it** — which system (shrimp/tea/webhook/cron)? which area
    (money/stock/slip/voice/3-lang)? Unsure → restate before auditing.
-2. **Use current in-repo truth** — `docs/PROJECT_STRUCTURE.md` (auto-synced) +
+2. **Use current in-repo truth** — `system/SYSMAP_AGENT.md` +
    rules files (`firestore.rules`, `storage.rules`) — don't scan the repo
-   blindly. Audit reports live in `/srv/repos/hq/vm-hq-core/audit/`.
+   blindly. Audit reports live in `$HQ_ROOT/audit/`.
 3. **Extend with dep-map** — `kb/dep-map-{webhook-core,seafood-pos,chincha-tea}.json`
    forward/reverse to find who a file touches.
 4. **Audit** — search/grep first, ranged reads (full-file only <150 lines);
@@ -175,7 +175,7 @@ minis-mcp-cli call vm-hq-gate gate_call --input '{"category":"chincha","tool":"q
 ```
 Needs `GH_TOKEN` on the VM (`/etc/chincha/env/*.env` → symlink into the vault; SSH runs as ubuntu with GH_TOKEN set).
 Firestore auth = VM SA at `/srv/secrets/vault/auth/firebase-sa.json` (the `/etc/jii/` shim was removed 2026-11-12;
-`/etc/chincha/secrets/{firebase-admin,google-admin}.json` are symlinks to the same vault file).
+every consumer reads the vault file directly via env (`FIREBASE_SERVICE_ACCOUNT_FILE`, `SA_PATH` = `/srv/secrets/vault/auth/*-sa.json`); `/etc/chincha/secrets/` holds no links at all).
 Also: `minis-mcp-cli tools <server>` to discover live tools (chincha + github).
 
 ---
@@ -201,12 +201,12 @@ after functions deploy; report Thai.
 
 ## G. CHAIN — project changes via MINIS_CHANGELOG ("มี PR ใหม่/อ่าน chain")
 
-1. `cat /srv/repos/hq/vm-hq-core/chincha/MINIS_CHANGELOG/<YYYY-MM>/<YYYY-MM-DD>.md` — read today's
+1. `cat $HQ_ROOT/chincha/MINIS_CHANGELOG/<YYYY-MM>/<YYYY-MM-DD>.md` — read today's
    manual team PR chain (newest PR at top). Folder rules: `MINIS_CHANGELOG/README.md`.
    Not auto-synced — agents write it by hand each time any PR is opened/merged on chinchaflow
    (full repo history stays in `docs/AGENT_CHANGELOG_TH.md`).
 2. Deep dive only when needed — the full repo history lives in the repo (not mirrored to the app);
-   for older PR detail use `git -C /srv/repos/hq/vm-hq-core/repos/chinchaflow` (central clone).
+   for older PR detail use `git -C $HQ_ROOT/repos/chinchaflow` (central clone).
 3. Sync KB to reality (main-pilot duty) — update `kb/<system>.json`. Repo rule
    docs (AGENTS.md etc.) are Peach's auto-sync — read, don't edit.
 4. Report to Peach: what's new (PR/CI) · what updated (KB) · anything for her

@@ -1,5 +1,5 @@
 ---
-name: dev-sql-optimization (ปรับ SQL)
+name: dev-sql-optimization
 description: "Master SQL optimization and indexing; read EXPLAIN to kill slow queries."
 tags: [6. Data, vm, KEEP, hub (unverified)]
 ---

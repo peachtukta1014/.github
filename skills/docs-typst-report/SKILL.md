@@ -1,5 +1,5 @@
 ---
-name: docs-typst-report (รายงาน PDF)
+name: docs-typst-report
 description: "Build professional PDF reports, papers and resumes with Typst, including CJK and math."
 tags: [3. Documents, vm, KEEP+PATCH, hub (unverified)]
 ---

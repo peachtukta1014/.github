@@ -1,5 +1,5 @@
 ---
-name: dev-debugging-recovery (หาสาเหตุที่พัง)
+name: dev-debugging-recovery
 description: "Systematic root-cause debugging when tests fail, builds break, or behaviour changed unexpectedly."
 tags: [2. Dev discipline, vm, KEEP+PATCH, hub (unverified)]
 ---
