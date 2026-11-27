@@ -84,7 +84,7 @@ edge-tts; `th-TH-Neural2-C` for Google Cloud. The Gemini studio whitelist is wha
 ## Where the code lives
 
 `tools/tts/` is a **registered tool group** (not a copy of the upstream skill): `find_voice.py`,
-`edge_say.py`, `tools/tts/tools/tts/references/voice_library.tsv`, and `README.md` with the full limits list. This
+`edge_say.py`, `tools/tts/references/voice_library.tsv`, and `README.md` with the full limits list. This
 skill is the routing layer — when to use which path; the tools are the implementation. Do not
 duplicate the scripts here.
 
