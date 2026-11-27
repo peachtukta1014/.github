@@ -43,7 +43,7 @@ wo-loop sp status --scope <lane>
 wo-loop pad --lane <lane> --log "..." [--status "..."] [--next-action "..."]
 wo-loop item --lane <lane> --n <N> --status done --evidence "..."
 wo-loop complete --to <orderer> --from <lane> --job <JOB> --summary "..." [--evidence "..."]
-wo-loop board [--scope <lane>]
+wo-loop board [--scope <lane>]     # retired name -> delegates to wo.py status
 wo-loop report --lane <lane> --title "..."
 wo-loop pr <branch> <title> [body-file]
 ```

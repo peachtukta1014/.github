@@ -38,7 +38,7 @@ If the live registration or path is not verified, say `runtime verification pend
 
 ```text
 lane-boot <lane>
-wo-loop board --scope <lane>
+wo-loop board --scope <lane>     # retired name -> pad-computed status
 wo-loop exec "<bounded-command>"
 wo-loop pad --lane <lane> --log "<result>" --status "<status>" --next-action "<next>"
 wo-loop report --lane <lane> --title "<title>"          # internal only: writes docs/reports/<lane>/ (the Peach folder was deleted 2026-11-24)

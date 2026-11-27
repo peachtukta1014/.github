@@ -34,7 +34,7 @@ minis-tools ▶ ws_exec {"command": "<shell command>"}
 | Close work | `ws_complete.py` |
 | Message only | `sse_dispatch.py` |
 | Chat ping | `sse_ping.py` |
-| Board | `board_check.py` |
+| Board | `bin/wo.py status` (computed from pads; no stored board) |
 | One-entry CLI | `wo-loop` |
 | Bridge heal | `$HQ_ROOT/tools/bridge-check/bridge_open_event.sh` |
 | MCP server (device) | `$HQ_ROOT/tools/mcp/minis_tools_mcp.py` |
@@ -53,7 +53,7 @@ Two diverging copies = a bug.
 | run anything on the VM | `ws_exec` |
 | order another channel | `ws_dispatch` |
 | close a job | `ws_complete` |
-| read the board | `board_check` |
+| read lane state | `wo-loop board` -> `bin/wo.py status` |
 | shop / Firestore / mesh | `vm-hq-gate ▶ gate_directory` -> `gate_call(category='chincha')` |
 | repo / PR | `gate_call(category='github')` |
 | VM status / logs / service | `gate_call(category='vm-operations')` |
