@@ -150,8 +150,8 @@ def main():
     ap.add_argument("--orientation", default="rotate-180-then-flip-horizontal")
     ap.add_argument("--block-size", type=int, default=240)
     ap.add_argument("--wait-refresh", type=float, default=12.0)
-    ap.add_argument("--prefix", default="/srv/work/todoocard_run/fast_e2e")
-    ap.add_argument("--report", default="/srv/work/todoocard_run/fast_e2e_report.json")
+    ap.add_argument("--prefix", default="/tmp/todoocard_run/fast_e2e")
+    ap.add_argument("--report", default="/tmp/todoocard_run/fast_e2e_report.json")
     args = ap.parse_args()
 
     report: dict = {
@@ -277,7 +277,7 @@ def main():
     # preview
     prev = info.get("preview")
     if prev and Path(prev).exists():
-        Path("/srv/work/attachments/fast_e2e_preview.png").write_bytes(Path(prev).read_bytes())
+        Path("/tmp/attachments/fast_e2e_preview.png").write_bytes(Path(prev).read_bytes())
 
 
 if __name__ == "__main__":

@@ -11,7 +11,7 @@ There is **no Chromium** in this setup, so Mermaid cannot be rendered to a file 
 Kroki are all out). The path that works is **Typst + CeTZ** (vector, offline, embeddable), with Mermaid
 kept as the design-time lingua franca.
 
-**Execution host: the VM.** All commands here run on `vm-chincha-hq` (Tailscale SSH `om-ssh`, or the WS
+**Execution host: the VM.** All commands here run on the VM (Tailscale SSH `om-ssh`, or the WS
 tunnel `ws_exec`). The device holds no tooling.
 
 ## Layout
@@ -41,7 +41,7 @@ docs-diagram/
 - `typst` (0.15.1 on the VM) **does** fetch `@preview` packages from Universe; a vendored copy also exists at
   `$HQ_ROOT/tools/typst-packages/` (cetz 0.2.2, oxifmt 0.2.1) and `render_diagram.py` picks
   whichever host path exists. Nothing needs the device.
-- The VM can read files under `/srv/...` normally — always render through `render_diagram.py` (it handles the
+- The VM can read its own files normally — always render through `render_diagram.py` (it handles the
   package path and the scratch dir).
 - Fonts: `("Noto Sans Thai", "Noto Sans")` for body text; `("Libertinus Serif", "Noto Serif Thai")` for print
   documents. `fonts-noto-cjk` is installed on the VM.

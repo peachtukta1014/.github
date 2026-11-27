@@ -104,7 +104,7 @@ assumed:
 | Where | node / npm | Playwright browsers | Verdict |
 |---|---|---|---|
 | device (iSH, iPhone) | none — only `/usr/bin/python3` | n/a | cannot run Playwright at all |
-| VM `vm-chincha-hq` | yes, `node v22.22.1` + npm | none cached, ~190 MB RAM free | installing Chromium is a bad trade on 2 vCPU / 1 GB |
+| VM the VM | yes, `node v22.22.1` + npm | none cached, ~190 MB RAM free | installing Chromium is a bad trade on 2 vCPU / 1 GB |
 
 **Use the browser tool we already have instead of a Playwright script.** It exposes the same
 primitives the pattern needs and nothing has to be installed:

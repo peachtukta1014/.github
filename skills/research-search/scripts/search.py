@@ -5,7 +5,8 @@ Ported from the device-side skill `exa-search` (OpenMinis/MinisSkills) so every
 lane can research from the VM itself (RULE 16, Peach 2026-11-24).
 
 Keyless by default (Exa MCP basic tier). If EXA_API_KEY is present in the
-environment (vault: /srv/secrets/vault/env/research.env) it is sent for higher
+environment (the VM keeps the value in its vault; see system/SECRETS.md) it is sent
+for higher
 limits. The key is never printed.
 
 Usage:

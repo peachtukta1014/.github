@@ -44,7 +44,7 @@ Two separate wiring questions, do not mix them up:
 | Want | How |
 |---|---|
 | Hear a file we already made | attachment link above — no provider needed |
-| The app's own speech feature should call OUR endpoint | Providers → Custom: Base URL `https://vm-chincha-hq.tail9cf6ce.ts.net`, model id `google/gemini-3.8-flash-tts` or `th-TH-Neural2-C`, plus the token. That is provider `6486BDD0…` ("OR key (TTS)") |
+| The app's own speech feature should call OUR endpoint | Providers → Custom: Base URL `https://<lane-vm-endpoint>`, model id `google/gemini-3.8-flash-tts` or `th-TH-Neural2-C`, plus the token. That is provider `6486BDD0…` ("OR key (TTS)") |
 
 ## Commands
 
@@ -58,7 +58,7 @@ python3 tools/tts/edge_say.py --text "สวัสดีครับ" --voice th
 python3 tools/tts/edge_say.py --text "hello" --voice en-US-AriaNeural --rate +10%
 
 # Google Cloud (free tier), Thai
-curl -s -X POST https://vm-chincha-hq.tail9cf6ce.ts.net/v1/audio/speech \
+curl -s -X POST https://<lane-vm-endpoint>/v1/audio/speech \
   -H "Authorization: Bearer $TTS_PROXY_AUTH_TOKEN" -H 'Content-Type: application/json' \
   -d '{"model":"th-TH-Neural2-C","input":"สวัสดีครับ","voice":"th-TH-Neural2-C"}' -o /tmp/b.mp3
 
@@ -78,7 +78,7 @@ edge-tts; `th-TH-Neural2-C` for Google Cloud. The Gemini studio whitelist is wha
   `backchannel` — **do not map** onto our `{model, input, voice}` API. Sending them is ignored,
   not an error. Details: `tools/tts/README.md`.
 - The proxy is bound to `127.0.0.1:8765`; from the device it is reachable only over the tailnet
-  at `https://vm-chincha-hq.tail9cf6ce.ts.net/v1`. There is no public route.
+  at `https://<lane-vm-endpoint>/v1`. There is no public route.
 - `TTS_PROXY_AUTH_TOKEN` is a secret: reference it, never print it, never paste it into a file.
 
 ## Where the code lives

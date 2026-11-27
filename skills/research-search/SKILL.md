@@ -33,8 +33,9 @@ Query style: describe the ideal page, not keywords — "blog post comparing X an
 performance", not "X vs Y".
 
 ## Key
-Keyless works (Exa MCP basic tier). For higher limits set `EXA_API_KEY` in
-`/srv/secrets/vault/env/research.env`; the script sends it and never prints it.
+Keyless works (Exa MCP basic tier). For higher limits set `EXA_API_KEY` in the lane
+environment (the VM keeps the value in its vault — `system/SECRETS.md`, never published);
+the script sends it and never prints it.
 Check without printing: `[ -n "$EXA_API_KEY" ] && echo set || echo unset`.
 
 ## Requirements

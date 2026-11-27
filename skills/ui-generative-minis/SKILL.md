@@ -17,7 +17,7 @@ The goal is not to modify the chat host itself, but to:
 
 1. Organize user instructions into a structured spec
 2. Render them with Python into a single-file HTML artifact
-3. Save it to `/srv/work/`
+3. Save it to `/tmp/`
 4. Let users preview, share, and continue iterating directly
 
 ## Automatic Trigger Scenarios
@@ -60,7 +60,7 @@ python3 $HQ_ROOT/skills/ui-generative-minis/scripts/generative_ui_artifact.py \
 By default, this outputs to:
 
 ```bash
-/srv/work/<title>_artifact.html
+/tmp/<title>_artifact.html
 ```
 
 ### 2) Render from a JSON spec
@@ -69,8 +69,8 @@ By default, this outputs to:
 python3 $HQ_ROOT/skills/ui-generative-minis/scripts/generative_ui_artifact.py \
   "Demo" \
   --spec /path/to/spec.json \
-  --out /srv/work/demo_artifact.html \
-  --json-out /srv/work/demo_spec.json
+  --out /tmp/demo_artifact.html \
+  --json-out /tmp/demo_spec.json
 ```
 
 ## spec Format
