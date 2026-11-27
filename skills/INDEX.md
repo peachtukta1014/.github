@@ -1,6 +1,6 @@
 # Skills published from the HQ trunk
 
-_Generated 2026-11-27 13:40 +0700 by `bin/publish_github.py`. Do not edit by hand._
+_Generated 2026-11-27 13:41 +0700 by `bin/publish_github.py`. Do not edit by hand._
 
 | skill | files |
 |---|---|
@@ -38,7 +38,7 @@ _Generated 2026-11-27 13:40 +0700 by `bin/publish_github.py`. Do not edit by han
 | [`ops-disk-scan`](skills/ops-disk-scan/SKILL.md) | 3 |
 | [`plantuml-ascii`](skills/plantuml-ascii/SKILL.md) | 1 |
 | [`pnpm-upgrade`](skills/pnpm-upgrade/SKILL.md) | 2 |
-| [`production-agent-public`](skills/production-agent-public/SKILL.md) | 3 |
+| [`production-agent-public`](skills/production-agent-public/SKILL.md) | 4 |
 | [`refactor`](skills/refactor/SKILL.md) | 2 |
 | [`research-gem-seeker`](skills/research-gem-seeker/SKILL.md) | 1 |
 | [`research-reader`](skills/research-reader/SKILL.md) | 1 |

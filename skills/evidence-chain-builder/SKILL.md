@@ -1,20 +1,10 @@
 ---
 name: evidence-chain-builder
-description: >
-  Score a claim against the evidence behind it. Use this skill whenever the user
-  wants to know whether something is actually supported — "is that true", "what's
-  the source", "that sounds made up", "can you back that up" — or before repeating
-  any number, statistic, market size, study result or benchmark that arrived without
-  a citation, especially from a model or a summary. It separates the claim from its
-  evidence, grades each item by source type, and reports an evidence score plus an
-  explicit list of what is *not* backed by independently verifiable sources. Also
-  trigger when the user is preparing something that will be published, filed or
-  relied on — a report, a filing, compliance material, a post quoting figures — and
-  the claims need sources pinned to them first. Trigger on 证据链, 论断验证, 防幻觉,
-  信源可信, 有出处吗, 这句话有依据吗, 논거 검증, 근거, 裏付け, 出典.
+
 compatibility: >
   Python 3.8+ on PATH. Standard library only — nothing to install, no network, works
   offline. Writes nothing to disk unless the caller redirects the output.
+description: Score a claim against the evidence behind it: verifiability by source type and what is not independently checkable. Use before repeating a number or statistic, or when asked "is that true", "what's the source", "can you back that up".
 ---
 
 # Evidence Chain Builder

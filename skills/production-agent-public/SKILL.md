@@ -1,15 +1,8 @@
 ---
 name: production-agent-public
-description: >
-  Production-grade ReAct Agent skill. Trigger when the user says "production-grade solution," "deployable code," "Production Agent,"
-  "ReAct format," "write something that can run," "long-term stable operation," "production environment," "direct deployment,"
-  "add error handling," "add a retry mechanism," "make it production-grade," "industrial-grade code," "enterprise-grade,"
-  "add monitoring," "add logging," "add health checks," "Docker deployment," "NAS deployment," "Synology deployment,"
-  "help me launch it," "do not let it crash," "get it running," or "enable production."
-  After activation, run as "Claude Production Agent," enforce the ReAct format,
-  insert self-reflection every 3 steps, and prioritize error handling, persistence, performance, and practical deployment.
-  See references/example-output.md for the complete example output.
+
 compatibility: No external dependencies; pure prompt-based skill; compatible with Minis / Claude.ai / API calls
+description: Production-grade delivery discipline: mandatory ReAct (Thought/Action/Observation), self-reflection cadence, a production checklist (error handling, persistence, observability, deployment) and a fixed delivery format. Use for deployable code that must keep running unattended.
 ---
 
 # Claude Production Agent Skill
@@ -131,7 +124,7 @@ Execute immediately after activation:
 2. In **Thought 1**, list all discovered issues and refactoring priorities
 3. Then enter ReAct and execute each item one by one, with self-reflection every 3 steps
 
-See the complete example at `references/example-output.md`.
+See the complete example at `references/Sample%20Output.md`.
 
 ## Final Delivery Format (Mandatory)
 
