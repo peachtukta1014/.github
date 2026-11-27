@@ -1,5 +1,5 @@
 # Skills registry — provenance, homes and tags
-_Generated 2026-11-27 18:02 +07 by `bin/gen_skills_index.py` from `skills/SOURCES.json`. Do not hand-edit rows: edit SOURCES.json and re-run._
+_Generated 2026-11-27 18:25 +07 by `bin/gen_skills_index.py` from `skills/SOURCES.json`. Do not hand-edit rows: edit SOURCES.json and re-run._
 ## The homes (one copy each)
 | Home | Path | What it is |
 |---|---|---|
@@ -23,10 +23,10 @@ _Generated 2026-11-27 18:02 +07 by `bin/gen_skills_index.py` from `skills/SOURCE
 | 7 | Devices + UI | `hw-todoocard`, `ui-generative-minis`, `webapp-template` |
 | 8 | Prompt + AI | `agentic-eval`, `ai-prompt-engineer`, `langchain-architecture` |
 | 9 | Authoring | `skill-creator`, `writing-skills` |
-| 99 | Uncategorised | `evidence-chain-builder`, `firecrawl-research`, `production-agent-public`, `webapp-testing` |
+| 99 | Uncategorised | `evidence-chain-builder`, `firecrawl-research`, `production-agent-public`, `tts-voice`, `webapp-testing` |
 
 
-## Our team skills (6)
+## Our team skills (7)
 | skill | ไทย | tags | installed | what it does |
 |---|---|---|---|---|
 | `bridge-check` | เปิดสะพานถึง VM | team · ready · vm · prompt-only | yes | Our own. Bridge WAKE — open/heal the device-to-VM path. |
@@ -34,6 +34,7 @@ _Generated 2026-11-27 18:02 +07 by `bin/gen_skills_index.py` from `skills/SOURCE
 | `lane-boot` | บูสต์เลนผ่าน VM | team · ready · vm · prompt-only | yes | Lean English lane boost entry for Open Minis and the HQ VM; covers all eight lanes. |
 | `skill-registry-maintenance` | ทะเบียนสกิล | team · ready · vm · python git | yes | Reusable workflow for stable-ID skill registry maintenance, resolver changes, and evidence-led validation. |
 | `system-protocol-design` | ออกแบบโปรโตคอลเอเจนต์ | team · ready · vm · prompt-only | yes | Our own. Design or repair a multi-agent protocol. Peach 2026-11-21: keep, do not delete. |
+| `tts-voice` |  | team · ready · both · python net zip | no | Routing layer for the uploaded tts-prompter pack (2026-11-27). The pack is NOT dropped: find_voice.py + 3 refe |
 | `wo-loop` | บูทเลน + ใบงาน | team · ready · vm · prompt-only | yes | Our own. Boot a lane then run the work loop; absorbed the two former team skills. |
 
 ## Minis built-in (0)
@@ -94,8 +95,8 @@ _Generated 2026-11-27 18:02 +07 by `bin/gen_skills_index.py` from `skills/SOURCE
 | `firecrawl-research` | — | ours (written on the VM, Peach 2026-11-27) |  | ours (written on the VM, Peach 2026-11-27) · ready · both · prompt-only | no | KEEP |
 
 ## Counts
-- library **55** · ours **6** · built-in **0** · imported **49** · installed on device **24**
-- provenance verified: **19** / 55 — the rest are hub/internet imports whose repo is not pinned yet
+- library **56** · ours **7** · built-in **0** · imported **49** · installed on device **24**
+- provenance verified: **20** / 56 — the rest are hub/internet imports whose repo is not pinned yet
 - 2026-11-18 audit (code lane): KEEP 6 · KEEP+PATCH 11 · ARCHIVE 9 · DELETE 18 (`docs/reports/skills-audit-20261118.md`)
 
 ## Gates
