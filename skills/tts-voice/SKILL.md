@@ -11,14 +11,40 @@ burns paid credit for audio the free tier produces identically.
 
 ## Which path (decide in this order)
 
-| Need | Path | Cost |
-|---|---|---|
-| Plain speech, any length, need rate/volume control | **edge-tts** (`tools.tts.edge_say`) | free, keyless, unlimited |
-| Thai, good quality, long-form reading | **Google Cloud TTS** through the VM proxy | free 1M chars/month, then paid |
-| Expressive/style narration, 30 curated voices | **Gemini 3.8 TTS** through the VM proxy | paid (OpenRouter) |
+| Need | Path | Cost | Measured 2026-11-27 |
+|---|---|---|---|
+| Thai speech, any length | **Google Cloud TTS** `th-TH-Neural2-C` via the VM proxy | free 1M chars/month | **works** — HTTP 200, 21,120 B, 2.64 s |
+| Expressive/style narration, 30 curated voices | **Gemini 3.8 TTS** via the same proxy | paid (OpenRouter) | **works** — HTTP 200, 19,316 B |
+| Need `--rate` / `--volume` | **edge-tts** (`tools.tts.edge_say`) | free, keyless | **partial** — short Thai works (11,232 B / 1.87 s); a longer Thai sentence returns **0 bytes, rc=1**. Do not use it for long text until that is fixed |
 
-Default to **edge-tts** unless Peach asks for a specific voice or style. Say which path you used
-and what it cost.
+**Default to Google Cloud `th-TH-Neural2-C`.** It is free to 1M chars/month and it is the only
+path that passed on long Thai text today. State which path you used and what it cost.
+The proxy needs `Authorization: Bearer $TTS_PROXY_AUTH_TOKEN` even on 127.0.0.1 (a bare POST
+returns 401) — reference the variable, never print it.
+
+**edge-tts long-text defect is open** (Peach 2026-11-27): `edge-tts --write-media` with a full
+sentence fails inside `edge_tts/util.py` on Python 3.14 and writes a 0-byte file. Capture the
+traceback, fix or pin, then update this row.
+
+
+## Getting the audio to play inside Open Minis (proven 2026-11-27)
+
+The app plays audio itself — you do not need a provider round trip to hear a file the VM made:
+
+1. Generate on the VM: `curl ... -o /tmp/a.mp3` (or `edge_say.py --out`).
+2. Bring it to the phone: `om-ssh "cat /tmp/a.mp3" > /var/minis/attachments/a.mp3`
+3. Put it in the chat as a Markdown audio link: `![voice](minis://attachments/a.mp3)` —
+   add `?auto_play=true` when Peach asked to hear it immediately.
+
+That is the whole delivery path. Proven with a 21,120-byte, 2.64-second Thai file that played in
+the chat.
+
+Two separate wiring questions, do not mix them up:
+
+| Want | How |
+|---|---|
+| Hear a file we already made | attachment link above — no provider needed |
+| The app's own speech feature should call OUR endpoint | Providers → Custom: Base URL `https://vm-chincha-hq.tail9cf6ce.ts.net`, model id `google/gemini-3.8-flash-tts` or `th-TH-Neural2-C`, plus the token. That is provider `6486BDD0…` ("OR key (TTS)") |
 
 ## Commands
 
@@ -83,11 +109,11 @@ Nothing was dropped. The files live in the trunk's tool group; this skill routes
 | `SKILL.md` (21.8 KB) | `references/upstream-tts-prompter-SKILL.md` (this skill) | kept verbatim, **reference only** — it documents `turns[]`/`style`/`speaker_voice_configs`/`backchannel`, which our `{model,input,voice}` API cannot express |
 | `edge_say.py` (ours, same day) | `tools/tts/edge_say.py` (tool `tools.tts.edge_say`) | the free keyless path; the only one with `--rate`/`--volume` |
 
-Why a tool group plus this skill, not a skill that ships the scripts: RULE 14 — one home per
-thing. Executable code belongs in `tools/`, callable by every channel as a registered tool; the
-skill carries the *when/how*, not a second copy.
+Why the pack is also in `tools/tts/`: executable code belongs where every channel can call it as
+a registered tool (RULE 14). This skill is the portable package — it ships the same files so an
+import on the phone works with no VM round trip.
 
 **Two copies, two jobs.** This skill ships the pack so it imports cleanly on the phone and works
-offline. The *live runtime* is  (registered as ), and it is the copy the
-VM actually runs. If the voice library or a script changes: update  first, then copy
-the file here — a divergence between the two is a defect, not a style choice.
+offline. The *live runtime* is `tools/tts/` (registered as `tools.tts.*`), and that is the copy the
+VM actually executes. If the voice library or a script changes: update `tools/tts/` first, then
+copy the file here — a divergence between the two is a defect, not a style choice.
