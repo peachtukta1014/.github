@@ -1,5 +1,5 @@
 # Skills registry — provenance, homes and tags
-_Generated 2026-11-27 14:03 +07 by `bin/gen_skills_index.py` from `skills/SOURCES.json`. Do not hand-edit rows: edit SOURCES.json and re-run._
+_Generated 2026-11-27 17:57 +07 by `bin/gen_skills_index.py` from `skills/SOURCES.json`. Do not hand-edit rows: edit SOURCES.json and re-run._
 ## The homes (one copy each)
 | Home | Path | What it is |
 |---|---|---|
@@ -23,7 +23,7 @@ _Generated 2026-11-27 14:03 +07 by `bin/gen_skills_index.py` from `skills/SOURCE
 | 7 | Devices + UI | `hw-todoocard`, `ui-generative-minis`, `webapp-template` |
 | 8 | Prompt + AI | `agentic-eval`, `ai-prompt-engineer`, `langchain-architecture` |
 | 9 | Authoring | `skill-creator`, `writing-skills` |
-| 99 | Uncategorised | `evidence-chain-builder`, `firecrawl-research`, `production-agent-public` |
+| 99 | Uncategorised | `evidence-chain-builder`, `firecrawl-research`, `production-agent-public`, `webapp-testing` |
 
 
 ## Our team skills (6)
@@ -40,7 +40,7 @@ _Generated 2026-11-27 14:03 +07 by `bin/gen_skills_index.py` from `skills/SOURCE
 | skill | ไทย | tags | installed | what it does |
 |---|---|---|---|---|
 
-## Imported — by source (48)
+## Imported — by source (49)
 | skill | upstream | source repo | ไทย | tags | installed | verdict |
 |---|---|---|---|---|---|---|
 | `ai-prompt-engineer` | prompt-engineer | Jeffallan/claude-skills | ออกแบบพรอมต์ LLM | claude-skills · adapt · vm · net | yes | KEEP+PATCH |
@@ -55,6 +55,7 @@ _Generated 2026-11-27 14:03 +07 by `bin/gen_skills_index.py` from `skills/SOURCE
 | `research-reader` | web-content-extractor | OpenMinis/MinisSkills | อ่านเนื้อหาเว็บ | MinisSkills · ready · vm · net | yes | KEEP |
 | `research-search` | exa-search | OpenMinis/MinisSkills | ค้นเว็บจาก VM | MinisSkills · adapt · vm · python net | no | KEEP |
 | `ui-generative-minis` | generative-ui-minis | OpenMinis/MinisSkills | ข้อความ → HTML | MinisSkills · ready · vm · python | yes | KEEP |
+| `webapp-testing` | webapp-testing | anthropics/skills |  | skills · adapt · vm · python node net | no | KEEP+PATCH |
 | `agentic-eval` | agentic-eval | hub (unverified) **(unverified)** |  | hub · adapt · vm · prompt-only | no | KEEP+PATCH |
 | `cloud-gcp-waf` | google-cloud-waf-cost-optimization | hub (unverified) **(unverified)** | ค่าใช้จ่าย GCP | hub · adapt · vm · net | yes | KEEP+PATCH |
 | `data-context-extractor` | data-context-extractor | hub (unverified) **(unverified)** | สร้างสกิลข้อมูล | hub · ready · vm · zip | yes | KEEP |
@@ -93,8 +94,8 @@ _Generated 2026-11-27 14:03 +07 by `bin/gen_skills_index.py` from `skills/SOURCE
 | `firecrawl-research` | — | ours (written on the VM, Peach 2026-11-27) |  | ours (written on the VM, Peach 2026-11-27) · ready · both · prompt-only | no | KEEP |
 
 ## Counts
-- library **54** · ours **6** · built-in **0** · imported **48** · installed on device **24**
-- provenance verified: **18** / 54 — the rest are hub/internet imports whose repo is not pinned yet
+- library **55** · ours **6** · built-in **0** · imported **49** · installed on device **24**
+- provenance verified: **19** / 55 — the rest are hub/internet imports whose repo is not pinned yet
 - 2026-11-18 audit (code lane): KEEP 6 · KEEP+PATCH 11 · ARCHIVE 9 · DELETE 18 (`docs/reports/skills-audit-20261118.md`)
 
 ## Gates
