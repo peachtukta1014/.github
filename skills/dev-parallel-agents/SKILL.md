@@ -24,7 +24,7 @@ the arithmetic.
 |---|---|---|
 | The tool | `subagent_task` — **app-side**; Open Minis sends it to the model | Settings → Agent Runtime → Sub Agents (`minis-config chat.tools.subAgents`), on by default |
 | Who can dispatch | only a session running **inside the app**. A VM-only process (hq-core, cron, a worker) cannot: neither door carries such a tool | `minis-tools` = 10 tools, `vm-hq-gate` = 3, none of them a dispatcher |
-| Concurrency | **3 at a time per conversation**; extras queue and start as slots free | `/var/minis/docs/concepts/subagents.md` |
+| Concurrency | **3 at a time per conversation**; extras queue and start as slots free | the app's own docs: `rg -il subagent /var/minis/docs` (device, read-only) |
 | Budget | **default 10 minutes, max 60 per run**; one 90-second no-tool wrap-up at the end; `extend` adds 1-30 min, at most 5 times, still 60 total | same |
 | Child session | no memory (no `GLOBAL.md`, no `memory_write`), no SOUL persona, cannot see the parent conversation | same |
 | Models | roster group is `Sub-agents`; Peach pins the group per roster entry (max 10 agents) | `minis-config get subagents` |
