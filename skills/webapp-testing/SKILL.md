@@ -1,7 +1,7 @@
 ---
 name: webapp-testing
 description: Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs.
-license: Complete terms in LICENSE.txt
+license: Complete terms in references/LICENSE.txt
 tags: [2. Dev discipline, vm, KEEP+PATCH, anthropics/skills]
 ---
 
@@ -115,13 +115,13 @@ primitives the pattern needs and nothing has to be installed:
 | screenshot | action `screenshot` (add `full_page: true`) |
 | inspect the DOM for selectors | `find_elements` / `get_backbone` / `get_text` |
 | run JS in the page | action `execute_js` |
-| browser console output | `execute_js`, or `examples/console_logging.py` as the shape to copy |
+| browser console output | `execute_js`, or `references/console_logging.py` as the shape to copy |
 | serve a local app | `python3 -m http.server 8765 > /dev/null 2>&1 &` then navigate to `http://127.0.0.1:8765`, or preview in-app with `minis-open minis://workspace/<app>/index.html` |
 
 The decision tree above is the real content — **reconnaissance before action**. Keep it; only the
 executor changes.
 
-`scripts/with_server.py` and `examples/*.py` are upstream Python + Playwright, kept for reference.
+`scripts/with_server.py` and `references/*.py` are upstream Python + Playwright, kept for reference.
 They will not run on the device. If a task genuinely needs Playwright, that is a decision for Peach
 (install Chromium on the VM), not a default.
 
