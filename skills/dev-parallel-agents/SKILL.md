@@ -25,10 +25,18 @@ the arithmetic.
 | The tool | `subagent_task` — **app-side**; Open Minis sends it to the model | Settings → Agent Runtime → Sub Agents (`minis-config chat.tools.subAgents`), on by default |
 | Who can dispatch | only a session running **inside the app**. A VM-only process (hq-core, cron, a worker) cannot: neither door carries such a tool | `minis-tools` = 10 tools, `vm-hq-gate` = 3, none of them a dispatcher |
 | Concurrency | **3 at a time per conversation**; extras queue and start as slots free | `/var/minis/docs/concepts/subagents.md` |
-| Budget | **60 minutes total per run**, one 90-second no-tool wrap-up at the end | same |
+| Budget | **default 10 minutes, max 60 per run**; one 90-second no-tool wrap-up at the end; `extend` adds 1-30 min, at most 5 times, still 60 total | same |
 | Child session | no memory (no `GLOBAL.md`, no `memory_write`), no SOUL persona, cannot see the parent conversation | same |
 | Models | roster group is `Sub-agents`; Peach pins the group per roster entry (max 10 agents) | `minis-config get subagents` |
 | Result | arrives in the parent chat as `<agent_callback>`; levers are `status` / `steer` / `cancel` / `extend` / `resume` | same |
+| Depth | a sub-agent **cannot start sub-agents** (depth 1); queue up to 10 per conversation; it cannot ask the user (`user_ask` is unavailable) or the parent | same |
+| Tools | it uses the parent conversation's tools, skills, MCP servers and workspace files, so `shell_execute` (**iSH**) is how it reaches the VM at all — `om-ssh` exists only in that shell | same |
+
+**Scope the iSH shell when you delegate.** The child runs its shell on the *phone*, as root, and
+inherits the parent's file access. So: no reading device secrets or environment values, no work
+that should live on the VM done locally, and a sub-agent that only needs to read gets read-only
+tasks. Heavy jobs belong on the VM (`om-ssh '<cmd>'`), never in the phone's shell.
+
 
 Two consequences for the pattern above:
 
