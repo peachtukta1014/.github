@@ -1,6 +1,6 @@
 # Skills published from the HQ trunk
 
-_Generated 2026-11-27 13:37 +0700 by `bin/publish_github.py`. Do not edit by hand._
+_Generated 2026-11-27 13:40 +0700 by `bin/publish_github.py`. Do not edit by hand._
 
 | skill | files |
 |---|---|
@@ -21,6 +21,7 @@ _Generated 2026-11-27 13:37 +0700 by `bin/publish_github.py`. Do not edit by han
 | [`docs-pdf-converter`](skills/docs-pdf-converter/SKILL.md) | 6 |
 | [`docs-readmes`](skills/docs-readmes/SKILL.md) | 13 |
 | [`docs-typst-report`](skills/docs-typst-report/SKILL.md) | 13 |
+| [`evidence-chain-builder`](skills/evidence-chain-builder/SKILL.md) | 4 |
 | [`excalidraw-diagram`](skills/excalidraw-diagram/SKILL.md) | 2 |
 | [`final-release-review`](skills/final-release-review/SKILL.md) | 3 |
 | [`firecrawl-research`](skills/firecrawl-research/SKILL.md) | 1 |
@@ -37,6 +38,7 @@ _Generated 2026-11-27 13:37 +0700 by `bin/publish_github.py`. Do not edit by han
 | [`ops-disk-scan`](skills/ops-disk-scan/SKILL.md) | 3 |
 | [`plantuml-ascii`](skills/plantuml-ascii/SKILL.md) | 1 |
 | [`pnpm-upgrade`](skills/pnpm-upgrade/SKILL.md) | 2 |
+| [`production-agent-public`](skills/production-agent-public/SKILL.md) | 3 |
 | [`refactor`](skills/refactor/SKILL.md) | 2 |
 | [`research-gem-seeker`](skills/research-gem-seeker/SKILL.md) | 1 |
 | [`research-reader`](skills/research-reader/SKILL.md) | 1 |
