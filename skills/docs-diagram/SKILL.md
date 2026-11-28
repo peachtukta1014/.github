@@ -39,7 +39,7 @@ docs-diagram/
 
 ## Rules measured on the host
 - `typst` (0.15.1 on the VM) **does** fetch `@preview` packages from Universe; a vendored copy also exists at
-  `$HQ_ROOT/tools/typst-packages/` (cetz 0.2.2, oxifmt 0.2.1) and `scripts/render_diagram.py` picks
+  `$HQ_ROOT/tools/typst-packages/` (cetz 0.4.0, oxifmt 1.0.0 - vendored 2026-11-28) and `scripts/render_diagram.py` picks
   whichever host path exists. Nothing needs the device.
 - The VM can read its own files normally — always render through `scripts/render_diagram.py` (it handles the
   package path and the scratch dir).
@@ -47,11 +47,15 @@ docs-diagram/
   documents. `fonts-noto-cjk` is installed on the VM.
 - `mmdc` / `chromium` / `d2` / `draw.io` / `plantuml` / `dot` are absent; graphviz can be added with
   `apt-get install graphviz` when a DOT graph is genuinely wanted.
-- CeTZ 0.2.2 on Typst 0.15 is fine (the old `style is deprecated` warning is harmless).
+- **CeTZ 0.4.0 is the working version on Typst 0.15** (measured 2026-11-28): 0.2.2 panics with
+  `Failed to resolve coordinate` on every coordinate, so any diagram written against 0.2.2 must bump the import.
+- **0.4.0 API differences that bit us:** `rect((x1, y1), (x2, y2))` is still corner-to-corner (do not pass a
+  width/height pair - the box lands in the wrong place), and `content()` has **no `anchor:` argument**, so a
+  left-aligned label must be positioned by its centre (`x_centre = x_left + text_width/2`) or it overhangs.
 
 ## Minimum template
 ```typ
-#import "@preview/cetz:0.2.2": canvas, draw
+#import "@preview/cetz:0.4.0": canvas, draw
 #canvas({
   import draw: *
   rect((0, 0), (3, 1), radius: 4pt, stroke: 0.8pt + blue.darken(20%), fill: blue.lighten(88%))

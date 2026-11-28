@@ -303,3 +303,25 @@ cat seq.utxt
 **Problem**: Output file not created
 
 - **Solution**: Check file permissions, ensure PlantUML has write access
+
+## On this VM (measured 2026-11-28)
+
+`/usr/bin/plantuml` (PlantUML 1.2020.02) with OpenJDK 25 - nothing to install. Run it on the VM, never
+on the device (the device has no JVM):
+
+```bash
+cd "$HQ_ROOT"
+plantuml -utxt -charset UTF-8 diagram.puml   # writes diagram.utxt next to it
+sed 's/ *$//' diagram.utxt                   # trim the trailing padding before pasting anywhere
+```
+
+What it is good for, measured on real diagrams:
+
+| diagram | `-utxt` result |
+|---|---|
+| `sequence` | **good** - the only type worth using here |
+| `component` / `package` | unusable: boxes float unconnected, arrows lost |
+| `activity` / `fork` | unusable: columns of trailing spaces, 200+ char lines |
+
+So: structure maps are hand-drawn ASCII or a `docs-diagram` render; PlantUML text mode is for
+sequences only. Do not pipe `.utxt` through `cat` in a log - trim it first.
