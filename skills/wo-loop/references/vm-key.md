@@ -29,7 +29,7 @@ minis-tools ▶ ws_exec {"command": "<shell command>"}
 | Purpose | Path (on this device) |
 |---|---|
 | Fast shell client | `ws_exec.py` |
-| SSH / IAP transport | `om-ssh`, `om_iap.py` |
+| SSH transport (tailnet) | `om-ssh` |
 | Order work | `ws_dispatch.py` |
 | Close work | `ws_complete.py` |
 | Message only | `sse_dispatch.py` |
