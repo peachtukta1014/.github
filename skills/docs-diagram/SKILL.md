@@ -68,3 +68,25 @@ docs-diagram/
 - No auto-layout: CeTZ places coordinates by hand. For very large graphs use graphviz.
 - A 50+ node diagram is not practical by hand — split it into several images or reach for Graphviz (`dot -Tsvg`).
 - No automatic diagram diff: compare the rendered PNGs by eye.
+
+## Fallback: rendering on the device (measured 2026-11-28)
+
+The device is not empty - it has `typst 0.12.0`, `pdftoppm`, `rsvg-convert`, `ffmpeg`, PIL 11 and Thai
+fonts (`Noto Sans Thai`, `Noto Sans Thai Looped`, `Sarabun`). It has **no JVM and no plantuml**, so
+PlantUML stays on the VM. To render here when the VM is unreachable:
+
+```bash
+# 1. one-time: pull the packages the device's typst can use (cetz 0.4.0 needs typst >= 0.13)
+#    from the VM:  tar czf - preview/cetz/0.2.2 preview/oxifmt/0.2.0 | base64 -w0
+#    cetz 0.2.2 + oxifmt 0.2.0 is the pair that works on typst 0.12
+# 2. build OUTSIDE /var/minis - typst cannot read that mount
+mkdir -p /tmp/dg && cd /tmp/dg && cp <source>.typ .
+typst compile --package-path /tmp/typst-pkgs --font-path /usr/share/fonts \
+  --format png --ppi 150 <source>.typ out.png
+# 3. copy the artifact back
+cp out.png /var/minis/attachments/<name>.png
+```
+
+Two traps, both hit on 2026-11-28: the device's typst has **no network** (`Protocol not available`), so
+every `@preview` package must be pulled from the VM first, and it **silently refuses** files under
+`/var/minis` - always compile from `/tmp` and copy the result back.
