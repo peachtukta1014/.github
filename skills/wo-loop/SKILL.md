@@ -28,7 +28,6 @@ Resolve the operation through `registry/transports.json` and the registered MCP 
 
 - `wo.lifecycle`, `vm.command.small`, and `vm.command.structured`: WS primary.
 - `vm.command.large`, `vm.file.bulk`, `vm.command.raw`, and `vm.interactive`: Tailscale direct SSH primary.
-- IAP: compatibility-only; never present it as the current primary route.
 - `vm-hq-gate`: primary typed VM gateway.
 - `minis-tools`: device/WS adapter and transitional entrypoint; not durable-state owner.
 

@@ -10,7 +10,7 @@ Use the HQ VM as the execution and durable-state authority. Treat Open Minis as 
 ## Workflow
 
 1. Resolve the session lane with `lane-id`; never guess an ambiguous lane.
-2. Resolve each operation through `registry/transports.json` and the registered MCP capability. Do not hard-code `minis-tools`, `vm-hq-gate`, WS, Tailscale, IAP, a host, or a credential into a lane boost.
+2. Resolve each operation through `registry/transports.json` and the registered MCP capability. Do not hard-code `minis-tools`, `vm-hq-gate`, WS, Tailscale, a host, or a credential into a lane boost.
 3. If the bridge is unhealthy or a wake trigger is received, run `bridge-check` once. It handles health/recovery/push-wake only; it does not own work-order state.
 4. Boot before reading lane state: `lane-boot <lane>`.
 5. Read only the boot-reported scope, protocol index, pad, and board paths.
@@ -30,7 +30,6 @@ The runtime selects the route from `registry/transports.json`:
 
 - WS is primary for lifecycle, work-order automation, and small/structured commands.
 - Tailscale direct SSH is primary for bulk, large, raw, and interactive operations.
-- IAP is compatibility-only and must not be presented as the current primary route.
 
 If the live registration or path is not verified, say `runtime verification pending` instead of inventing an implementation path.
 
